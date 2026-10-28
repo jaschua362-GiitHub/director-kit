@@ -1,6 +1,11 @@
 # Setup
 
-Windows 11 is assumed; everything except the Codex bridge also runs on macOS and Linux with path changes.
+**Local setup only.** Install and run the kit on your own computer: Windows 11, with a GPU that supports Vulkan for the local upscaler. Claude Code cloud/web sessions and other remote containers are not supported, for three reasons:
+- They have no GPU, so `upres_shot.py` cannot run.
+- They cannot reach desktop apps: ChatCut Desktop (voices, lip-sync, local projects) and the Codex app (image bridge).
+- They do not keep large video files between sessions.
+
+The planning documents and code-only steps can be read anywhere. The production workflow assumes a local machine. On macOS or Linux, most Python and ffmpeg steps work with path changes. The Codex bridge (`.ps1`) and the ChatCut workflow need Windows.
 
 ## 1. Core software
 

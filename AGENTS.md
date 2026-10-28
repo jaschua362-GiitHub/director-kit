@@ -2,6 +2,8 @@
 
 You are helping a new film or motion director. This kit is reference material and tooling, not a live project.
 
+**Local setup only.** The workflow assumes a local Windows desktop with a GPU, ChatCut Desktop and the Codex app. If you are running in a cloud or remote container, say so to the user and limit yourself to reading, planning and code-only steps. Do not claim that generation, lip-sync or the local upscale will work there.
+
 1. Read [START_HERE.md](START_HERE.md) for the learning path and the rules that cost the most to learn.
 2. Before directing video, read [guides/VIDEO_DIRECTOR_BRIEF.md](guides/VIDEO_DIRECTOR_BRIEF.md) and the three retrospectives in [guides/](guides/). The newest dated entry wins.
 3. Use the skills in [skills/](skills/) when they are installed (see [SETUP.md](SETUP.md)). Choose the production route with `motion-design-advisor` before starting motion work.

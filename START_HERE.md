@@ -2,6 +2,8 @@
 
 A starter package for new film and motion directors. It collects what we learned making six AI-assisted short films and a set of brand motion pieces (October 2026): the guides, the agent skills, the tools that worked, and real scripts from finished films. Start from this instead of from zero.
 
+**Local setup only:** run the kit on your own Windows desktop, not in a cloud or web agent session. [SETUP.md](SETUP.md) explains why.
+
 **Setup:** [SETUP.md](SETUP.md) (software) and [PLUGINS.md](PLUGINS.md) (agent plugins and services).
 **Using an AI agent?** Point it at [AGENTS.md](AGENTS.md).
 
