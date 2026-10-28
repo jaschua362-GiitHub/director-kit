@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Motion Sting</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#140C07;--fg:#FBF6EA;--dim:rgba(251,246,234,.45)}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:Montserrat,sans-serif}
+  body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px}
+  canvas{display:block;width:min(100%,calc((100vh - 80px)*16/9));aspect-ratio:16/9;height:auto;border-radius:6px;cursor:pointer}
+  .track{width:min(100%,calc((100vh - 80px)*16/9));height:2px;background:rgba(251,246,234,.12);border-radius:2px;overflow:hidden}
+  #bar{height:100%;width:0;background:#FEDA00}
+  #status{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+  /* ?solo=1: canvas only, 1:1 pixels (headless stills via scripts/stills.py) */
+  body.solo{padding:0;gap:0;display:block;overflow:hidden} body.solo canvas{width:auto!important;height:auto!important;max-width:none;aspect-ratio:auto!important;border-radius:0}
+  body.solo .track, body.solo #status{display:none}
+</style>
+</head>
+<body>
+<script>if (new URLSearchParams(location.search).has('solo')) document.body.classList.add('solo')</script>
+<canvas id="c" width="1920" height="1080"></canvas>
+<div class="track"><div id="bar"></div></div>
+<div id="status">click / space — pause · ← → — step frame · r — restart</div>
+<script src="glyphs.js"></script>
+<script src="sting.js"></script>
+<script src="tools.js"></script>
+</body>
+</html>

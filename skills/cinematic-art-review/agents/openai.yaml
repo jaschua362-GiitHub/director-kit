@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cinematic Art Review"
+  short_description: "Review and improve cinematic art direction"
+  default_prompt: "Use $cinematic-art-review to inspect this cinematic draft and improve its art direction while preserving accepted work."
