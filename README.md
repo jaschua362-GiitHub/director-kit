@@ -3,7 +3,7 @@
 A starter package for new film and motion directors working with AI tools. It holds what we learned making six AI-assisted short films and a set of brand motion pieces (October 2026):
 
 - the playbooks and directing retrospectives;
-- seven agent skills for Claude Code and Codex;
+- eight agent skills for Claude Code and Codex;
 - the tools that worked;
 - real scripts from finished films.
 

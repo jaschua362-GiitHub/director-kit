@@ -10,7 +10,7 @@
   {
    "kit_path": "guides/VIDEO_DIRECTOR_BRIEF.md",
    "source": "<LAB>\\VIDEO_DIRECTOR_BRIEF.md",
-   "source_sha256": "e8994721f937c3ef366871fab725f72fbb9d78e1a02b4d536a189344fe1e5d0d"
+   "source_sha256": "92b3a7df45da02bbf6da35fd68165ca8e19eb1174b9e552e7428996855e9ebf8"
   },
   {
    "kit_path": "guides/CONCEPT_TO_MOTION.md",
@@ -476,6 +476,16 @@
    "kit_path": "examples/film6-shadow/assemble_v02.py",
    "source": "<LAB>/experiments/TEST-013/assemble_v02.py",
    "source_sha256": "36381fb0fbdcdc4bab8b674cf8a902d54c719680645637395ec44364c03adf4f"
+  },
+  {
+   "kit_path": "skills/one-prompt-takes/SKILL.md",
+   "source": "<LAB>\\skills\\one-prompt-takes\\SKILL.md",
+   "source_sha256": "1d309e3cc681d431b1219c12f4deec9008a1f79772c6015d901bf8f3fe784cee"
+  },
+  {
+   "kit_path": "guides/RETROSPECTIVE_2026-11-05_TEST021_ONE_PROMPT.md",
+   "source": "<LAB>\\RETROSPECTIVE_2026-11-05_TEST021_ONE_PROMPT.md",
+   "source_sha256": "1638575e1e9811e0090809cd1fc48110fe944573005d08ad29a9825e1d40d3e6"
   }
  ]
 }

@@ -57,6 +57,7 @@ Skills in this kit:
 - `environment-continuity`: nine-view environment coverage.
 - `colour-grade`: measured grading targets.
 - `vertical-reframe`: 9:16 cuts.
+- `one-prompt-takes`: multi-shot Seedance takes of up to 30 s from one prompt.
 - `motion-design-advisor`: choose the production route.
 - `motion-sting`: code-built brand motion.
 - `business-motion-film`: commercials with a critic loop.

@@ -149,3 +149,14 @@ Jason: "we allow you to change the board and image to be suitable for the cinema
 2. **Before any video generation, show Jason a visual board.** He can't judge a storyboard of text or crops. Use generated key frames or a hand-drawn storyboard sheet. Start with a small action pilot (stance, movement, key action) before building the full board.
 3. **Default still route:** Codex ImageGen on his ChatGPT subscription, run through `tools/run_jobs.ps1` and `tools/codex_imagegen.ps1` (lab root). Each pack is `JOBS.json` plus `prompts/` and `returns/`, and is also runnable by hand as Route A (see the Wind tools README for the format). It costs no video credits.
 4. **Hand-drawn until locked.** Iterate the board as hand-drawn storyboard sheets until Jason locks it. Photoreal start frames come only after the lock: "stay as drawn storyboard first until is lock dont waste credit on actual image gen".
+
+## 2026-11-05 — One-prompt takes are an adopted second route (Jason, after TEST-021)
+
+Seedance 2.5 `reference-to-video` can plan, shoot and cut up to 30 s from one structured prompt and a few reference images, with no board frames or start frames. Jason asked to implement the method after TEST-021 "Cyber Ninjas: Airborne". Follow [skills/one-prompt-takes/SKILL.md](../skills/one-prompt-takes/SKILL.md): when to use it, the prompt template, the gates, how to patch a shot, and how to finish.
+
+- **Choose the route at the start of directing, per film.** One-prompt take for teasers, series fillers and flowing sequences. Board and start frames for exact compositions. Hybrid (blocks of 8–15 s plus start-frame shots) for a main film.
+- **The approved prompt is the board.** Jason approves it before the first quote.
+- **Action, contact and prop-state continuity are not trusted to the take.** Plan them as start-frame shots or patch them from the previous shot's last frame.
+- **One re-roll at most, for global notes. Then patch.**
+- **Jason judges motion.** Send him the draft before calling an action shot good.
+- All existing rules still apply: approved sources, a quote and his yes per paid batch, physics and living world, every-frame checks on composites, grade, final delivery standard, post-copy approval before the kit.

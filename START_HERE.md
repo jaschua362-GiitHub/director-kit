@@ -12,7 +12,7 @@ A starter package for new film and motion directors. It collects what we learned
 | Folder | What it holds | How to treat it |
 |---|---|---|
 | [guides/](guides/) | Playbooks, director brief, retrospectives, lessons | Read. Dated entries; the newest entry wins |
-| [skills/](skills/) | Seven agent skills (Claude Code / Codex) | Install, then the agent uses them |
+| [skills/](skills/) | Eight agent skills (Claude Code / Codex) | Install, then the agent uses them |
 | [tools/](tools/) | Ready-to-use scripts: image jobs, per-shot upscale | Copy into your project's `tools\` folder |
 | [examples/](examples/) | Real scripts from Film 4 and Film 6 | Study and adapt. Paths inside are project-specific |
 | [MANIFEST.json](MANIFEST.json) | Source path and hash of every copied file | For refreshing the kit later |
@@ -23,11 +23,11 @@ The guides are working records from the lab. Project IDs such as `DCL-20261021-S
 
 Work through it in order. Each step names what to read and what to practise.
 
-1. **How we direct.** [VIDEO_DIRECTOR_BRIEF.md](guides/VIDEO_DIRECTOR_BRIEF.md), then the retrospectives in order: [films 1–3](guides/RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md), [Film 5](guides/RETROSPECTIVE_2026-10-20_FILM5_DIRECTING.md), [Film 6](guides/RETROSPECTIVE_2026-10-27_FILM6_DIRECTING.md). Film 6 holds the current best workflow.
+1. **How we direct.** [VIDEO_DIRECTOR_BRIEF.md](guides/VIDEO_DIRECTOR_BRIEF.md), then the retrospectives in order: [films 1–3](guides/RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md), [Film 5](guides/RETROSPECTIVE_2026-10-20_FILM5_DIRECTING.md), [Film 6](guides/RETROSPECTIVE_2026-10-27_FILM6_DIRECTING.md), [one-prompt takes (TEST-021)](guides/RETROSPECTIVE_2026-11-05_TEST021_ONE_PROMPT.md). Film 6 holds the current best board-and-start-frame workflow.
 2. **Story.** [STORY_FOUNDATION.md](guides/STORY_FOUNDATION.md): a synopsis plus concept art is the foundation; the director develops the storyboard and pacing.
 3. **Concept art that can move.** [CONCEPT_TO_MOTION.md](guides/CONCEPT_TO_MOTION.md), the [cinematic-art-review](skills/cinematic-art-review/SKILL.md) skill, and [environment-continuity](skills/environment-continuity/SKILL.md) (nine consistent views of each location). Prepare image prompts as jobs that can run by hand or by agent: [IMAGE_JOBS_FORMAT.md](tools/IMAGE_JOBS_FORMAT.md).
 4. **Board before video.** Draw the board and get it locked before you spend credits on photoreal frames or video. Examples: [build_drawn_board.py](examples/film6-shadow/build_drawn_board.py), [build_storyboard.py](examples/film6-shadow/build_storyboard.py), [make_locked_jobs.py](examples/film6-shadow/startframes/make_locked_jobs.py).
-5. **Video generation.** [PRODUCTION_PLAYBOOK.md](guides/PRODUCTION_PLAYBOOK.md) and [FORMAT_AND_RESOLUTION_WORKFLOW.md](guides/FORMAT_AND_RESOLUTION_WORKFLOW.md). Cheap drafts for blocking and the whole edit; promote only hero shots and faces to native 1080p.
+5. **Video generation.** [PRODUCTION_PLAYBOOK.md](guides/PRODUCTION_PLAYBOOK.md) and [FORMAT_AND_RESOLUTION_WORKFLOW.md](guides/FORMAT_AND_RESOLUTION_WORKFLOW.md). Cheap drafts for blocking and the whole edit; promote only hero shots and faces to native 1080p. For teasers, series fillers and flowing sequences, the second route is the [one-prompt-takes](skills/one-prompt-takes/SKILL.md) skill: one structured prompt and reference images make a take of up to 30 s, then you patch the shots that miss.
 6. **Edit.** Frame-exact assembly: [assemble_final.py](examples/film6-shadow/assemble_final.py) (it imports [assemble_v02.py](examples/film6-shadow/assemble_v02.py) and [hud.py](examples/film6-shadow/hud.py), a designed machine-POV overlay).
 7. **Sound.** Ambience bed first, then cues on measured motion peaks, about −15 LUFS. [make_bed.py](examples/film6-shadow/music/make_bed.py), [gem_sfx.py](examples/film4-wind/gem_sfx.py), the business-motion-film [audio notes](skills/business-motion-film/references/audio.md) and the motion-sting [audio kit](skills/motion-sting/audio/).
 8. **Finish.** [colour-grade](skills/colour-grade/SKILL.md) (measure faces, highlights and blacks; never darken the whole film to hide a CGI look), per-shot upscale with [upres_shot.py](tools/upres_shot.py), grain once after grading (1.0 for 9:16 phone delivery). Grade examples: [look.py](examples/film4-wind/look.py), [luma_report.py](examples/film4-wind/luma_report.py), [grade_plates.py](examples/film6-shadow/finish/grade_plates.py).
