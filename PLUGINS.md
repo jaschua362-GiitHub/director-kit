@@ -20,9 +20,23 @@ Our main production surface for Films 4–6.
   - Generated assets land in the local project folder (`%APPDATA%\ChatCut\projects\...`). Copy them into your experiment folder and record their hashes.
   - See the Film 6 retrospective in [guides/](guides/) for the full workflow.
 
+## Atlas Cloud (Seedance 2.5 pay-as-you-go, plus the still rendering pass)
+
+Our video route from TEST-018 on (November 2026), through its MCP connector. See [guides/PLATFORM_COMPARISON_2026-11-03.md](guides/PLATFORM_COMPARISON_2026-11-03.md) for the numbers.
+
+- **Why:** no subscription, an exact quote before every job, and `draft-complete` turns an approved 480p draft into native 1080p with the same motion, staging and faces. Approving the draft edit approves the final content.
+- **Lessons:**
+  - A call without a confirmation token is free and returns a quote. Each paid batch needs the user's explicit yes to that quote, typed in the session that holds it; "continue" does not count. Quote one batch per gate, not per take.
+  - Media is kept 7 days: download at once.
+  - Make drafts with `generate_audio: false` and build sound in the finish; a copyright-filtered draft audio cannot be fixed at completion.
+  - Identical requests are merged into one job; vary the prompt for a second draw.
+  - `draft-complete` keeps every defect in the draft, so identity-check drafts as if they were finals. The HD file is not frame-identical to the draft: measure the HD file.
+  - MiniMax music returns a full song, not a timed cue; pick a window by measured loudness and pitch. There is no sound-effects model; SFX, voice and lip-sync stay on ChatCut.
+  - Image models for the rendering pass ([guides/IMAGE_RENDERING_PIPELINE.md](guides/IMAGE_RENDERING_PIPELINE.md)): Seedream 5.5 Edit, MAI-Image 2.6 Edit, Nano Banana 2.1 Edit. Use only the fields the schema lists.
+
 ## Higgsfield (Seedance draft → HD promotion)
 
-Used on Film 6:
+Used on Film 6, no subscription since November 2026 (see the platform comparison). Kept for the record:
 - Draft at 480p for blocking and the whole edit.
 - Promote approved takes to native 1080p by draft job ID, resending the exact prompt, start image and parameters.
 - Check the cost preflight: it assumes 5 s unless you pass a duration.
@@ -43,7 +57,8 @@ A command-line client for Dreamina image and video generation that the lab teste
 
 ## Before any paid call
 
-- Show the board first.
-- Run the physics and blocking check.
+- Show the board first, with the requirements lock filled in and every row answered ([guides/REQUIREMENTS_LOCK_TEMPLATE.md](guides/REQUIREMENTS_LOCK_TEMPLATE.md)).
+- Run the physics and blocking check, and the frame-pair check on every start/end pair.
 - Make one short acceptance test per new provider.
+- Quote the gate's whole batch once, including a retake allowance, and get one yes.
 - Record every take: its prompt, settings, credits spent and output hash.

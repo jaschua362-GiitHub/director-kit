@@ -24,7 +24,7 @@ Adopted 5 November 2026 after TEST-021 "Cyber Ninjas: Airborne". Jason asked to 
 
 ## Steps and gates
 
-1. **Beat sheet (free).** One line per 2–4 s: what happens, which shot, who is in frame. Climax before about 65%. Mark every risky beat (see the table above).
+1. **Beat sheet (free).** One line per 2–4 s: what happens, which shot, who is in frame. Climax before about 65%. Mark every risky beat (see the table above and the story risk list in [STORY_FOUNDATION.md](../../guides/STORY_FOUNDATION.md), 2026-11-07: crossing paths, small hand-held objects, on-screen text, mirrors, asymmetric features, a light change inside one shot, three actions in a row, a face hidden by a high angle, more than two or three supporting characters).
 2. **References (free).** Use existing approved art: front and rear or profile per character, one state image per changing prop or costume state, one design still per vehicle or creature. Six to eight images is enough. A design with no reference image will drift between shots.
 3. **Prompt.** Use the template below. **Gate 1: Jason approves the prompt on a review page.** The prompt is the board in words.
 4. **Quote, then his typed yes. Draft at 480p** (`draft: true`), about USD0.134/s. Download at once; the provider keeps media 7 days.

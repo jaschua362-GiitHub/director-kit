@@ -1,16 +1,16 @@
 {
- "built": "2026-10-28",
- "note": "source_sha256 is the original at copy time; kit copies may be edited afterwards to remove private details and fix paths.",
+ "built": "2026-11-07",
+ "note": "source_sha256 is the Lab source at copy time. Files are scrubbed on copy by tools/refresh_director_kit.py in the Lab (names, location, lab-only links, machine paths); a few kit files were then adapted by hand.",
  "files": [
   {
    "kit_path": "guides/PRODUCTION_PLAYBOOK.md",
    "source": "<LAB>\\PRODUCTION_PLAYBOOK.md",
-   "source_sha256": "7a455c95ebd0cb505c4e20e9bdee4d401dacab453c77347e8ee11341eaf2f21d"
+   "source_sha256": "f79c157cbaca1aebb15ed2b6092e97a25ab9b679eb873f2d9fc3b72756073894"
   },
   {
    "kit_path": "guides/VIDEO_DIRECTOR_BRIEF.md",
    "source": "<LAB>\\VIDEO_DIRECTOR_BRIEF.md",
-   "source_sha256": "92b3a7df45da02bbf6da35fd68165ca8e19eb1174b9e552e7428996855e9ebf8"
+   "source_sha256": "781c8b93e5388b155ad1adba57b1f185a84dc78843d1de3373c0d851089f5443"
   },
   {
    "kit_path": "guides/CONCEPT_TO_MOTION.md",
@@ -25,17 +25,37 @@
   {
    "kit_path": "guides/STORY_FOUNDATION.md",
    "source": "<LAB>\\STORY_FOUNDATION.md",
-   "source_sha256": "07ffb7d59fe785e0f5b8c9ffe684f124a60c55364800af7d5eaa9bb4344c482b"
+   "source_sha256": "096fc469faf5ee9fbdb926e0e94ea051d5d01e0a43ef3fee20a7dc047a925af9"
   },
   {
    "kit_path": "guides/FINAL_DELIVERY_STANDARD.md",
    "source": "<LAB>\\FINAL_DELIVERY_STANDARD.md",
-   "source_sha256": "67fb8698aca71181495ba8ddbf04881b715770cfe4b73f26b7bd606213db782d"
+   "source_sha256": "32f2026a6a0d026e9e01a67cfec3fb4cbca81a799f4cfbddcbfb0789be61426c"
   },
   {
    "kit_path": "guides/LESSONS.md",
    "source": "<LAB>\\LESSONS.md",
-   "source_sha256": "f272b4a692b0e07ae7b5c618f604ccb8efaf9e7becf353404f55ce1935f35987"
+   "source_sha256": "3d012d4c9771f38ccbcc6df1375aff86db352db4ecec76235f8ac00832a8d082"
+  },
+  {
+   "kit_path": "guides/IMAGE_RENDERING_PIPELINE.md",
+   "source": "<LAB>\\IMAGE_RENDERING_PIPELINE.md",
+   "source_sha256": "fbb3b44d4485ed2aacde9345f5b0c460ede92b19f575c45b99e44c5c0c07e4f4"
+  },
+  {
+   "kit_path": "guides/REQUIREMENTS_LOCK_TEMPLATE.md",
+   "source": "<LAB>\\REQUIREMENTS_LOCK_TEMPLATE.md",
+   "source_sha256": "dff952e62b2e45d87ee2d672a80f47be0a6a288c6e70cc58bc6b603ee6361cbf"
+  },
+  {
+   "kit_path": "guides/PIPELINE_SIMULATION_2026-11-07_TEST020.md",
+   "source": "<LAB>\\PIPELINE_SIMULATION_2026-11-07_TEST020.md",
+   "source_sha256": "6c7a83ee7b4d1769077331811ab25429718f62e764fd12bbb5a7773e66a5b197"
+  },
+  {
+   "kit_path": "guides/OPTIONAL_CRAFT_TOOLS.md",
+   "source": "<LAB>\\OPTIONAL_CRAFT_TOOLS.md",
+   "source_sha256": "0351146d4c043372697a10850828809fe0b2b28474376adf83aaa763b526aac2"
   },
   {
    "kit_path": "guides/RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md",
@@ -53,19 +73,59 @@
    "source_sha256": "97948d42d6557be5a6cc18ff5f4f76506f16cc00ce11d8cdcf0dd001d1517de1"
   },
   {
-   "kit_path": "skills/cinematic-art-review/agents/openai.yaml",
-   "source": "<LAB>\\skills\\cinematic-art-review\\agents\\openai.yaml",
-   "source_sha256": "922040f3abaa0d0388291bcb0a4e3839c0ccc3951602df0659910bb070d6bb9a"
+   "kit_path": "guides/RETROSPECTIVE_2026-10-29_FILM7_DIRECTING.md",
+   "source": "<LAB>\\RETROSPECTIVE_2026-10-29_FILM7_DIRECTING.md",
+   "source_sha256": "9b766dddb40c1c66deeb51cf0d2bfd1bf8512543a697f649780889c82cca8bba"
   },
   {
-   "kit_path": "skills/cinematic-art-review/references/creative-lead-taste.md",
-   "source": "<LAB>\\skills\\cinematic-art-review\\references\\ (lab taste file, renamed in the kit)",
-   "source_sha256": "72d71f1f68c9de58e28933d05e3497edcb4a5f7b6aee734ceaf027cc57cf2406"
+   "kit_path": "guides/RETROSPECTIVE_2026-11-03_TEST018_DIRECTING.md",
+   "source": "<LAB>\\RETROSPECTIVE_2026-11-03_TEST018_DIRECTING.md",
+   "source_sha256": "9a663bdfab4931cfd1181ac15752c7c69fca3d5666be574d0a28a8139d1c92d9"
+  },
+  {
+   "kit_path": "guides/RETROSPECTIVE_2026-11-03_TEST019_PILOT.md",
+   "source": "<LAB>\\RETROSPECTIVE_2026-11-03_TEST019_PILOT.md",
+   "source_sha256": "510e1dc165056b0513f2401131f0d8650e94155cb117d3b7cf75f30d6257e590"
+  },
+  {
+   "kit_path": "guides/RETROSPECTIVE_2026-11-05_TEST019_PHASE3.md",
+   "source": "<LAB>\\RETROSPECTIVE_2026-11-05_TEST019_PHASE3.md",
+   "source_sha256": "ebd70400c0d05c946c00e432d2354d8ae8de8aebdc8d94fd9a39959d2d7b3dc0"
+  },
+  {
+   "kit_path": "guides/RETROSPECTIVE_2026-11-06_TEST020.md",
+   "source": "<LAB>\\RETROSPECTIVE_2026-11-06_TEST020.md",
+   "source_sha256": "349509c99c7e2bbe568ed067cfe1ad882a061789df932dee864edf285effb40c"
+  },
+  {
+   "kit_path": "guides/SKIN_REALISM.md",
+   "source": "<LAB>\\references\\rendering\\SKIN_REALISM.md",
+   "source_sha256": "f8e804b787a0b6f23d5df555f7930b2f0112f21aa28f868718db4c8fd82e4b3e"
+  },
+  {
+   "kit_path": "guides/STILL_TO_VIDEO_QUALITY.md",
+   "source": "<LAB>\\references\\rendering\\STILL_TO_VIDEO_QUALITY.md",
+   "source_sha256": "5d07a15653805edade1eb81112d845600df0e47a93487737b121ef8e0ec74060"
+  },
+  {
+   "kit_path": "guides/GUARDRAILS_HOLD_THE_NOTE.md",
+   "source": "<LAB>\\experiments\\TEST-020-hold-the-note\\GUARDRAILS.md",
+   "source_sha256": "4779ceabec0006729034f3ffa81207681358d97bec73f1d9a932e773cc17e5a9"
+  },
+  {
+   "kit_path": "guides/PLATFORM_COMPARISON_2026-11-03.md",
+   "source": "<LAB>\\experiments\\TEST-018-cyber-ninjas-escape\\closeout\\PLATFORM_COMPARISON.md",
+   "source_sha256": "67c1ea323b35d487ccd9d0984fa814a799c51513387f6bc8c3bd9afe7029d6b6"
   },
   {
    "kit_path": "skills/cinematic-art-review/SKILL.md",
    "source": "<LAB>\\skills\\cinematic-art-review\\SKILL.md",
    "source_sha256": "b5f1fc33733c50f001127f4926d40107885e47f351448d8391bd5dbf103340b3"
+  },
+  {
+   "kit_path": "skills/cinematic-art-review/agents/openai.yaml",
+   "source": "<LAB>\\skills\\cinematic-art-review\\agents\\openai.yaml",
+   "source_sha256": "922040f3abaa0d0388291bcb0a4e3839c0ccc3951602df0659910bb070d6bb9a"
   },
   {
    "kit_path": "skills/colour-grade/SKILL.md",
@@ -83,246 +143,6 @@
    "source_sha256": "849de12dfbfeab2f37fba2a8cecca7276f1c96b0710764de7f3481341873dddc"
   },
   {
-   "kit_path": "skills/business-motion-film/references/audio.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\references\\audio.md",
-   "source_sha256": "69e27ef2433418b85a6bcf43b552c8fdcd7b7ed7f9a8869f5e4f3d046e3956ad"
-  },
-  {
-   "kit_path": "skills/business-motion-film/references/business-offers.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\references\\business-offers.md",
-   "source_sha256": "8ef8109136cae202771ebd9629a91a177c95f338bdf17bb066903ccb46be6160"
-  },
-  {
-   "kit_path": "skills/business-motion-film/references/case-study-alder.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\references\\case-study-alder.md",
-   "source_sha256": "3e5b7c5911de2dc6964f9d3cea931c42b25fe1294302a167396c9a789a47abc3"
-  },
-  {
-   "kit_path": "skills/business-motion-film/references/case-study-duo.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\references\\case-study-duo.md",
-   "source_sha256": "766da199cd2542c19c6d85427b3b53c54915fba7290c77ff7720d8083667ddda"
-  },
-  {
-   "kit_path": "skills/business-motion-film/references/critic-prompts.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\references\\critic-prompts.md",
-   "source_sha256": "82a5b11329e576b0aa5ea0c5896f773739087e0e67c153a4c2934c878e521b2e"
-  },
-  {
-   "kit_path": "skills/business-motion-film/references/gauntlet.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\references\\gauntlet.md",
-   "source_sha256": "e0e0309d0dcd9ae4585d5860c33ebe172f71be86bcc162798dd6a2a12699dabb"
-  },
-  {
-   "kit_path": "skills/business-motion-film/references/launch-film-notes.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\references\\launch-film-notes.md",
-   "source_sha256": "924130006f4906242cec7026e700bd228a31df346254e53413af5832bd5acc99"
-  },
-  {
-   "kit_path": "skills/business-motion-film/references/motion-grammar.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\references\\motion-grammar.md",
-   "source_sha256": "9f55cfb21a11e1f58e796b4543264c4a62e24746790116f5c88cbfd1ede070c1"
-  },
-  {
-   "kit_path": "skills/business-motion-film/references/product-hero-realism.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\references\\product-hero-realism.md",
-   "source_sha256": "33debe93169312b9756ff5ff0f0e8c0bcf4015f369e792948835f4fbde53292c"
-  },
-  {
-   "kit_path": "skills/business-motion-film/references/quality-bar.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\references\\quality-bar.md",
-   "source_sha256": "02c431faff1fd9b02f3b0101aac549310a4caa5e8a98d39b5c32ca9df42a61d6"
-  },
-  {
-   "kit_path": "skills/business-motion-film/references/three-js-patterns.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\references\\three-js-patterns.md",
-   "source_sha256": "8296696502f20739bf92646a72c7085d9d6d4654749178a377b67cba48a114ee"
-  },
-  {
-   "kit_path": "skills/business-motion-film/scripts/contact-sheet.sh",
-   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\contact-sheet.sh",
-   "source_sha256": "3ad52d730ac0b623d4f4b8602af7228b1ba62467f5ab5e790dc155b68458e4ff"
-  },
-  {
-   "kit_path": "skills/business-motion-film/scripts/frozen-time.sh",
-   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\frozen-time.sh",
-   "source_sha256": "767a8920b6fdca2bdadb9b562feb3e82e46bfd18cdf58e77def091376651fbe5"
-  },
-  {
-   "kit_path": "skills/business-motion-film/scripts/loudness.sh",
-   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\loudness.sh",
-   "source_sha256": "edb14abe7dd09c06f586c8dc3aa0861dba6c90840e74250336cc583b6ed3a47a"
-  },
-  {
-   "kit_path": "skills/business-motion-film/scripts/offline-mix.py",
-   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\offline-mix.py",
-   "source_sha256": "bf61ae07314fbcf6b00beea824a38e90c3a945563c2626768a2bc7a6c3bae888"
-  },
-  {
-   "kit_path": "skills/business-motion-film/scripts/sfx-candidates.py",
-   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\sfx-candidates.py",
-   "source_sha256": "8d5a6f237798ecc7139dd0b7963bdab17211e81bc1dac576ccb11293acbcc072"
-  },
-  {
-   "kit_path": "skills/business-motion-film/scripts/soften-sfx.sh",
-   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\soften-sfx.sh",
-   "source_sha256": "dba8de46fa968534d2ae1e08a316b4e22032aa8285d830f1943d533570c1ca02"
-  },
-  {
-   "kit_path": "skills/business-motion-film/scripts/solve-sfx-gains.py",
-   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\solve-sfx-gains.py",
-   "source_sha256": "a9d5c994855626f47818b800822410e723549da786a5031282d72059c9bf5984"
-  },
-  {
-   "kit_path": "skills/business-motion-film/SKILL.md",
-   "source": "<USER_SKILLS>\\business-motion-film\\SKILL.md",
-   "source_sha256": "18180e295ceeeb4fe1e0cbbdd199f0983e825362e8d931a6610826996aae0ff6"
-  },
-  {
-   "kit_path": "skills/business-motion-film/templates/component-lab.html",
-   "source": "<USER_SKILLS>\\business-motion-film\\templates\\component-lab.html",
-   "source_sha256": "e8262c85f30c095ca10ec5e9196754c2280c959a03a869485da0754b13dcd1d4"
-  },
-  {
-   "kit_path": "skills/business-motion-film/templates/projected-overlays.js",
-   "source": "<USER_SKILLS>\\business-motion-film\\templates\\projected-overlays.js",
-   "source_sha256": "3937dbfc7f6696b31d3c0d9bd0acb5adb1e99b8ed15aedbcbce909cf99630e10"
-  },
-  {
-   "kit_path": "skills/motion-design-advisor/references/style-library.md",
-   "source": "<USER_SKILLS>\\motion-design-advisor\\references\\style-library.md",
-   "source_sha256": "afc2217174433c8590bde3ff219229750b5d5df52c48a2a2f743cd6a703c4d31"
-  },
-  {
-   "kit_path": "skills/motion-design-advisor/SKILL.md",
-   "source": "<USER_SKILLS>\\motion-design-advisor\\SKILL.md",
-   "source_sha256": "07a1ec9a5a502898fd51381c34446c4f21ae2311b8156995143d2ee3b7b822a7"
-  },
-  {
-   "kit_path": "skills/motion-sting/audio/audio_check.py",
-   "source": "<USER_SKILLS>\\motion-sting\\audio\\audio_check.py",
-   "source_sha256": "c763dce8e7c82cebf16d6cef9358cca806c07826b784739ea115e783f1d5ab24"
-  },
-  {
-   "kit_path": "skills/motion-sting/audio/beats.py",
-   "source": "<USER_SKILLS>\\motion-sting\\audio\\beats.py",
-   "source_sha256": "f10b5e0053ffc2583ff42f4849a33aa1c6f6d429c4dd60a7f17c774fa51aa359"
-  },
-  {
-   "kit_path": "skills/motion-sting/audio/cues_example.py",
-   "source": "<USER_SKILLS>\\motion-sting\\audio\\cues_example.py",
-   "source_sha256": "beaabf98470b768958f93e2289310ac66b1485e366acc271b4be9b59f594ab98"
-  },
-  {
-   "kit_path": "skills/motion-sting/audio/foley_template.py",
-   "source": "<USER_SKILLS>\\motion-sting\\audio\\foley_template.py",
-   "source_sha256": "83ce967ca85a00b70deab4aa50f4a018d9488502606909f23f0629e259a2ad87"
-  },
-  {
-   "kit_path": "skills/motion-sting/audio/mix.py",
-   "source": "<USER_SKILLS>\\motion-sting\\audio\\mix.py",
-   "source_sha256": "96bb9a171cd53b29f39d8487a9ee23138e52d6d23167c9dbb2149e6bf078caf3"
-  },
-  {
-   "kit_path": "skills/motion-sting/audio/place_sfx.py",
-   "source": "<USER_SKILLS>\\motion-sting\\audio\\place_sfx.py",
-   "source_sha256": "1900ef3dffac36d12e2fcd8c978803b4c68dbf29614555365c4faeb12c16978f"
-  },
-  {
-   "kit_path": "skills/motion-sting/audio/sfxlib.py",
-   "source": "<USER_SKILLS>\\motion-sting\\audio\\sfxlib.py",
-   "source_sha256": "e36a80025dd136583ed807bd1169d78173411744bf1d9c125dbb02d00d9869e8"
-  },
-  {
-   "kit_path": "skills/motion-sting/references/craft-rules.md",
-   "source": "<USER_SKILLS>\\motion-sting\\references\\craft-rules.md",
-   "source_sha256": "08928d31aadac1b5128f54522e6db1c5d6af93abf4377e5b919e58054102e123"
-  },
-  {
-   "kit_path": "skills/motion-sting/references/critic.md",
-   "source": "<USER_SKILLS>\\motion-sting\\references\\critic.md",
-   "source_sha256": "b47cb106f1217295064dc72750f11173e4f112af082c4435e3bc9137376b78a7"
-  },
-  {
-   "kit_path": "skills/motion-sting/references/engine-map.md",
-   "source": "<USER_SKILLS>\\motion-sting\\references\\engine-map.md",
-   "source_sha256": "6f3b1e916b2ab909fb527683c50cd5609ecdfd40ee9d125d486b5b75492dade3"
-  },
-  {
-   "kit_path": "skills/motion-sting/references/footage.md",
-   "source": "<USER_SKILLS>\\motion-sting\\references\\footage.md",
-   "source_sha256": "664a70ed162803af90d9402866319a12125b76c294dcf33c46ab78978fe5bb80"
-  },
-  {
-   "kit_path": "skills/motion-sting/references/genai-live-action.md",
-   "source": "<USER_SKILLS>\\motion-sting\\references\\genai-live-action.md",
-   "source_sha256": "a9bf83bc99acedb4045986e1ec8c7e35c964bdfdbe75067c1d940585d78ddf31"
-  },
-  {
-   "kit_path": "skills/motion-sting/scripts/extract_clips.py",
-   "source": "<USER_SKILLS>\\motion-sting\\scripts\\extract_clips.py",
-   "source_sha256": "5543f90552018a8c7386b02133f41bdc79d008b9ab606e51a0c3dc7b566b8a12"
-  },
-  {
-   "kit_path": "skills/motion-sting/scripts/genai_assemble_template.py",
-   "source": "<USER_SKILLS>\\motion-sting\\scripts\\genai_assemble_template.py",
-   "source_sha256": "dd2ca7cda9b01bdb138b980960dd27f000411b775a7ffffc471e2175279e8eac"
-  },
-  {
-   "kit_path": "skills/motion-sting/scripts/new_project.py",
-   "source": "<USER_SKILLS>\\motion-sting\\scripts\\new_project.py",
-   "source_sha256": "5a9352b8d054a5776f107590f02f3c32931acc9fbd2d5b6ffce186be19058a45"
-  },
-  {
-   "kit_path": "skills/motion-sting/scripts/render.py",
-   "source": "<USER_SKILLS>\\motion-sting\\scripts\\render.py",
-   "source_sha256": "6ac67f45a0108e8614646c783e7a612ec0f48844c982a5b57793e8d60c60bcf8"
-  },
-  {
-   "kit_path": "skills/motion-sting/scripts/review_pack.py",
-   "source": "<USER_SKILLS>\\motion-sting\\scripts\\review_pack.py",
-   "source_sha256": "f8893cae5061e803c88c41a97f2a40e658467665529565ccaaffe6df7af25430"
-  },
-  {
-   "kit_path": "skills/motion-sting/scripts/stills.py",
-   "source": "<USER_SKILLS>\\motion-sting\\scripts\\stills.py",
-   "source_sha256": "d0ee215b8bf9c52ec58f386989f0f2a435359424fb8e756675648db951532880"
-  },
-  {
-   "kit_path": "skills/motion-sting/scripts/trace_logo.py",
-   "source": "<USER_SKILLS>\\motion-sting\\scripts\\trace_logo.py",
-   "source_sha256": "f163d1b2a7c2a049f200f14366b5f095d1e348632870e1b26b3d55b1403a4026"
-  },
-  {
-   "kit_path": "skills/motion-sting/SKILL.md",
-   "source": "<USER_SKILLS>\\motion-sting\\SKILL.md",
-   "source_sha256": "8dda660410274dca6f79bfc97caedfe6ca8ac6f2274a534bc276d86700d3b4d1"
-  },
-  {
-   "kit_path": "skills/motion-sting/template/footage.js",
-   "source": "<USER_SKILLS>\\motion-sting\\template\\footage.js",
-   "source_sha256": "a55e933ef05290102bdbe33d79e6c80daf86306365bb10964ef11a104f7cad4e"
-  },
-  {
-   "kit_path": "skills/motion-sting/template/index.html",
-   "source": "<USER_SKILLS>\\motion-sting\\template\\index.html",
-   "source_sha256": "7b5c0b47cea7dc09c8188ddc11e45f944b6be7d58cd98a4ad5548342388f9f99"
-  },
-  {
-   "kit_path": "skills/motion-sting/template/server.js",
-   "source": "<USER_SKILLS>\\motion-sting\\template\\server.js",
-   "source_sha256": "c406df51fa39b230696cdac0352a25f1586217b1a3f14c359788f99c8a27ed83"
-  },
-  {
-   "kit_path": "skills/motion-sting/template/sting.js",
-   "source": "<USER_SKILLS>\\motion-sting\\template\\sting.js",
-   "source_sha256": "e20efe91e1063c3d55f3812281d573e1b8b0469bd9e1a45707519054fca6fbdc"
-  },
-  {
-   "kit_path": "skills/motion-sting/template/tools.js",
-   "source": "<USER_SKILLS>\\motion-sting\\template\\tools.js",
-   "source_sha256": "70babde658ed5fc97c816ce37dd143e5d6918fd5624bba6ff1fa20da60c555c5"
-  },
-  {
    "kit_path": "tools/upres_shot.py",
    "source": "<LAB>\\tools\\upres_shot.py",
    "source_sha256": "cd46a9596111dedbe409a6a2c714217bcdec500ec4ead17dd58c990e7b43c37e"
@@ -338,6 +158,11 @@
    "source_sha256": "352b03c360247970d2aae2dc4edb8f3001fe8f5afcec7274f6de79236c3fcbc4"
   },
   {
+   "kit_path": "tools/frame_pair_check.py",
+   "source": "<LAB>\\tools\\frame_pair_check.py",
+   "source_sha256": "b599f48ee6ac56346333e35de70a5614f96ac71cab2c87ecb8fe625598f095ee"
+  },
+  {
    "kit_path": "tools/make_manual_sheet.py",
    "source": "<LAB>\\Micro Series\\Wind the Man\\tools\\make_manual_sheet.py",
    "source_sha256": "f25846d4c322f45b2717c021ceee7787f442a56cc8772f8b544abed6f222d06d"
@@ -346,11 +171,6 @@
    "kit_path": "tools/codex_review.ps1",
    "source": "<LAB>\\Micro Series\\Wind the Man\\tools\\codex_review.ps1",
    "source_sha256": "5efeeb62c2074d5e374b95cca9e12cca6a90dbdc80973b1d70b8029128b03b99"
-  },
-  {
-   "kit_path": "tools/IMAGE_JOBS_FORMAT.md",
-   "source": "<LAB>\\Micro Series\\Wind the Man\\tools\\README.md",
-   "source_sha256": "476ae00027ccf993007d80fead6be9c75471ce7378c572276eeeab9bea6b5438"
   },
   {
    "kit_path": "examples/film6-shadow/build_drawn_board.py",
@@ -371,6 +191,11 @@
    "kit_path": "examples/film6-shadow/assemble_final.py",
    "source": "<LAB>\\experiments\\TEST-013\\assemble_final.py",
    "source_sha256": "3e9c4b15fbebc09533f0233e33230fe7b92c93bb73b56e25b740e6768e1d1427"
+  },
+  {
+   "kit_path": "examples/film6-shadow/assemble_v02.py",
+   "source": "<LAB>\\experiments\\TEST-013\\assemble_v02.py",
+   "source_sha256": "36381fb0fbdcdc4bab8b674cf8a902d54c719680645637395ec44364c03adf4f"
   },
   {
    "kit_path": "examples/film6-shadow/hud.py",
@@ -473,19 +298,399 @@
    "source_sha256": "128646a08a7922b41584c14205fe70379ea8a9d72067a2daa7c99b584cc1a0ff"
   },
   {
-   "kit_path": "examples/film6-shadow/assemble_v02.py",
-   "source": "<LAB>/experiments/TEST-013/assemble_v02.py",
-   "source_sha256": "36381fb0fbdcdc4bab8b674cf8a902d54c719680645637395ec44364c03adf4f"
+   "kit_path": "examples/film7-himmapan/paint_out_sprite.py",
+   "source": "<LAB>\\experiments\\TEST-016-himmapan\\production\\paint_out_sprite.py",
+   "source_sha256": "085a9604d48df066cb3f9e5a2ff37cbe2f8d42092cad6350b9976d581998bdc8"
   },
   {
-   "kit_path": "skills/one-prompt-takes/SKILL.md",
-   "source": "<LAB>\\skills\\one-prompt-takes\\SKILL.md",
-   "source_sha256": "1d309e3cc681d431b1219c12f4deec9008a1f79772c6015d901bf8f3fe784cee"
+   "kit_path": "examples/evade-and-escape/assemble_draft_edit_v04.py",
+   "source": "<LAB>\\experiments\\TEST-018-cyber-ninjas-escape\\drafts\\assemble_draft_edit_v04.py",
+   "source_sha256": "064627ec921d628d01a846fc61e3de9ef2f623ac7cab7a8385ee9ec8471ae52c"
+  },
+  {
+   "kit_path": "examples/one-beat-late/pilot/composite/insert.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\pilot\\composite\\insert.py",
+   "source_sha256": "f236bff424d5d42a6febcbff032ae46f8cc3e01ae506b74f87a289edfbdf2f13"
+  },
+  {
+   "kit_path": "examples/one-beat-late/production/stills/build_visual_board.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\production\\stills\\build_visual_board.py",
+   "source_sha256": "73acbf71230833cf9fa4b704de68efc1150e6b77b03c29fd6e9fe22fa19a604e"
+  },
+  {
+   "kit_path": "examples/one-beat-late/production/video/build_face_prompts.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\production\\video\\build_face_prompts.py",
+   "source_sha256": "0e14af7c090a38030b21704fa5705273843e05fb82171cd0922f3f9847e4be0c"
+  },
+  {
+   "kit_path": "examples/one-beat-late/production/edit/build_music_edit.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\production\\edit\\build_music_edit.py",
+   "source_sha256": "e82590b2eb238e8a9c64876e035878d549405914b0c1be200e7af086238350dc"
+  },
+  {
+   "kit_path": "examples/one-beat-late/production/music/analyze_music.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\production\\music\\analyze_music.py",
+   "source_sha256": "a81b2f92c34ef934ba3097c70070b76e6a2ab8f9f53afb642fc2e06bb98395d5"
+  },
+  {
+   "kit_path": "examples/one-beat-late/production/sound/design_sfx.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\production\\sound\\design_sfx.py",
+   "source_sha256": "52fd6e3eb5ea12b3056b41bd492c83f47cfe6363e9234bb15b5b24676e6c3339"
+  },
+  {
+   "kit_path": "examples/one-beat-late/production/sound/build_sound_mix.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\production\\sound\\build_sound_mix.py",
+   "source_sha256": "1bdca4e0c8e463d4ddcec096b130a34b2b5578e1fd49cb6f1db237a97c1131a4"
+  },
+  {
+   "kit_path": "examples/one-beat-late/production/finish/build_final_1080.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\production\\finish\\build_final_1080.py",
+   "source_sha256": "8ab0607e5626983a41ccecb9821cbe21592e1678c952d3775fab5775e1e74605"
+  },
+  {
+   "kit_path": "examples/one-beat-late/production/finish/every_frame.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\production\\finish\\every_frame.py",
+   "source_sha256": "7f49ae98199b8cc4112883d26debda876ec58965e67b12499dfe1d95e4a89120"
+  },
+  {
+   "kit_path": "examples/one-beat-late/production/finish/measure.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\production\\finish\\measure.py",
+   "source_sha256": "3023652c1cb4900bc50f96bb8579544c181488994c68a551165a1a30b955154a"
+  },
+  {
+   "kit_path": "examples/one-beat-late/production/finish/verify_final.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\production\\finish\\verify_final.py",
+   "source_sha256": "fc4d6e65f223383b129178d50afd4ce10adc10c35bb568eab7194ea37fa72abc"
+  },
+  {
+   "kit_path": "examples/one-beat-late/closeout/package_final_delivery.py",
+   "source": "<LAB>\\experiments\\TEST-019-one-beat-late\\closeout\\package_final_delivery.py",
+   "source_sha256": "4ed8e2a60b7e7e9644b7ba314263c7819bfd02a232fdfb66fe4664cc89ddc313"
+  },
+  {
+   "kit_path": "examples/hold-the-note/effects/grain_fx.py",
+   "source": "<LAB>\\experiments\\TEST-020-hold-the-note\\effects\\tools\\grain_fx.py",
+   "source_sha256": "71ca65cae0569000a6e609c5eb07e8e66eb3e011b4a170a42302897c43ae86b0"
+  },
+  {
+   "kit_path": "examples/hold-the-note/production/p4_atlas/build_requests.py",
+   "source": "<LAB>\\experiments\\TEST-020-hold-the-note\\production\\p4_atlas\\build_requests.py",
+   "source_sha256": "b7861eed36775c10e98a6600b46679352c93fbe96de222fea6afff11d5648da4"
+  },
+  {
+   "kit_path": "examples/hold-the-note/production/finish/make_finish_edl.py",
+   "source": "<LAB>\\experiments\\TEST-020-hold-the-note\\production\\p5c_build\\make_finish_edl.py",
+   "source_sha256": "4160f2c46c6dff6d772528620a6e92232122def7dcfc1b8d815f7d8c1f6680f4"
+  },
+  {
+   "kit_path": "examples/hold-the-note/production/finish/build_04V_reframe.py",
+   "source": "<LAB>\\experiments\\TEST-020-hold-the-note\\production\\p5c_build\\build_04V_reframe.py",
+   "source_sha256": "93af0c57478317bc3231d3335e22c442471b73874106e86f11c760c9b832332a"
+  },
+  {
+   "kit_path": "examples/hold-the-note/production/finish/face_sheet.py",
+   "source": "<LAB>\\experiments\\TEST-020-hold-the-note\\production\\p5_finish\\seedvr2_faces\\face_sheet.py",
+   "source_sha256": "c2eb033775d523a17b1a47cf69b877b56efbaa03c59deef91be3588ca49d5b2e"
+  },
+  {
+   "kit_path": "examples/hold-the-note/production/finish/flute_track.py",
+   "source": "<LAB>\\experiments\\TEST-020-hold-the-note\\production\\p5c_atlas\\flute_track.py",
+   "source_sha256": "235c5f31a7791043f9ae41afe0f8071a4f0899e22b6ac2b82b6d2e665aaee001"
+  },
+  {
+   "kit_path": "examples/hold-the-note/production/finish/epigraph_overlay.py",
+   "source": "<LAB>\\experiments\\TEST-020-hold-the-note\\production\\p5c_build\\epigraph\\epigraph_overlay_v12.py",
+   "source_sha256": "69b448aed3871133860590cb6ced14dfc2944d2a9932c910bfbe4c29c6d41016"
+  },
+  {
+   "kit_path": "examples/hold-the-note/closeout/make_poster.py",
+   "source": "<LAB>\\experiments\\TEST-020-hold-the-note\\closeout\\make_poster.py",
+   "source_sha256": "0d2c2381b01212c8e462227c2f53665c7f91adab0ad4fff8e911ac3dc3d56f23"
+  },
+  {
+   "kit_path": "examples/airborne/finish/checks.py",
+   "source": "<LAB>\\experiments\\TEST-021-cyber-ninjas-airborne\\finish\\checks.py",
+   "source_sha256": "2a2df2dd8fa00e9ffee35dae3a022b384d3d8535b27e262fb63cdc73d5e3eb6c"
+  },
+  {
+   "kit_path": "examples/airborne/finish/skin_measure.py",
+   "source": "<LAB>\\experiments\\TEST-021-cyber-ninjas-airborne\\finish\\skin_measure.py",
+   "source_sha256": "6ca421e97ed1b9604bf0086679c76e24d6f561696a4e0e4a1a14dd3111a1d96a"
   },
   {
    "kit_path": "guides/RETROSPECTIVE_2026-11-05_TEST021_ONE_PROMPT.md",
    "source": "<LAB>\\RETROSPECTIVE_2026-11-05_TEST021_ONE_PROMPT.md",
-   "source_sha256": "1638575e1e9811e0090809cd1fc48110fe944573005d08ad29a9825e1d40d3e6"
+   "source_sha256": "9cd04c42c1ad17cce54150d9de04b585503917de70bcb181f591d7fddd76e526"
+  },
+  {
+   "kit_path": "skills/one-prompt-takes/SKILL.md",
+   "source": "<LAB>\\skills\\one-prompt-takes\\SKILL.md",
+   "source_sha256": "aa6a861ad5c6b5e3f7a5ede1d6b884d65a1786b466688306cfc2aa987dd34c50"
+  },
+  {
+   "kit_path": "skills/cinematic-art-review/references/creative-lead-taste.md",
+   "source": "<LAB>\\skills\\cinematic-art-review\\references\\ (lab taste file, renamed in the kit)",
+   "source_sha256": "72d71f1f68c9de58e28933d05e3497edcb4a5f7b6aee734ceaf027cc57cf2406"
+  },
+  {
+   "kit_path": "tools/IMAGE_JOBS_FORMAT.md",
+   "source": "<LAB>\\Micro Series\\Wind the Man\\tools\\README.md",
+   "source_sha256": "476ae00027ccf993007d80fead6be9c75471ce7378c572276eeeab9bea6b5438"
+  },
+  {
+   "kit_path": "tools/token_count.py",
+   "source": "<LAB>\\tools\\token_count.py",
+   "source_sha256": "06bb88d8dfa044c7eaf51639517fc3606901904a999ba1867e3726257730353c"
+  },
+  {
+   "kit_path": "tools/seedvr2.ps1",
+   "source": "<LAB>\\tools\\seedvr2.ps1",
+   "source_sha256": "1a01b3731f23253f50c1f4d117c79a187a7ee84f69550d94d11e57bc267a90cd"
+  },
+  {
+   "kit_path": "skills/business-motion-film/SKILL.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\SKILL.md",
+   "source_sha256": "18180e295ceeeb4fe1e0cbbdd199f0983e825362e8d931a6610826996aae0ff6"
+  },
+  {
+   "kit_path": "skills/business-motion-film/references/audio.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\references\\audio.md",
+   "source_sha256": "69e27ef2433418b85a6bcf43b552c8fdcd7b7ed7f9a8869f5e4f3d046e3956ad"
+  },
+  {
+   "kit_path": "skills/business-motion-film/references/business-offers.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\references\\business-offers.md",
+   "source_sha256": "8ef8109136cae202771ebd9629a91a177c95f338bdf17bb066903ccb46be6160"
+  },
+  {
+   "kit_path": "skills/business-motion-film/references/case-study-alder.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\references\\case-study-alder.md",
+   "source_sha256": "3e5b7c5911de2dc6964f9d3cea931c42b25fe1294302a167396c9a789a47abc3"
+  },
+  {
+   "kit_path": "skills/business-motion-film/references/case-study-duo.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\references\\case-study-duo.md",
+   "source_sha256": "766da199cd2542c19c6d85427b3b53c54915fba7290c77ff7720d8083667ddda"
+  },
+  {
+   "kit_path": "skills/business-motion-film/references/critic-prompts.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\references\\critic-prompts.md",
+   "source_sha256": "82a5b11329e576b0aa5ea0c5896f773739087e0e67c153a4c2934c878e521b2e"
+  },
+  {
+   "kit_path": "skills/business-motion-film/references/gauntlet.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\references\\gauntlet.md",
+   "source_sha256": "e0e0309d0dcd9ae4585d5860c33ebe172f71be86bcc162798dd6a2a12699dabb"
+  },
+  {
+   "kit_path": "skills/business-motion-film/references/launch-film-notes.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\references\\launch-film-notes.md",
+   "source_sha256": "924130006f4906242cec7026e700bd228a31df346254e53413af5832bd5acc99"
+  },
+  {
+   "kit_path": "skills/business-motion-film/references/motion-grammar.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\references\\motion-grammar.md",
+   "source_sha256": "9f55cfb21a11e1f58e796b4543264c4a62e24746790116f5c88cbfd1ede070c1"
+  },
+  {
+   "kit_path": "skills/business-motion-film/references/product-hero-realism.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\references\\product-hero-realism.md",
+   "source_sha256": "33debe93169312b9756ff5ff0f0e8c0bcf4015f369e792948835f4fbde53292c"
+  },
+  {
+   "kit_path": "skills/business-motion-film/references/quality-bar.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\references\\quality-bar.md",
+   "source_sha256": "02c431faff1fd9b02f3b0101aac549310a4caa5e8a98d39b5c32ca9df42a61d6"
+  },
+  {
+   "kit_path": "skills/business-motion-film/references/three-js-patterns.md",
+   "source": "<USER_SKILLS>\\business-motion-film\\references\\three-js-patterns.md",
+   "source_sha256": "8296696502f20739bf92646a72c7085d9d6d4654749178a377b67cba48a114ee"
+  },
+  {
+   "kit_path": "skills/business-motion-film/scripts/contact-sheet.sh",
+   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\contact-sheet.sh",
+   "source_sha256": "3ad52d730ac0b623d4f4b8602af7228b1ba62467f5ab5e790dc155b68458e4ff"
+  },
+  {
+   "kit_path": "skills/business-motion-film/scripts/frozen-time.sh",
+   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\frozen-time.sh",
+   "source_sha256": "767a8920b6fdca2bdadb9b562feb3e82e46bfd18cdf58e77def091376651fbe5"
+  },
+  {
+   "kit_path": "skills/business-motion-film/scripts/loudness.sh",
+   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\loudness.sh",
+   "source_sha256": "edb14abe7dd09c06f586c8dc3aa0861dba6c90840e74250336cc583b6ed3a47a"
+  },
+  {
+   "kit_path": "skills/business-motion-film/scripts/offline-mix.py",
+   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\offline-mix.py",
+   "source_sha256": "bf61ae07314fbcf6b00beea824a38e90c3a945563c2626768a2bc7a6c3bae888"
+  },
+  {
+   "kit_path": "skills/business-motion-film/scripts/sfx-candidates.py",
+   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\sfx-candidates.py",
+   "source_sha256": "8d5a6f237798ecc7139dd0b7963bdab17211e81bc1dac576ccb11293acbcc072"
+  },
+  {
+   "kit_path": "skills/business-motion-film/scripts/soften-sfx.sh",
+   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\soften-sfx.sh",
+   "source_sha256": "dba8de46fa968534d2ae1e08a316b4e22032aa8285d830f1943d533570c1ca02"
+  },
+  {
+   "kit_path": "skills/business-motion-film/scripts/solve-sfx-gains.py",
+   "source": "<USER_SKILLS>\\business-motion-film\\scripts\\solve-sfx-gains.py",
+   "source_sha256": "a9d5c994855626f47818b800822410e723549da786a5031282d72059c9bf5984"
+  },
+  {
+   "kit_path": "skills/business-motion-film/templates/component-lab.html",
+   "source": "<USER_SKILLS>\\business-motion-film\\templates\\component-lab.html",
+   "source_sha256": "e8262c85f30c095ca10ec5e9196754c2280c959a03a869485da0754b13dcd1d4"
+  },
+  {
+   "kit_path": "skills/business-motion-film/templates/projected-overlays.js",
+   "source": "<USER_SKILLS>\\business-motion-film\\templates\\projected-overlays.js",
+   "source_sha256": "3937dbfc7f6696b31d3c0d9bd0acb5adb1e99b8ed15aedbcbce909cf99630e10"
+  },
+  {
+   "kit_path": "skills/motion-design-advisor/SKILL.md",
+   "source": "<USER_SKILLS>\\motion-design-advisor\\SKILL.md",
+   "source_sha256": "07a1ec9a5a502898fd51381c34446c4f21ae2311b8156995143d2ee3b7b822a7"
+  },
+  {
+   "kit_path": "skills/motion-design-advisor/references/style-library.md",
+   "source": "<USER_SKILLS>\\motion-design-advisor\\references\\style-library.md",
+   "source_sha256": "afc2217174433c8590bde3ff219229750b5d5df52c48a2a2f743cd6a703c4d31"
+  },
+  {
+   "kit_path": "skills/motion-sting/SKILL.md",
+   "source": "<USER_SKILLS>\\motion-sting\\SKILL.md",
+   "source_sha256": "8dda660410274dca6f79bfc97caedfe6ca8ac6f2274a534bc276d86700d3b4d1"
+  },
+  {
+   "kit_path": "skills/motion-sting/audio/audio_check.py",
+   "source": "<USER_SKILLS>\\motion-sting\\audio\\audio_check.py",
+   "source_sha256": "c763dce8e7c82cebf16d6cef9358cca806c07826b784739ea115e783f1d5ab24"
+  },
+  {
+   "kit_path": "skills/motion-sting/audio/beats.py",
+   "source": "<USER_SKILLS>\\motion-sting\\audio\\beats.py",
+   "source_sha256": "f10b5e0053ffc2583ff42f4849a33aa1c6f6d429c4dd60a7f17c774fa51aa359"
+  },
+  {
+   "kit_path": "skills/motion-sting/audio/cues_example.py",
+   "source": "<USER_SKILLS>\\motion-sting\\audio\\cues_example.py",
+   "source_sha256": "beaabf98470b768958f93e2289310ac66b1485e366acc271b4be9b59f594ab98"
+  },
+  {
+   "kit_path": "skills/motion-sting/audio/foley_template.py",
+   "source": "<USER_SKILLS>\\motion-sting\\audio\\foley_template.py",
+   "source_sha256": "83ce967ca85a00b70deab4aa50f4a018d9488502606909f23f0629e259a2ad87"
+  },
+  {
+   "kit_path": "skills/motion-sting/audio/mix.py",
+   "source": "<USER_SKILLS>\\motion-sting\\audio\\mix.py",
+   "source_sha256": "96bb9a171cd53b29f39d8487a9ee23138e52d6d23167c9dbb2149e6bf078caf3"
+  },
+  {
+   "kit_path": "skills/motion-sting/audio/place_sfx.py",
+   "source": "<USER_SKILLS>\\motion-sting\\audio\\place_sfx.py",
+   "source_sha256": "1900ef3dffac36d12e2fcd8c978803b4c68dbf29614555365c4faeb12c16978f"
+  },
+  {
+   "kit_path": "skills/motion-sting/audio/sfxlib.py",
+   "source": "<USER_SKILLS>\\motion-sting\\audio\\sfxlib.py",
+   "source_sha256": "e36a80025dd136583ed807bd1169d78173411744bf1d9c125dbb02d00d9869e8"
+  },
+  {
+   "kit_path": "skills/motion-sting/references/craft-rules.md",
+   "source": "<USER_SKILLS>\\motion-sting\\references\\craft-rules.md",
+   "source_sha256": "08928d31aadac1b5128f54522e6db1c5d6af93abf4377e5b919e58054102e123"
+  },
+  {
+   "kit_path": "skills/motion-sting/references/critic.md",
+   "source": "<USER_SKILLS>\\motion-sting\\references\\critic.md",
+   "source_sha256": "b47cb106f1217295064dc72750f11173e4f112af082c4435e3bc9137376b78a7"
+  },
+  {
+   "kit_path": "skills/motion-sting/references/engine-map.md",
+   "source": "<USER_SKILLS>\\motion-sting\\references\\engine-map.md",
+   "source_sha256": "6f3b1e916b2ab909fb527683c50cd5609ecdfd40ee9d125d486b5b75492dade3"
+  },
+  {
+   "kit_path": "skills/motion-sting/references/footage.md",
+   "source": "<USER_SKILLS>\\motion-sting\\references\\footage.md",
+   "source_sha256": "664a70ed162803af90d9402866319a12125b76c294dcf33c46ab78978fe5bb80"
+  },
+  {
+   "kit_path": "skills/motion-sting/references/genai-live-action.md",
+   "source": "<USER_SKILLS>\\motion-sting\\references\\genai-live-action.md",
+   "source_sha256": "a9bf83bc99acedb4045986e1ec8c7e35c964bdfdbe75067c1d940585d78ddf31"
+  },
+  {
+   "kit_path": "skills/motion-sting/scripts/extract_clips.py",
+   "source": "<USER_SKILLS>\\motion-sting\\scripts\\extract_clips.py",
+   "source_sha256": "5543f90552018a8c7386b02133f41bdc79d008b9ab606e51a0c3dc7b566b8a12"
+  },
+  {
+   "kit_path": "skills/motion-sting/scripts/genai_assemble_template.py",
+   "source": "<USER_SKILLS>\\motion-sting\\scripts\\genai_assemble_template.py",
+   "source_sha256": "dd2ca7cda9b01bdb138b980960dd27f000411b775a7ffffc471e2175279e8eac"
+  },
+  {
+   "kit_path": "skills/motion-sting/scripts/new_project.py",
+   "source": "<USER_SKILLS>\\motion-sting\\scripts\\new_project.py",
+   "source_sha256": "5a9352b8d054a5776f107590f02f3c32931acc9fbd2d5b6ffce186be19058a45"
+  },
+  {
+   "kit_path": "skills/motion-sting/scripts/render.py",
+   "source": "<USER_SKILLS>\\motion-sting\\scripts\\render.py",
+   "source_sha256": "6ac67f45a0108e8614646c783e7a612ec0f48844c982a5b57793e8d60c60bcf8"
+  },
+  {
+   "kit_path": "skills/motion-sting/scripts/review_pack.py",
+   "source": "<USER_SKILLS>\\motion-sting\\scripts\\review_pack.py",
+   "source_sha256": "f8893cae5061e803c88c41a97f2a40e658467665529565ccaaffe6df7af25430"
+  },
+  {
+   "kit_path": "skills/motion-sting/scripts/stills.py",
+   "source": "<USER_SKILLS>\\motion-sting\\scripts\\stills.py",
+   "source_sha256": "d0ee215b8bf9c52ec58f386989f0f2a435359424fb8e756675648db951532880"
+  },
+  {
+   "kit_path": "skills/motion-sting/scripts/trace_logo.py",
+   "source": "<USER_SKILLS>\\motion-sting\\scripts\\trace_logo.py",
+   "source_sha256": "f163d1b2a7c2a049f200f14366b5f095d1e348632870e1b26b3d55b1403a4026"
+  },
+  {
+   "kit_path": "skills/motion-sting/template/footage.js",
+   "source": "<USER_SKILLS>\\motion-sting\\template\\footage.js",
+   "source_sha256": "a55e933ef05290102bdbe33d79e6c80daf86306365bb10964ef11a104f7cad4e"
+  },
+  {
+   "kit_path": "skills/motion-sting/template/glyphs.js",
+   "source": "<USER_SKILLS>\\motion-sting\\template\\glyphs.js",
+   "source_sha256": "b1cfcf8aeeea02d9214ab11800e7c0886bdc065ec571f91188582c0199b3acb5"
+  },
+  {
+   "kit_path": "skills/motion-sting/template/index.html",
+   "source": "<USER_SKILLS>\\motion-sting\\template\\index.html",
+   "source_sha256": "7b5c0b47cea7dc09c8188ddc11e45f944b6be7d58cd98a4ad5548342388f9f99"
+  },
+  {
+   "kit_path": "skills/motion-sting/template/server.js",
+   "source": "<USER_SKILLS>\\motion-sting\\template\\server.js",
+   "source_sha256": "c406df51fa39b230696cdac0352a25f1586217b1a3f14c359788f99c8a27ed83"
+  },
+  {
+   "kit_path": "skills/motion-sting/template/sting.js",
+   "source": "<USER_SKILLS>\\motion-sting\\template\\sting.js",
+   "source_sha256": "e20efe91e1063c3d55f3812281d573e1b8b0469bd9e1a45707519054fca6fbdc"
+  },
+  {
+   "kit_path": "skills/motion-sting/template/tools.js",
+   "source": "<USER_SKILLS>\\motion-sting\\template\\tools.js",
+   "source_sha256": "70babde658ed5fc97c816ce37dd143e5d6918fd5624bba6ff1fa20da60c555c5"
   }
  ]
 }

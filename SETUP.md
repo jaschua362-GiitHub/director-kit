@@ -38,6 +38,27 @@ python -I tools\upres_shot.py take.mp4 <in_frame> <n_frames> out.mkv --size 1920
 
 The script stops if the GPU returns dark frames. Still compare each upscaled shot's brightness with its source.
 
+## 2b. SeedVR2 (optional, the better upscaler)
+
+`tools/seedvr2.ps1` runs the SeedVR2 3B one-step diffusion upscaler through the standalone CLI from `numz/ComfyUI-SeedVR2_VideoUpscaler` (Apache-2.0). It re-synthesises detail, so it is for shots without readable faces, and for medium or close faces that pass a 100 % crop afterwards. Small faces (under about 60 px in the final frame) get invented features; those shots are generated at native 1080p instead.
+
+1. Clone the upstream repository into `<SEEDVR2_DIR>\upstream\`.
+2. Make a Python 3.12 environment at `<SEEDVR2_DIR>\.venv\` with a CUDA build of torch and the upstream requirements (we used `uv`; nothing global).
+3. Download into `<SEEDVR2_DIR>\models\`: `seedvr2_ema_3b-Q8_0.gguf` (Hugging Face `AInVFX/SeedVR2_comfyUI`) and `ema_vae_fp16.safetensors` (`numz/SeedVR2_comfyUI`). Record their SHA-256.
+4. Set the folder and run:
+
+```powershell
+$env:SEEDVR2_DIR = "D:\tools\seedvr2"
+./tools/seedvr2.ps1 -In take.mp4 -Out take_1080x1920.mkv -Short 1080
+```
+
+Measured on an RTX 3080 (10 GB): about 5–8 min per 48 frames at a 1080 short side, about 17 min per 5 s clip at 1620; 2160 failed. The script refuses to start while other apps hold more than 3.5 GB of VRAM (`-MaxUsedMiB`, `-Force`). Batches of 5 frames mean temporal consistency is per batch: check for shimmer between batches.
+
+## 2c. Checks that run before money is spent
+
+- `python -I tools\frame_pair_check.py START.png END.png OUT_DIR` before every paid first/last-frame video job: an overlay, a difference heat map and the grid cells that changed. Anything that should stay fixed (walls, props, cup size, sky) must not light up; a prop that differs between the frames forces a morph in every take.
+- `python -I tools\token_count.py "<film title>" --budget 150` at every approval gate, from the project folder you open Claude Code in. It reads the local Claude Code transcripts (read-only) and prints processed tokens per session, flagging sessions that passed 250 K context. Session titles must contain the film name.
+
 ## 3. Image jobs (stills)
 
 Read [tools/IMAGE_JOBS_FORMAT.md](tools/IMAGE_JOBS_FORMAT.md). Copy `tools\` into your project root; the scripts treat the folder that contains `tools\` as the project root.
@@ -66,4 +87,4 @@ Some skill text still names the lab's own paths, such as `<PROJECTS>\<Brand>\...
 
 ## 5. Paid services
 
-Video generation, voices and lip-sync go through the plugins in [PLUGINS.md](PLUGINS.md) and spend credits. Run one short face-acceptance test (about 4 s) before committing a film to a provider, and draft at low resolution until the edit is approved.
+Video generation, voices and lip-sync go through the plugins and services in [PLUGINS.md](PLUGINS.md) and spend credits. Run one short face-acceptance test (about 4 s) before committing a film to a provider, draft at low resolution until the edit is approved, and read [guides/PLATFORM_COMPARISON_2026-11-03.md](guides/PLATFORM_COMPARISON_2026-11-03.md) for how the providers compared on real films.

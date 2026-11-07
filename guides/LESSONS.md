@@ -157,3 +157,14 @@ Token efficiency:
 - Fresh work per finished second was the best so far, at 32 K/s against Film 5's 50 K/s.
 - Total processed tokens were 4.6× Film 5's, because everything ran as one 9-hour session.
 - Next film: split the work into phase sessions. See TOKEN_AND_COST_COMPARISON.md (lab file, not in kit: `experiments/TEST-013/closeout/TOKEN_AND_COST_COMPARISON.md`).
+
+## 2026-10-31 — Reusable skin material/light recipe
+Jason requests reuse across future films. [SKIN_REALISM](SKIN_REALISM.md) records actual native prompts/reference roles and inspected outputs. Earlier female texture edits embossed coarse detail without removing broad sheen; a new portrait setup gave finer detail. No controlled causal study or universal preset is claimed. Preserve face design, judge material/light in close and scene-sized references, and keep unresolved sheen visible in the review.
+
+
+## 2026-11-07 — Outside workflow compared; four checks adopted
+Jason asked whether Eian's Claude Code + Codex + Seedance article could improve our process. XR03 (lab file, not in kit: `references/process/XR03-eianlu-2118317430665613741/START_HERE.md`) digests it and maps it against our rules: about four fifths was already Lab practice. He adopted the four gaps ("All four"): a story risk list priced at the synopsis (STORY_FOUNDATION.md), a frame-pair overlay check before paid jobs (PRODUCTION_PLAYBOOK.md §8 item 11, `tools/frame_pair_check.py`), a supervisor check at every gate (REQUIREMENTS_LOCK_TEMPLATE.md step 6) and one final-review brief for the fresh agent (VIDEO_DIRECTOR_BRIEF.md, 2026-11-07). The article's error-and-fix table is kept in XR03 as the author's reports, unverified here. Left for later tests: Seedance 2.0 mini for ordinary shots, long timed prompts versus our short ones, and the colour-tag question on untagged Seedance files.
+
+## 2026-11-07 — neutral whites and contextual realism
+
+Jason likes the improved Small Cargo lighting, then requests neutral whites and fine interior dust. Actual v08 inspection (lab file, not in kit: `days/2026-11-04-small-cargo/white-dust-v08-DRAFT/SELF_REVIEW.md`) distinguishes real material colour from global cast, sparse light-revealed air from decorative particles, and inherited etched facial lines from natural skin. A targeted skin follow-up helps cheeks partly; forehead lines remain. Four native edits/three selected are awaiting review. The supplied checklist is useful direction, not measured evidence that one source/f1.8/off-centre framing/phone styling universally removes AI appearance.

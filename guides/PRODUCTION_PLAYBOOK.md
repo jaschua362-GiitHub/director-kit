@@ -68,6 +68,7 @@ Learned on DCL-20261013-SOLAR (Claude Opus 5.5 + ChatCut Seedance 2.5): five rev
     - Read the credit balance before and after each job.
     - Agent-mode chat turns can bill credits.
     - Prefer an installed integration over screenshot-driven typing, which is token-heavy.
+11. **Frame-pair check (adopted 2026-11-07, Jason: "All four"; source XR03).** Before the paid job, run `python -I tools/frame_pair_check.py START.png END.png OUT_DIR`. It writes a 50% overlay, an amplified difference map and a short list of the grid cells that changed most. Anything that should stay fixed must not show: a wall that shifts colour becomes a colour drift in the video, a cup that is drawn larger grows on screen. Then check the enlarged frames: every object the motion uses is already in the start frame; reactions are set up in the start frame (one person acting in front, the other behind, facing camera); no two people share a pose; space is left where things land or fly, and headroom above people; one wind direction across the scene; no stray objects or lines. Rules 3 and 4 above say how to build the frames; this item is how to prove they were built that way. Proof case: run on Hold the Note's approved S10H/E10H pair (7 Nov 2026), the overlay shows two flutes of different length at once, and 72% of the frame differs; that pair cost the shot 10 retakes. A derived pair where only the acting changes scores well under 20%.
 
 Jason's bar: "we shouldn't deliver unpolished work." Polish means correct motion and acting, not only resolution.
 

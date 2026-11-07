@@ -22,5 +22,21 @@ Jason reviews the identifiable synopsis/story foundation and selected art. Recor
 
 In a later authorised production session, the video director expands the approved synopsis and art into a storyboard, shot coverage, performance, pacing and final edit. It may develop the narrative within roughly 30 seconds when useful, without routine reapproval of that execution work. Preserve the approved story intent, character/world identity, essential payoff and explicit user locks. Keep the source packet unchanged and production derivatives separate. Meaningful departures remain labelled director variants; replacing the pinned foundation requires new source approval. Existing account, spending and final-video approval rules still apply.
 
+## 2026-11-07 — Story risk list: price the hard beats before the board (Jason: "All four")
+
+Adopted from Eian's workflow article (XR03 (lab file, not in kit: `references/process/XR03-eianlu-2118317430665613741/START_HERE.md`)) after a comparison with our own lessons. When the synopsis is written, mark every beat that uses one of the things current video models do badly:
+
+- two characters crossing paths or passing in front of each other;
+- small objects handled in the hands (a key, a needle, a cup passed over);
+- on-screen text, signs or screens that must read;
+- mirrors, glass and water reflections;
+- left-right asymmetric features (one earring, one tattoo, a scar, a hilt on one side);
+- a lighting change inside one shot;
+- three actions in a row for one character;
+- a high angle that hides a face that must act;
+- more than two or three supporting characters in frame.
+
+A mark is a **cost item, not a ban.** The story keeps its freedom (the 2026-10-21 rule stands). The director decides for each mark: make it a start-frame shot, give it a patch budget in the requirements lock (row 16), stage around it, or keep it and accept the retake risk in writing. Our own evidence behind the list: the hilt still showing in the scabbard and the fake drone cut (TEST-021), the shrinking flute (TEST-020), the mirrored makeup (Film 3), the hand-swap that would not take (Film 1). The one-prompt skill's "mark every risky beat" step uses this same list.
+
 ## 2026-10-17 — Audience evidence, directed stories and next-cycle selection
 Use AUDIENCE_AND_STORY_BRIEF.md (lab file, not in kit: `AUDIENCE_AND_STORY_BRIEF.md`) to connect the intended opening, emotional development, reveal and ending with a professional-relevance hypothesis. For the current requested cycle, three15–25s treatments/keyframe proposals await creative selection before full asset generation. This specific review step does not turn every future synopsis into a fixed timed screenplay or replace the roughly30s upper target.
