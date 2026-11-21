@@ -6,16 +6,18 @@ Route: **2.5D in code** (`motion-sting` skill engine + a glossy shading pass), c
 
 | Item | Decision |
 |---|---|
-| Logo source | Google Drive `foundation-lock/` → `source/LOCKED-creature.png`, `source/LOCKED-wordmark.png` (1254 px PNG, no vector master) |
+| Logo master | **`source/identity/approved-white-lockup.svg`** (Drive, `2026-10-28-crenature-identity` work): true vector, arc-built dragon with diamond eye + the approved wordmark, one `<g data-letter>` per letter. Supersedes the traced PNGs |
+| Look references | `refs/final_look_3d.jpg` (user, glossy black, horizontal), `source/identity/environment-endcard-light.png` (Drive, 3840x2160, same glossy black dragon, stacked), `source/identity/horizontal.png` (Drive, white matte 3D dragon on dark) |
+| Earlier sources | `foundation-lock/` → `source/LOCKED-creature.png`, `source/LOCKED-wordmark.png` (1254 px PNG; older almond-eye / creature-c version, not used) |
 | Source hashes (sha256) | creature `91e55a37…0067`, wordmark `67284262…1ac` |
 | Vectors | `traced/creature_glyphs.js` (ink body + eye), `traced/wordmark_glyphs.js` (9 letters + dot), traced with `trace_logo.py`, checked side by side in `stills/compare_*.png` |
 | Format | 16:9 only, 1920×1080, 60 fps + 30 fps export |
 | Duration | short intro, about 5 s (3.6 s story + 1.4 s hold) |
 | Ending | dragon mark + `crenature` wordmark lockup, resolving to the **glossy 3D look** of `refs/final_look_3d.jpg` |
 | Route | **2.5D in code** (approved): the dragon moves and coils facing camera, then inflates from flat ink to glossy 3D (height field + studio shading, `lookdev/glossy_test.py`). It never turns sideways. |
-| Wordmark | **plain geometric sans like the reference** (replaces the locked custom wordmark for this piece), set from a real font, never traced from the reference. Font to propose at build: an OFL geometric sans (e.g. Outfit / Lexend / Sora); Inter Display is installed as a fallback |
-| Eye | **glowing diamond eye** like the reference (a change from the locked almond eye). Colour: hot core `#FFBE77` → amber `#FB8F18` → red-orange edge `#CF5D1F` (reference measures mean `#CF5D1F`, core `#FFBE77`) |
-| Palette | ink `#101010`, background soft studio grey (reference about `#EEECEA` centre to `#D8D6D4` edges), glossy black body with warm-white highlights |
+| Wordmark | the **approved wordmark from the SVG master** (plain geometric sans with notched `e`/`r` details, as in the reference). No font needed |
+| Eye | **diamond eye** from the SVG master, approved colour **`#FF6A24`**, with a glow (hot core about `#FFBE77`, as measured in the reference) |
+| Palette | approved logo cream `#FFFDF7` (white lockup), ink `#101010` for the glossy black version, background soft studio grey (reference about `#EEECEA` centre to `#D8D6D4` edges), glossy black body with warm-white highlights |
 | Saving | user approved pushing everything (incl. logo files) to the public repo branch, 2026-11-21 |
 | Sound | synthesised, cued from the timeline (default; confirm) |
 | Music | none |
@@ -47,4 +49,5 @@ Built in a cloud session. Code, preview stills and the headless-Chrome export ru
 ## Look development
 
 - `stills/lookdev_board_v1.png`: A reference, B code glossy finish (v2), C flat start state. Shown to the user 2026-11-21.
-- To do at build: more grey sheen on the big curve (closer to A), diamond eye, real-font wordmark.
+- To do at build: rebuild the look from the SVG master (not the traced PNG), more grey sheen on the big curve (match `environment-endcard-light.png`), diamond eye.
+- Note: the approved identity also has a white-on-dark version (`horizontal.png`). This intro uses the black-on-light look the user chose.
