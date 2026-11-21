@@ -83,3 +83,24 @@ VERDICT: ANOTHER ROUND
 3. **Sound and wordmark disconnected (3.0–4.4 s).** Fix: put the 3.80 s hit on a blink and glint. Flick the tail at 3.0 s and drive a hard-edged reveal from its tip, with one note per letter. Add a travelling light sweep through the hold.
 
 VERDICT: ANOTHER ROUND
+
+## Round 4 (new direction)
+
+Critic: independent pass on `out/Crenature_Intro_v4_1920x1080_60fps_sound.mp4`. Extra frames in `review/critic_4/`.
+
+| # | Criterion | Score | Evidence |
+|---|---|---|---|
+| 1 | Hook | 5 | 0–2.3 s motion 0.2/0.6 per s; the "razor rim" at 1.6 s is a dim grey smear (body luma ~15–40), not a blade of light |
+| 2 | Phone readability | 6 | phone.png 1 s: black dragon on black is invisible at 360 px; 3 s+ lockup reads well |
+| 3 | Motion quality | 6 | No one-frame pops; but 2.38–2.57 s luma 8→240 in 10 frames as a flat disc wipe; hold 3.4–5.6 s frame diff ~0.1, push and 4.4 s glint don't register |
+| 4 | Variety & pacing | 5 | Motion/s 0.2 0.6 7.9 0.3 0.2 0.2: all energy in one 0.2 s burst, 2.3 s of near-black before it and a 2.2 s static hold after |
+| 5 | Composition | 7 | End lock 69.6 % wide, centre 963/539, margins 295/287 px, good; 1.5–2.8 s dragon parked at left third, 2/3 of frame empty |
+| 6 | Brand & tone | 5 | Geometry and rigidity match the approved mark; finish is soft inflated rubber with blurry highlights, none of the crisp warm-grey specular edges in final_look_3d; eye is a flat dull orange at 5.5 s |
+| 7 | Sound sync | 8 | Hit ~2.50 s on burst peak; 9 ticks 2.85–3.25 s at 50 ms match the letters; -14.5 LUFS, TP -2.5 dBFS; level dips to -21 dB at 2.40 s, so the riser doesn't build |
+
+**Biggest problems**
+1. **0.55–2.3 s: the carve isn't on screen.** Fix: a 1–3 px near-white specular rim (luma 200+) travelling the spine with a hot leading point and a short motion-blurred trail; body stays black; frame the pull-back so the mark lands centred, not parked left.
+2. **2.38–2.57 s: the light burst is a 2D circular iris wipe** with a soft ring edge and macroblock smear on the dark side (lifted 2.43 s frame). This is the cheapest-looking moment. Fix: stage it as lighting. Strip lights snap on in 2–3 staggered steps (floor, then backdrop), with a 1–2-frame overexposure and bloom on the speculars and no geometric edge. Put the hit on the first light.
+3. **2.6–5.6 s: final material and hold.** It reads as rubber, the eye is dull and the hold is dead. Fix: narrow, sharp highlights; warm-grey edge sheen on the big curve and tail; an emissive eye with small bloom; a visible specular streak at 4.4 s plus a 6–10-frame glint; a 3–4 % push. Also encode at 10–15 Mbps with dither or grain: the 0.6 s eye glow and vignette show stepped rings (2.9 Mbps now).
+
+VERDICT: ANOTHER ROUND

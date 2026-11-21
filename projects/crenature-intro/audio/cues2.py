@@ -56,10 +56,15 @@ m.add(ring, 0, gain=.05, pan=pan_a, rev=.5)
 nr = secs(.6); tr = tax(nr)
 riser = bp_sweep(pink(nr), np.linspace(400, 5200, nr), q=1.8) * (tr / tr[-1]) ** 2.2
 m.add(riser / np.max(np.abs(riser)), R.T_LIGHT_HIT - .6, gain=.28, pan=0, rev=.3)
-m.add(sub_thump(85, 40, 1.1), R.T_LIGHT_HIT, gain=.42, pan=0, rev=.1)
+m.add(sub_thump(85, 40, 1.1), R.T_LIGHT_HIT, gain=.26, pan=0, rev=.1)
 m.add(tock(1800), R.T_LIGHT_HIT, gain=.30, pan=0, rev=.3)
 nh = secs(.35); hit = static(pink(nh), 'hp', 2500) * np.exp(-tax(nh) / .06)
 m.add(hit / np.max(np.abs(hit)), R.T_LIGHT_HIT, gain=.16, pan=0, rev=.5)
+# the next two lights snap on: heavier clacks, the key light carries the big body
+for tk, g, f0 in ((R.T_L2, .30, 1500), (R.T_L3, .38, 1200)):
+    m.add(tock(f0), tk, gain=g, pan=0, rev=.35)
+    m.add(hit / np.max(np.abs(hit)), tk, gain=g * .6, pan=0, rev=.5)
+m.add(sub_thump(70, 36, 1.2), R.T_L3, gain=.40, pan=0, rev=.12)
 
 # 5. wordmark cuts: one crisp tick per letter, rising slightly in pitch, panned left -> right
 for i in range(9):
