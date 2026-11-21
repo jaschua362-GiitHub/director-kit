@@ -44,15 +44,16 @@ R = dist[ys[path], xs[path]]
 # smooth + resample at 1 px arc length
 P = np.stack([ndimage.gaussian_filter1d(P[:, k], 6, mode='nearest') for k in (0, 1)], 1)
 R = ndimage.gaussian_filter1d(R, 2, mode='nearest')
+Rs = ndimage.gaussian_filter1d(R, 22, mode='nearest') * 0.97   # smooth flight profile
 s = np.r_[0, np.cumsum(np.hypot(*np.diff(P, axis=0).T))]
 u = np.arange(0, s[-1], 1.0)
-P = np.stack([np.interp(u, s, P[:, 0]), np.interp(u, s, P[:, 1])], 1); R = np.interp(u, s, R)
-np.savez('parts/spine.npz', pts=P, radius=R)
+P = np.stack([np.interp(u, s, P[:, 0]), np.interp(u, s, P[:, 1])], 1); R = np.interp(u, s, R); Rs = np.interp(u, s, Rs)
+np.savez('parts/spine.npz', pts=P, radius=R, radius_s=Rs)
 print('spine samples', len(P), 'radius min/max', R.min().round(1), R.max().round(1))
 # debug image: skeleton, chosen spine, reconstruction
 im = Image.new('RGB', A.shape[::-1], (30, 30, 30)); dr = ImageDraw.Draw(im)
 rec = Image.new('L', A.shape[::-1], 0); dr2 = ImageDraw.Draw(rec)
-for (x, y), r in zip(P[::2], R[::2]): dr2.ellipse([x-r, y-r, x+r, y+r], fill=255)
+for (x, y), r in zip(P[::2], Rs[::2]): dr2.ellipse([x-r, y-r, x+r, y+r], fill=255)
 rec = np.asarray(rec) > 0
 dbg = np.zeros(A.shape + (3,), np.uint8); dbg[A] = (90, 90, 90); dbg[rec] = (200, 200, 200); dbg[A & ~rec] = (220, 80, 80)
 dbg[sk] = (80, 160, 255)

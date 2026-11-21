@@ -43,12 +43,12 @@ rum = osc(42 + 18 * spd_a, n) * spd_a ** 1.5
 m.add(rum, 0, gain=.10, pan=0, rev=.1)
 
 # eye glint as it appears (first on screen)
-t_in = tf[np.argmax(on)]
+t_in = R.T_EYE0 + .1     # the eye opens on the waiting head
 m.add(glass(F['A5'], 1.2, .45), t_in, gain=.10, pan=float(np.interp(t_in, t, pan_a)), rev=.6)
 
 # 3. coil locks (end of flight): tightening noise rise + click + sub thump
-rise = bp_sweep(pink(secs(.5)), np.linspace(600, 3200, secs(.5)), q=2.0) * np.linspace(0, 1, secs(.5)) ** 2
-m.add(rise / np.max(np.abs(rise)), R.T_FLY1 - .5, gain=.12, pan=-.45, rev=.3)
+rise = bp_sweep(pink(secs(.85)), np.linspace(500, 3400, secs(.85)), q=2.2) * np.linspace(0, 1, secs(.85)) ** 1.6
+m.add(rise / np.max(np.abs(rise)), R.T_FLY1 - .85, gain=.30, pan=-.45, rev=.3)
 m.add(tock(1400), R.T_FLY1, gain=.25, pan=-.45, rev=.25)
 m.add(sub_thump(70, 42, .9), R.T_FLY1, gain=.26, pan=0, rev=.1)
 
@@ -69,7 +69,9 @@ for i, k in enumerate(scale):
 # 7. resolve chord carries the hold to silence
 t_res = R.T_TYPE0 + 8 * R.T_TYPE_STEP + .2
 for k, g in [('D3', .20), ('A3', .14), ('D4', .12), ('F4', .09), ('A4', .06)]:
-    m.add(bell(F[k], R.DUR - t_res + .2), t_res, gain=g, pan=0, rev=.5)
+    b = bell(F[k], R.DUR - t_res)
+    b *= np.linspace(1, 0, len(b)) ** 1.5        # decays to silence inside the film
+    m.add(b, t_res, gain=g, pan=0, rev=.5)
 
 out = os.path.join(HERE, 'crenature_sfx.wav')
 m.render(out)
