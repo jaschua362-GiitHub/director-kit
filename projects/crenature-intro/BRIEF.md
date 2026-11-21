@@ -22,7 +22,21 @@ Route: **2.5D in code** (`motion-sting` skill engine + a glossy shading pass), c
 | Sound | synthesised, cued from the timeline (default; confirm) |
 | Music | none |
 
-## Story beats (mirror of `T` in sting.js)
+## Direction change (2026-11-21, after v3)
+
+Client note on v1-v3: "too toon-like in the action; the dragon animation looks like a cartoon ink worm, which loses the premium and edgy creative branding."
+New direction (approved): **light carves the dragon**. The mark never bends or deforms; it is the rigid glossy 3D dragon from the first frame. Mood: **dark to light**.
+Renderer: `build/render2.py` (v4+). `build/render.py` (flying-worm version, v1-v3) is kept for the record only.
+
+| t (s) | beat (v4) | sound |
+|---|---|---|
+| 0.00-0.55 | Near-black. Tight close-up on the head; the amber eye opens and glows. | low air, breath swell, glass shimmer on the eye |
+| 0.55-2.25 | A razor rim-light runs along the dragon from horns and head, down the neck, around the big coil, into the tail spiral, carving the glossy body out of the dark. The camera pulls back from the eye to the full mark. | metallic "blade" sweep following the light front |
+| 2.30-2.70 | The studio lights rise: the black field flips to the warm off-white studio, the dragon stands in full glossy light, the floor shadow lands. | riser into a hard hit |
+| 2.85-3.30 | `crenature` cuts in hard, letter by letter (crisp slices, no fades). | one crisp tick per letter |
+| 3.30-5.60 | Hold: blink, then a light sweep and eye glint around 4.4 s; slow push. | blink chime, glint shimmer, low chord decaying to silence |
+
+## Story beats (v1-v3, superseded)
 
 Dragon leads (user request 2026-11-21). Times are a starting point; may stretch to about 6 s.
 

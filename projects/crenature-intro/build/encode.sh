@@ -2,7 +2,7 @@
 # Encode a rendered frame folder + the synthesised sound into 60 and 30 fps H.264 MP4s.
 #   bash build/encode.sh frames/v1 Crenature_Intro_5s_v1
 set -euo pipefail
-FR=$1; NAME=$2; WAV=audio/crenature_sfx.wav; mkdir -p out
+FR=$1; NAME=$2; WAV=${WAV:-audio/crenature_sfx.wav}; mkdir -p out
 # two-pass loudness to -14 LUFS, true peak <= -1.5 dBTP
 J=$(ffmpeg -hide_banner -nostats -i $WAV -af loudnorm=I=-14:TP=-2.6:LRA=11:print_format=json -f null - 2>&1 | sed -n '/^{/,/^}/p')
 g(){ echo "$J" | python3 -c "import json,sys;print(json.load(sys.stdin)['$1'])"; }
