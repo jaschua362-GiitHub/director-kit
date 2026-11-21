@@ -128,3 +128,27 @@ VERDICT: ANOTHER ROUND
 3. **0–1.0 s and 5.58 s.** The ember holds static for a second, and the end frame lacks the warm-grey perimeter sheen in `final_look_3d.jpg`. Fix: start the pull-back or an orbit by 0.5 s, and add a thin warm-grey specular along the outer coil and tail.
 
 VERDICT: ANOTHER ROUND
+
+## Round 6, independent critic (v6; frames in `review/critic_6/`)
+
+**Round 5 check**
+1. Brownout: **FIXED.** Luma goes 8→86→150→234 at 2.42/2.52/2.62 s, and light 3 lands the floor shadow. A 3-unit dip remains at 2.48 s, and lights 1 and 2 have no overshoot.
+2. Outline rim: **PARTLY.** At 2.0 s the outer-left edges are lit, right edges dark, but the inner curl and horn slits are still traced.
+3. Static ember and end sheen: **PARTLY.** The eye now opens, but 0.40–0.58 s is frozen and 5.58 s has no warm-grey perimeter sheen.
+
+| # | Criterion | Score | Evidence |
+|---|---|---|---|
+| 1 | Hook | 6 | 0–2.4 s dark; frame difference ≤0.39; the body first shows at ~0.9 s |
+| 2 | Phone | 7 | At 0 s only a dot; the rim reads at 1 s; the lockup is clear from 3 s |
+| 3 | Motion | 8 | The slide eases 0→22→0 px/frame (2.70–3.40 s); no pops |
+| 4 | Pacing | 6 | Motion per second: 0.3 0.5 9.5 2.7 0.4 0.4; the hold (3.4–5.6 s) changes 0.12–0.24 per frame |
+| 5 | Composition | 8 | End lockup 68.4 % wide, centre 964/534, margins 308/299 px |
+| 6 | Brand & tone | 7 | Geometry correct, but at 5.58 s the body is soft rubber, without the bright fresnel edges of `final_look_3d.jpg` |
+| 7 | Sound | 8 | Hits at 2.42/2.52/2.61 s; -14.4 LUFS, TP -2.4 dBFS; flat with no build at 2.30–2.41 s; the 4.5 s shimmer plays over nothing visible |
+
+**Biggest problems**
+1. **0–2.4 s, a dead first act.** Fix: start the pull-back and a 3–5° orbit on frame 0, give the rim a hot travelling head (luma 220+), add a 2-frame pre-flash at 1.2 s, and trim the act to ~1.9 s.
+2. **2.65–5.6 s, rubber finish.** Fix: a 2–4 px warm-grey fresnel rim (luma 180–200) on the outer coil, neck, horns and tail blade; tighter speculars; an eye as large and emissive as in the reference.
+3. **3.4–5.6 s, a frozen hold.** 4.4 s registers nothing (difference 0.24). Fix: a specular streak across the coil over 4.3–4.7 s (difference ≥1.5) with a 6-frame eye glint on the shimmer, a ~10 % push, and a 2-frame +8 % overshoot on lights 1 and 2.
+
+VERDICT: ANOTHER ROUND
