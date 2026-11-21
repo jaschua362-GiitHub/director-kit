@@ -1,0 +1,5 @@
+frames/
+stills/beats_*/
+__pycache__/
+audio/__pycache__/
+build/__pycache__/
