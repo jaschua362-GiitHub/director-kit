@@ -53,3 +53,33 @@ VERDICT: ANOTHER ROUND
 3. **Opening and end lock (0–0.4 s, 2.8–5.6 s).** Fix: open on the empty field with the eye opening at least 10 % in from the edges, then bring the body in. Shift the lockup 15–20 px right. Add a light sweep and a blink on the 4.25 s hit. Soften the specular toward the satin of the reference. Dither the background, and raise the coil tone by 8 dB.
 
 VERDICT: ANOTHER ROUND
+
+## Round 3, independent critic (v3)
+
+**Round 2 check**
+- Lock pop: PARTLY. There is no one-frame spike now, but 2.35–2.55 s is a cross-dissolve (double contour at 2.45 s).
+- Cheap flight body: PARTLY. The tail is pointed, but the outline is lumpy at 2.0–2.3 s and the head is a flat wedge.
+- Diagonal bent into an S: PARTLY. At 1.0 s it is still a slab.
+- Eye opening inset: PARTLY. It is a 6 px speck, then the body fades in mid-air at 0.37 s.
+- Lockup shifted right: FIXED (+3 px).
+- Sweep and blink on the hit: PARTLY. The blinks at 3.07 s and 4.35 s have no hit; the hit at 3.80 s has no event.
+- Satin specular: FIXED.
+- Dither: FIXED.
+- Coil tone: FIXED (rises from -26 to -12 dB).
+
+| # | Criterion | Score | Evidence |
+|---|---|---|---|
+| 1 | Hook | 6 | 0–0.37 s: an empty field and a speck. |
+| 2 | Phone | 8 | 3–5 s: the wordmark and hairlines hold. At 1 s the body is a blob. |
+| 3 | Motion | 5 | 0.383 s: the change is 1.73 against 0.05, a fade-in pop. 0.7 s and 1.0 s: stepped blur ghosts. 1.33–1.38 s: the head swivels about 180° in 4 frames. 2.45 s: double contour. |
+| 4 | Pacing | 7 | Motion is 0.3 per second from 2.6 s. 3.6–5.6 s has only a blink and the push. |
+| 5 | Composition | 8 | The lock is 70.0 % wide, +3/-6 px from centre. At 1.0 s the head is 115 px from the bottom edge. |
+| 6 | Brand | 7 | The end geometry matches the SVG. The gloss reads as rubber, not satin. 3.25 s: the wordmark is a soft gradient wipe, with no tail whip. |
+| 7 | Sound | 6 | -14.0 LUFS and -2.4 dBTP pass. There is no lock click at 2.5 s. The loudest hit (3.80 s) lands on nothing. |
+
+**Three biggest problems**
+1. **Popping, cheap flight (0.37–2.4 s).** Fix: enter from off-screen right with no opacity ramp. Give the eye a real glow first. Use the SVG head throughout. Use 16 or more blur subframes. Smooth the spine by arc length. Slow the head turn.
+2. **Dissolve lock (2.35–2.55 s).** Fix: morph matched arc-length points (or drive the ribbon from the SVG spine from 1.8 s) so one contour converges. Grow the shard and spike from their roots.
+3. **Sound and wordmark disconnected (3.0–4.4 s).** Fix: put the 3.80 s hit on a blink and glint. Flick the tail at 3.0 s and drive a hard-edged reveal from its tip, with one note per letter. Add a travelling light sweep through the hold.
+
+VERDICT: ANOTHER ROUND
