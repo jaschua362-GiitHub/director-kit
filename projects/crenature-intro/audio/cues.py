@@ -48,7 +48,7 @@ m.add(glass(F['A5'], 1.2, .45), t_in, gain=.10, pan=float(np.interp(t_in, t, pan
 
 # 3. coil locks (end of flight): tightening noise rise + click + sub thump
 rise = bp_sweep(pink(secs(.85)), np.linspace(500, 3400, secs(.85)), q=2.2) * np.linspace(0, 1, secs(.85)) ** 1.6
-m.add(rise / np.max(np.abs(rise)), R.T_FLY1 - .85, gain=.30, pan=-.45, rev=.3)
+m.add(rise / np.max(np.abs(rise)), R.T_FLY1 - .85, gain=.75, pan=-.45, rev=.3)
 m.add(tock(1400), R.T_FLY1, gain=.25, pan=-.45, rev=.25)
 m.add(sub_thump(70, 42, .9), R.T_FLY1, gain=.26, pan=0, rev=.1)
 
@@ -60,14 +60,18 @@ m.add(sh / 3, R.T_INF0, gain=.07, pan=-.4, rev=.7)
 
 # 5. blink + glint chime
 m.add(glass(F['D6'], .9, .3), R.T_BLINK + .14, gain=.14, pan=-.3, rev=.55)
+m.add(glass(F['A5'], 1.0, .35), R.T_BLINK2 + .14, gain=.10, pan=-.3, rev=.6)   # second blink + sweep
 
 # 6. wordmark letters: rising marimba, D minor pentatonic, panned left -> right
 scale = ['D4', 'F4', 'G4', 'A4', 'C5', 'D5', 'F5', 'G5', 'A5']
+lb = A.letter_boxes; lx0, lx1 = lb[0][0] - 120, lb[-1][2] + 160
+tw = np.linspace(R.T_WIPE0, R.T_WIPE1, 2000); xw = np.array([lx0 + (lx1 - lx0) * R.ease_out(R.T_WIPE0, R.T_WIPE1, x, 2.2) for x in tw])
 for i, k in enumerate(scale):
-    m.add(marimba(F[k], .9), R.T_TYPE0 + i * R.T_TYPE_STEP + .04, gain=.11 - .004 * i, pan=-.1 + .1 * i, rev=.35)
+    t_hit = float(tw[np.argmax(xw >= (lb[i][0] + lb[i][2]) / 2)])   # front passes the letter centre
+    m.add(marimba(F[k], .9), t_hit, gain=.11 - .004 * i, pan=-.1 + .1 * i, rev=.35)
 
 # 7. resolve chord carries the hold to silence
-t_res = R.T_TYPE0 + 8 * R.T_TYPE_STEP + .2
+t_res = R.T_WIPE1 + .05
 for k, g in [('D3', .20), ('A3', .14), ('D4', .12), ('F4', .09), ('A4', .06)]:
     b = bell(F[k], R.DUR - t_res)
     b *= np.linspace(1, 0, len(b)) ** 1.5        # decays to silence inside the film

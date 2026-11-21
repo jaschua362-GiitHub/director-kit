@@ -33,10 +33,14 @@ EYE = np.array([0xFF, 0x6A, 0x24]) / 255
 EYE_HOT = np.array([0xFF, 0xBE, 0x77]) / 255
 LETTER = np.array([0x12, 0x12, 0x12]) / 255
 
-T_FLY0, T_FLY1 = 0.40, 2.55
-T_EYE0, T_EYE1 = 0.05, 0.38     # eye opens on the waiting head
+T_FLY0, T_FLY1 = 0.45, 2.55
+T_EYE0, T_EYE1 = 0.12, 0.42     # the eye opens alone in the empty field
+T_REV0, T_REV1 = 0.36, 0.62     # the body materialises outward from the eye
+T_RIM0, T_RIM1 = 2.33, 2.58     # edge slivers settle in as the coil tightens (no one-frame pop)
+T_BLINK2 = 4.28                 # second blink + light sweep in the hold
+T_WIPE0, T_WIPE1 = 3.0, 3.75    # wordmark sweep
 L_FLY = 900                    # body length in flight (2x px); grows to the full spine in the coil
-T_GROW0, T_GROW1 = 2.55, 2.85
+T_GROW0, T_GROW1 = 2.58, 2.90
 T_INF0, T_INF1 = 2.60, 3.05
 T_BLINK = 3.00
 T_TYPE0, T_TYPE_STEP, T_TYPE_DUR = 3.05, 0.055, 0.32
@@ -109,8 +113,8 @@ class Assets:
         """pre-extension + flight spline + the spine itself (tail -> nose), resampled at 1 px."""
         P = self.P
         t0 = P[40] - P[0]; t0 /= np.linalg.norm(t0)
-        way = np.array([[4800, 60], [3250, 420], [2650, 900], [1750, 1600], [1100, 1860],
-                        [700, 1800], [640, 1640]], float)
+        way = np.array([[4800, 60], [3150, 470], [2650, 620], [2450, 1050], [1900, 1500],
+                        [1250, 1830], [820, 1860], [660, 1720]], float)       # S-shaped dive
         # approach the tail tip from behind, along the spine's starting direction
         ctrl = np.vstack([way, P[0] - t0 * 300, P[0], P[0] + t0 * 120])
         pts = catmull_rom(ctrl, 400)
@@ -121,12 +125,12 @@ class Assets:
         pre = fly[0] - d0 * np.arange(L_FLY + 300, 0, -1)[:, None]
         route = np.vstack([pre, fly, P])
         self.s_p0 = len(pre) + len(fly)                 # route index of the tail tip
-        self.h_start = len(pre) + int(np.argmin(np.hypot(*(fly - [3250, 420]).T)))
+        self.h_start = len(pre) + int(np.argmin(np.hypot(*(fly - [3150, 470]).T)))
         return route, len(route) - 1
 
     def progress_table(self):
         x = np.linspace(0, 1, 4001)
-        v = (1 - x) ** 2 * (1 - np.exp(-x / 0.06))
+        v = (1 - x) ** 1.7 * (1 - np.exp(-x / 0.06))
         p = np.cumsum(v); p = (p - p[0]) / (p[-1] - p[0])
         return x, p
 
@@ -207,12 +211,23 @@ def flight_mask(A, t):
     pc, tc = route_at(A, np.array([h - (A.N - 1) + A.k_head]))
     ac = np.arctan2(tc[0, 1], tc[0, 0])
     paste_rigid(m, A.head_patch, A.hbox, pf, af, pc[0], ac)
+    if t < T_REV1:
+        rr = 2200 * ease_out(T_REV0, T_REV1, t, 2)
+        yy, xx = np.mgrid[0:H2:4, 0:W2:4]
+        ex, ey = pc[0] + (A.eye_c - pf)            # roughly the eye's current position
+        vis = np.clip((rr - np.hypot(xx - ex, yy - ey)) / 90, 0, 1)
+        vis = np.kron(vis, np.ones((4, 4)))[:H2, :W2]
+        m = Image.fromarray((np.asarray(m) * vis).astype(np.uint8))
     return m, (pf, af, pc[0], ac)
 
 
+def grow_reach(A, t):
+    RIM = 36.0
+    return RIM * sstep(T_RIM0, T_RIM1, t) + ease_out(T_GROW0, T_GROW1, t, 2) * (A.grow_max - RIM + 2)
+
+
 def landed_mask(A, t):
-    g = ease_out(T_GROW0, T_GROW1, t, 2) * (A.grow_max + 2)
-    grown = (A.grow_d > 0) & (A.grow_d <= g)
+    grown = (A.grow_d > 0) & (A.grow_d <= grow_reach(A, t))
     base = (A.body > 0) & (A.grow_d == 0)
     m = np.where(base | grown, A.body, 0)
     return np.clip(m + A.horns, 0, 1)
@@ -235,7 +250,8 @@ def shade(A, mask, t, inflate):
     n /= np.linalg.norm(n, axis=2, keepdims=True)
     # key light sweeps from far left to upper-left as the body inflates
     sw = sstep(T_INF0, T_INF1 + 0.35, t)
-    az = np.radians(-170 + 45 * sw + 14 * sstep(3.3, DUR, t))
+    b2 = np.sin(np.pi * np.clip((t - (T_BLINK2 - 0.3)) / 0.9, 0, 1)) ** 2
+    az = np.radians(-170 + 45 * sw + 14 * sstep(3.3, DUR, t) + 30 * b2)
     key = np.array([np.cos(az) * 0.75, np.sin(az) * 0.75 - 0.35, 0.55]); key /= np.linalg.norm(key)
     V = np.array([0, 0, 1.0])
     ndv = np.clip(n[..., 2], 0, 1)
@@ -243,11 +259,11 @@ def shade(A, mask, t, inflate):
     rk = np.clip((r * key).sum(2), 0, 1)
     env = (0.24 + 0.60 * np.clip(-r[..., 1], 0, 1) ** 1.2       # bright studio ceiling
            + 0.35 * np.clip(r[..., 0], 0, 1) ** 2              # bounce from the right
-           + 1.05 * rk ** 1.5 + 1.2 * rk ** 16)                   # broad grey softbox + hot core
+           + 1.05 * rk ** 1.5 + 0.9 * rk ** 9)                   # broad grey softbox + hot core
     fres = 0.05 + 0.95 * (1 - ndv) ** 4
-    hl = np.clip((n * ((key + V) / np.linalg.norm(key + V))).sum(2), 0, 1) ** 160
+    hl = np.clip((n * ((key + V) / np.linalg.norm(key + V))).sum(2), 0, 1) ** 70
     ndl = np.clip((n * key).sum(2), 0, 1)
-    val = 0.07 * (0.4 + 0.6 * ndl) + (0.04 + fres) * env * 0.66 + 0.55 * hl
+    val = 0.07 * (0.4 + 0.6 * ndl) + (0.04 + fres) * env * 0.66 + 0.32 * hl
     rim = (1 - ndv) ** 3 * np.clip(-(n[..., 0] * 0.6 + n[..., 1] * 0.8) + 0.2, 0, 1) * 0.30
     flat = INK.mean()
     val = flat + (val - flat) * inflate
@@ -262,8 +278,9 @@ def eye_layer(A, t, frame):
     eb = A.ebox
     m = Image.new('L', (W2, H2), 0)
     blink = max(0.04, sstep(T_EYE0, T_EYE1, t))
-    if T_BLINK <= t <= T_BLINK + 0.16:
-        blink = max(0.08, abs(np.cos(np.pi * (t - T_BLINK) / 0.16)))
+    for tb in (T_BLINK, T_BLINK2):
+        if tb <= t <= tb + 0.16:
+            blink = max(0.08, abs(np.cos(np.pi * (t - tb) / 0.16)))
     patch = A.eye_patch
     if blink < 1:
         im = Image.fromarray((patch * 255).astype(np.uint8))
@@ -277,9 +294,13 @@ def eye_layer(A, t, frame):
     core = ndimage.distance_transform_edt(e > 0.5)
     hot = np.clip(core / max(core.max(), 1), 0, 1) ** 1.5
     rgb = EYE[None, None] * (1 - hot[..., None]) + EYE_HOT[None, None] * hot[..., None]
-    glow_a = (0.55 + 0.6 * np.exp(-((t - T_EYE1) / 0.12) ** 2)) if t < T_INF1 else 0.35
-    glow = np.asarray(Image.fromarray((e * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(22))).astype(np.float32) / 255
-    return e, rgb, glow * glow_a
+    glow_a = (0.55 + 0.6 * np.exp(-((t - T_EYE1) / 0.12) ** 2)) if t < T_INF1 else 0.35 + 0.35 * np.exp(-((t - T_BLINK2 - 0.2) / 0.15) ** 2)
+    eim = Image.fromarray((e * 255).astype(np.uint8))
+    glow = np.asarray(eim.filter(ImageFilter.GaussianBlur(22))).astype(np.float32) / 255 * glow_a
+    op = np.exp(-((t - T_EYE1) / 0.18) ** 2) if t < 1.0 else 0.0       # wide halo as the eye opens
+    if op > 0.01:
+        glow = glow + np.asarray(eim.filter(ImageFilter.GaussianBlur(70))).astype(np.float32) / 255 * 9.0 * op
+    return e, rgb, glow
 
 
 def camera(t):
@@ -287,7 +308,7 @@ def camera(t):
     # gentle push all along, then ~3 %/s through the hold (velocity eases in, no kink)
     z = 0.975 + 0.015 * (t / DUR) + 0.07 * (x - 0.15 * (1 - np.exp(-x / 0.15)))
     damp = 1 - sstep(3.6, 5.2, t)
-    dx = 6 * np.sin(1.3 * t + 0.4) * damp
+    dx = 6 * np.sin(1.3 * t + 0.4) * damp + 15
     dy = 4 * np.sin(0.9 * t + 1.1) * damp
     rot = np.radians(0.18 * np.sin(0.7 * t)) * damp
     return z, dx, dy, rot
@@ -329,6 +350,9 @@ def render(A, t):
     if t < T_FLY1:
         m, frame = flight_mask(A, t)
         M = np.asarray(m).astype(np.float32) / 255
+        if t >= T_RIM0:
+            g = grow_reach(A, t)
+            M = np.maximum(M, np.where((A.grow_d > 0) & (A.grow_d <= g), A.body, 0))
         a = M
         rgb = rgb * (1 - a[..., None]) + INK * a[..., None]
         alpha = alpha * (1 - a) + a
@@ -349,13 +373,16 @@ def render(A, t):
         add_glow = glow
 
     # wordmark
+    lx0, lx1 = A.letter_boxes[0][0] - 120, A.letter_boxes[-1][2] + 160
+    xw = lx0 + (lx1 - lx0) * ease_out(T_WIPE0, T_WIPE1, t, 2.2)
     for i, (Lm, box) in enumerate(zip(A.letters, A.letter_boxes)):
-        k = ease_out(T_TYPE0 + i * T_TYPE_STEP, T_TYPE0 + i * T_TYPE_STEP + T_TYPE_DUR, t, 3)
-        if k <= 0: continue
-        dy = int(round((1 - k) * 36))
         x0, y0, x1, y1 = box
+        if xw <= x0 - 1: continue
+        kc = np.clip((xw - (x0 + x1) / 2 + 180) / 360, 0, 1)
+        dy = int(round((1 - (1 - (1 - kc) ** 3)) * 30))
+        cols = np.clip((xw - np.arange(x0, x1)) / 110, 0, 1)
         a = np.zeros_like(alpha)
-        a[y0 + dy:y1 + dy, x0:x1] = Lm[y0:y1, x0:x1] * k
+        a[y0 + dy:y1 + dy, x0:x1] = Lm[y0:y1, x0:x1] * cols[None, :]
         rgb = rgb * (1 - a[..., None]) + LETTER * a[..., None]
         alpha = alpha * (1 - a) + a
 
@@ -399,7 +426,8 @@ def work(job):
         f = acc / sub
     else:
         f = render(A, t)
-    f = f + (np.random.default_rng(i).random(f.shape) - 0.5) / 255      # dither, no visible grain
+    rg = np.random.default_rng(i)
+    f = f + (rg.random(f.shape) + rg.random(f.shape) - 1.0) / 255      # triangular dither vs banding
     Image.fromarray((np.clip(f, 0, 1) * 255 + 0.5).astype(np.uint8)).save(out)
     return out
 

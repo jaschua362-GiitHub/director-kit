@@ -19,3 +19,37 @@
 3. **The final look is cheaper than the reference (2.8–5.2 s).** Fix: raise the height-field roughness and add a broad grey softbox reflection on the big curve and a warm rim on the outer edge, so it matches environment-endcard-light.png. Scale the lockup to 70 %. Add a slow light sweep and a push of 3–5 % per second through the hold. Open on the eye glow at 0–0.4 s. Limit true peak to -1.5 dBFS, lift the coil tone by about 8 dB, and let the chord decay to silence before 5.2 s (or extend to about 5.6 s).
 
 VERDICT: ANOTHER ROUND
+
+## Round 2, independent critic (v2)
+
+**Round 1 check**
+- No eye-glow opening: PARTLY (no empty-field beat).
+- Lumpy blob, no taper: STILL PRESENT (2.0 s).
+- Hairpin at 1.1 s: FIXED.
+- Tangle at 1.4 s: PARTLY (the head swivels under its loop).
+- Cross-fade lock and ghost parts: STILL PRESENT.
+- Edge hugging at 1.0–1.3 s: FIXED.
+- Lockup at 78 %: FIXED (69.8 %).
+- Lockup off-centre: STILL PRESENT (12.5 px left).
+- Crushed black: PARTLY.
+- Frozen hold: FIXED (a 3 %/s push).
+- True peak: FIXED.
+- Chord cut off: FIXED.
+- Quiet coil tone: STILL PRESENT (-30 dB at 1.9 s).
+
+| # | Criterion | Score | Evidence |
+|---|---|---|---|
+| 1 | Hook | 5 | 0–0.4 s: the head sits parked 24 px from the right edge (0.07 change per frame). Then a stiff diagonal slab. |
+| 2 | Phone | 8 | At 4 s the wordmark and horn hairline hold. At 1 s the body is a blot. |
+| 3 | Motion | 4 | At 2.567 s the frame difference is 0.67 against about 0.1 around it, and the ink area jumps 12 % in one frame. |
+| 4 | Pacing | 6 | 2.2–2.55 s: the coil stalls (0.09 change per frame). Push only after 3.7 s. |
+| 5 | Composition | 7 | The end lock spans 277–1618 px, so it sits 12.5 px left. |
+| 6 | Brand | 7 | The geometry matches the SVG. The surface reads as harder plastic than the reference. The letters fade in instead of a tail sweep. Faint background banding. |
+| 7 | Sound | 7 | -14.6 LUFS and -2.5 dBTP pass, and the hit at 2.55 s lands on the lock. The coil is still quiet, and the 4.25 s hit has no visual event. |
+
+**Three biggest problems**
+1. **The lock pops (2.53–2.62 s).** The lumpy ink snaps to the clean mark in one frame, then a ghost tail arc lingers. Fix: drive the body from the SVG spine from 1.8 s so it converges with no swap. Grow the tail spike and throat shard from their roots after 2.6 s, with no opacity fades. Make the tighten land on the hit.
+2. **Cheap flight body (0.4–2.5 s).** Fix: build one smoothed ribbon that tapers to a pointed tail. Turn the head with the tangent, never under its own loop. Bend the 0.5–1.0 s diagonal into an S.
+3. **Opening and end lock (0–0.4 s, 2.8–5.6 s).** Fix: open on the empty field with the eye opening at least 10 % in from the edges, then bring the body in. Shift the lockup 15–20 px right. Add a light sweep and a blink on the 4.25 s hit. Soften the specular toward the satin of the reference. Dither the background, and raise the coil tone by 8 dB.
+
+VERDICT: ANOTHER ROUND
