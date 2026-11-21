@@ -104,3 +104,27 @@ Critic: independent pass on `out/Crenature_Intro_v4_1920x1080_60fps_sound.mp4`. 
 3. **2.6–5.6 s: final material and hold.** It reads as rubber, the eye is dull and the hold is dead. Fix: narrow, sharp highlights; warm-grey edge sheen on the big curve and tail; an emissive eye with small bloom; a visible specular streak at 4.4 s plus a 6–10-frame glint; a 3–4 % push. Also encode at 10–15 Mbps with dither or grain: the 0.6 s eye glow and vignette show stepped rings (2.9 Mbps now).
 
 VERDICT: ANOTHER ROUND
+
+## Round 5, independent critic (v5; frames in `review/critic_5/`)
+
+**Round 4 check**
+1. Carve not on screen: **PARTLY.** The rim now reads (luma ~150) and the mark is centred by 2.0 s, but it is a uniform outline, not light.
+2. Iris wipe: **PARTLY.** The disc is gone, but the three lights pump and the third doesn't show.
+3. Material and hold: **PARTLY.** Emissive eye, the 4.45 s streak, an 8 % push and a 31.5 Mbps encode are all in. The warm-grey edge sheen is still missing.
+
+| # | Criterion | Score | Evidence |
+|---|---|---|---|
+| 1 | Hook | 6 | 0–0.9 s: one static ember on black (0.3/s) |
+| 2 | Phone | 7 | The rim reads at 1–2 s and the lockup from 3 s; at 0 s there is only a dot |
+| 3 | Motion | 7 | The slide (2.75–3.35 s) eases 4→24→4 px/frame; luma at 2.40–2.55 s goes 9→75→45→225 |
+| 4 | Pacing | 7 | Motion per second: 0.3 0.8 11.5 2.7 0.4 0.4; the first second is near-dead |
+| 5 | Composition | 8 | End lockup 67.7 % wide, centre 958/542, margins 308/312 px |
+| 6 | Brand & tone | 7 | Rigid and on geometry, but 1.0–2.5 s outlines the inner spiral and horn slits, which reads as line art |
+| 7 | Sound | 8 | Hits at 2.42/2.52/2.61 s; letter ticks 2.85–3.25 s; -14.4 LUFS, TP -2.4 dBFS; nothing on screen at 2.61 s |
+
+**Biggest problems**
+1. **2.40–2.62 s.** Luma sags 75→45 (a brownout), then flips to 225 in 2 frames. Light 3 changes almost nothing (frame difference 2.5), and a hard floor band sits at y≈600. Fix: make the steps always rise (~70/150/235), each with a 2-frame overshoot. Light 3 lands the coil speculars and the floor shadow. Feather the band.
+2. **1.0–2.5 s.** The rim is a constant ~1 px outline on every edge. Fix: light only the edges that face the key, 1–3 px with fresnel falloff, keep a 220+ leading point and leave the inner edges black.
+3. **0–1.0 s and 5.58 s.** The ember holds static for a second, and the end frame lacks the warm-grey perimeter sheen in `final_look_3d.jpg`. Fix: start the pull-back or an orbit by 0.5 s, and add a thin warm-grey specular along the outer coil and tail.
+
+VERDICT: ANOTHER ROUND

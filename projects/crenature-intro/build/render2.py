@@ -27,7 +27,7 @@ WARM = np.array([1.0, 0.93, 0.84])                     # rim-light colour
 # ---------------------------------------------------------------- timeline
 T_EYE0, T_EYE1 = 0.15, 0.50          # eye opens in the dark
 T_TRACE0, T_TRACE1 = 0.55, 2.25      # rim-light runs head -> tail
-T_PULL0, T_PULL1 = 0.30, 2.35        # camera pulls back from the eye to the whole dragon (centred)
+T_PULL0, T_PULL1 = 0.05, 2.35        # camera pulls back from the eye to the whole dragon (centred)
 T_L1, T_L2, T_L3 = 2.42, 2.52, 2.61  # studio lights snap on: floor strip, backdrop, key
 T_LIGHT0, T_LIGHT1 = T_L1, T_L3 + 0.04
 T_LIGHT_HIT = T_L1
@@ -76,11 +76,18 @@ class Assets:
         half = np.maximum(ndimage.gaussian_filter(ndimage.grey_dilation(d, size=(41, 41)), 14), 2.0)
         tt = np.clip(d / half, 0, 1)
         hgt = ndimage.gaussian_filter(half * np.sqrt(1 - (1 - tt) ** 2) * 0.95, 1.6)
-        din = ndimage.distance_transform_edt(self.M > 0.5)
-        self.rimline = (np.exp(-(din / 3.2) ** 2) * (self.M > 0.3)).astype(np.float32)   # ~1.5 px at 1x
         gy, gx = np.gradient(hgt)
         n = np.dstack([-gx, -gy, np.ones_like(hgt)]); n /= np.linalg.norm(n, axis=2, keepdims=True)
         self.n = n.astype(np.float32)
+        din = ndimage.distance_transform_edt(self.M > 0.5)
+        nx, ny = n[..., 0], n[..., 1]
+        nl = np.hypot(nx, ny) + 1e-6
+        face = np.clip((nx * -0.6 + ny * -0.8) / nl, 0, 1) ** 1.3          # edges facing the key (upper-left)
+        face = ndimage.gaussian_filter(face, 3)
+        width = 1.2 + 4.8 * face                                           # 1-3 px at 1x
+        self.rimline = (np.exp(-(din / width) ** 2) * face * (self.M > 0.3)).astype(np.float32)
+        self.rimsoft = (np.exp(-(din / 7.0) ** 2) * (self.M > 0.3)).astype(np.float32)
+        self.left = np.clip(-nx / nl * 0.8 + ny / nl * 0.4, 0, 1).astype(np.float32)   # outer coil / tail side
         self.ndv = np.clip(n[..., 2], 0, 1).astype(np.float32)
         self.r = (2 * n * self.ndv[..., None] - np.array([0, 0, 1.0])).astype(np.float32)
         # sigma: where each pixel sits along the dragon, 0 = tail tip, 1 = nose (horns/head = 1)
@@ -113,16 +120,21 @@ def st(t, t0, d=0.035):
 
 
 def light_level(t):
-    """how much studio light is on the dragon (3 snaps)."""
-    return 0.35 * st(t, T_L1) + 0.25 * st(t, T_L2) + 0.40 * st(t, T_L3)
+    """how much studio light is on the dragon: light 3 (key) lands the highlights."""
+    return 0.18 * st(t, T_L1) + 0.17 * st(t, T_L2) + 0.65 * st(t, T_L3)
 
 
-def bg_levels(t):
-    return st(t, T_L1), st(t, T_L2)          # floor strip, backdrop
+def bg_level(t):
+    """backdrop brightness, a monotonic three-step rise (~70 / 150 / 235 of 255)."""
+    return 0.27 * st(t, T_L1) + 0.32 * st(t, T_L2) + 0.41 * st(t, T_L3)
+
+
+def shadow_level(t):
+    return st(t, T_L3, 0.06)
 
 
 def exposure_kick(t):
-    return sum(0.22 * np.exp(-((t - tk - 0.025) / 0.028) ** 2) for tk in (T_L1, T_L2, T_L3))
+    return sum(0.10 * np.exp(-((t - tk - 0.02) / 0.02) ** 2) for tk in (T_L1, T_L2, T_L3))
 
 
 def shade(A, t):
@@ -148,7 +160,8 @@ def shade(A, t):
         k2 = np.array([np.cos(a2) * 0.8, np.sin(a2) * 0.5 - 0.2, 0.5]); k2 /= np.linalg.norm(k2)
         val = val + 1.3 * np.sin(np.pi * sw) * np.clip((r * k2).sum(2), 0, 1) ** 40
     rimw = (1 - ndv) ** 2 * np.clip(-(n[..., 0] * 0.6 + n[..., 1] * 0.8) + 0.25, 0, 1) * 0.45
-    studio = np.dstack([val + rimw, val * 0.985 + rimw * 0.86, val * 0.97 + rimw * 0.70])
+    sheen = A.rimsoft * (0.25 + 0.75 * A.left) * 0.42                 # warm-grey edge sheen
+    studio = np.dstack([val + rimw + sheen, val * 0.985 + rimw * 0.86 + sheen * 0.95, val * 0.97 + rimw * 0.70 + sheen * 0.88])
     # --- dark look: a razor rim-light front runs along the body, leaving a faint lit edge behind
     f = front(t)
     ds = A.sig - f
@@ -158,7 +171,7 @@ def shade(A, t):
     # a hard light from upper-left grazing the surface where the front is
     kd = np.array([-0.55, -0.65, 0.5]); kd /= np.linalg.norm(kd)
     graze = np.clip((n * kd).sum(2), 0, 1) ** 6
-    lum = (A.rimline * (1.35 * band + 0.78 * passed)               # the razor line itself
+    lum = (A.rimline * (2.2 * band + 0.95 * passed)                # the razor line (key-facing edges)
            + band * (0.55 * edge + 0.30 * graze) + passed * (0.12 * edge + 0.035 * graze + 0.01))
     dark = lum[..., None] * WARM[None, None]
     return np.clip(dark * (1 - E) + studio * E, 0, 1)
@@ -193,7 +206,7 @@ def eye_rgba(A, t):
 
 def camera(t, A):
     """focus point (layout 2x) and zoom (1 = full frame)."""
-    k1 = ease_io(T_PULL0, T_PULL1, t, 3)
+    k1 = ease_io(T_PULL0, T_PULL1, t, 2)
     k2 = ease_io(T_SLIDE0, T_SLIDE1, t, 3)
     head = A.eye_c + np.array([-60, 40])
     drag = np.array([A.dcx, A.dcy])
@@ -203,7 +216,7 @@ def camera(t, A):
     z = z0 * (1 - k2) + 0.95 * k2
     x = np.clip((t - T_SLIDE1) / (DUR - T_SLIDE1), 0, 1)
     z = z * (1 + 0.095 * (x - 0.15 * (1 - np.exp(-x / 0.15))))       # ~4 %/s push through the hold
-    rot = np.radians(-2.2 * (1 - k1) + 0.15 * np.sin(0.7 * t) * (1 - sstep(3.5, 5.2, t)))
+    rot = np.radians(-7.0 * (1 - k1) ** 1.5 + 0.15 * np.sin(0.7 * t) * (1 - sstep(3.5, 5.2, t)))
     return fx, fy, z, rot
 
 
@@ -217,7 +230,7 @@ def burst(t, xx, yy, cx, cy):
 def background(E, floor=0.0):
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     if floor > 0:
-        E = np.clip(E + floor * 0.55 * sstep(0.45 * H, 1.05 * H, yy), 0, 1)
+        E = np.clip(E + floor * sstep(0.30 * H, 1.25 * H, yy), 0, 1)
     r = np.hypot((xx - 0.5 * W) / (0.75 * W), (yy - 0.42 * H) / (0.75 * H))
     k = np.clip(r, 0, 1) ** 1.6
     hi, lo = np.array([0xFE, 0xFD, 0xFC]) / 255, np.array([0xF2, 0xF0, 0xED]) / 255
@@ -237,7 +250,7 @@ def render(A, t):
         yy, xx = np.mgrid[0:H2, 0:W2]
         cx, by = A.foot_x + 30, A.foot_y - 4
         sh = (np.exp(-(((xx - cx) / 250) ** 2 + ((yy - by - 8) / 42) ** 2)) * 0.20
-              + np.exp(-(((xx - cx) / 120) ** 2 + ((yy - by) / 9) ** 2)) * 0.25) * bg_levels(t)[1]
+              + np.exp(-(((xx - cx) / 120) ** 2 + ((yy - by) / 9) ** 2)) * 0.25) * shadow_level(t)
         a = sh.astype(np.float32)
     # dragon
     c = shade(A, t)
@@ -295,8 +308,8 @@ def render(A, t):
     dcx, dcy = (A.x0 + A.x1) / 2, (A.y0 + A.y1) / 2
     sx = c_ * (dcx - fx) - s_ * (dcy - fy); sy = s_ * (dcx - fx) + c_ * (dcy - fy)
     cxs, cys = W / 2 + sx * 0.5 * z, H / 2 + sy * 0.5 * z
-    ef, eb = bg_levels(t)
-    img = background(np.full((H, W), eb, np.float32), ef * (1 - eb)) * (1 - out[..., 3:4]) + out[..., :3]
+    eb = bg_level(t)
+    img = background(np.full((H, W), eb, np.float32), 0.35 * st(t, T_L1) * (1 - eb)) * (1 - out[..., 3:4]) + out[..., :3]
     g = out[..., 4:5]
     img = img + EYE[None, None] * g * (1 - img) * 1.5
     img = img + out[..., 5:6] * (1 - img)                      # white light: carve front + glint
