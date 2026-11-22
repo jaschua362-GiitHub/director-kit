@@ -68,7 +68,11 @@ Each rule cost a feedback round once. Build v1 to these and the first review sta
 - Movement → filtered-noise whoosh whose loudness = the element's speed, pan = its x; closeness → brighter.
 - Closing/landing moments → chimes; letters → rising marimba notes; resolve chord carries the hold to silence.
 - Make a concept audible when it's cheap (roast curves sonified) — "interesting" beats generic.
-- −14 LUFS, peak −1.5 dBFS; watch the low end in dense sections. Verified by spectrogram — say so; he
+- −14 LUFS, peak −1.5 dBFS; watch the low end in dense sections.
+- **Always ease the sound out.** End every film with a master ease-out of the whole mix (dry, reverb, air)
+  over at least the last ~1–1.3 s, reaching true silence (≤ −60 dB) before the last frame. Check the tail
+  after loudness normalisation: a tail still ringing at −30 dB at the cut reads as cut off, even with a short
+  fade. Shape each element too (rise into the peak, then a natural decay) so the level never sits flat. (Crenature, Nov 2026) Verified by spectrogram — say so; he
   listens on headphones.
 
 ## Captions
