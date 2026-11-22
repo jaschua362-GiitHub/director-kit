@@ -18,6 +18,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 DUR = 6.2
 W2, H2, W, H = 3840, 2160, 1920, 1080
+FMT = os.environ.get('CRE_FMT', '16x9')          # CRE_FMT=9x16 -> vertical cut with the stacked lockup
+PORTRAIT = FMT == '9x16'
+if PORTRAIT:
+    W, H = 1080, 1920
 EYE = np.array([0xFF, 0x6A, 0x24]) / 255
 EYE_HOT = np.array([0xFF, 0xBE, 0x77]) / 255
 INK = np.array([0x10, 0x10, 0x10]) / 255
@@ -119,6 +123,19 @@ class Assets:
         self.P = P
         bx = self.bbox(body)
         self.dcx, self.dcy = (bx[0] + bx[2]) / 2, (bx[1] + bx[3]) / 2 - 10
+        if PORTRAIT:
+            # stacked lockup (as the brand's stack / end-card files): the wordmark centred under the dragon
+            fb = self.bbox(full)
+            lx0 = min(L['box'][0] for L in self.type); lx1 = max(L['box'][2] for L in self.type)
+            ly0 = min(L['box'][1] for L in self.type); ly1 = max(L['box'][3] for L in self.type)
+            dx = int(round((fb[0] + fb[2]) / 2 - (lx0 + lx1) / 2))
+            dy = int(round(self.foot_y + 150 - ly0))
+            for L in self.type:
+                x0, y0, x1, y1 = L['box']; L['box'] = (x0 + dx, y0 + dy, x1 + dx, y1 + dy)
+            self.stack_cx = (fb[0] + fb[2]) / 2
+            self.stack_cy = (fb[1] + ly1 + dy) / 2
+            self.stack_w = max(lx1 - lx0, fb[2] - fb[0])
+            self.drag_w = fb[2] - fb[0]
 
     @staticmethod
     def bbox(m, pad=0):
@@ -217,7 +234,9 @@ def eye_rgba(A, t):
 
 
 def camera(t, A):
-    """focus point (layout 2x) and zoom (1 = full frame)."""
+    """focus point (layout 2x) and zoom z (screen px per layout px = 0.5 * z)."""
+    if PORTRAIT:
+        return camera_portrait(t, A)
     k1 = ease_io(T_PULL0, T_PULL1, t, 2)
     k2 = ease_io(T_SLIDE0, T_SLIDE1, t, 3)
     head = A.eye_c + np.array([-60, 40])
@@ -230,6 +249,23 @@ def camera(t, A):
     z = z * (1 + 0.095 * (x - 0.15 * (1 - np.exp(-x / 0.15))))       # ~4 %/s push through the hold
     rot = np.radians(-7.0 * (1 - k1) ** 1.5 + 0.15 * np.sin(0.7 * t) * (1 - sstep(3.5, 5.2, t)))
     return fx, fy, z, rot
+
+
+def camera_portrait(t, A):
+    """9:16: eye close-up -> whole dragon -> stacked lockup (the camera rises as the type draws in)."""
+    k1 = ease_io(T_PULL0, T_PULL1, t, 2)
+    k2 = ease_io(T_SLIDE0, T_SLIDE1, t, 3)
+    head = A.eye_c + np.array([-60, 40])
+    drag = np.array([A.dcx, A.dcy])
+    s_lock = 0.72 * W / A.stack_w                                    # lockup ~72 % of the phone width
+    lock = np.array([A.stack_cx, A.stack_cy + 0.025 * H / s_lock])    # optical lift ~2.5 % of H
+    fx, fy = (head * (1 - k1) + drag * k1) * (1 - k2) + lock * k2
+    s0 = 1.5 * (1 - k1) + (0.62 * W / A.drag_w) * k1                 # dragon ~62 % wide in the dark act
+    s = s0 * (1 - k2) + s_lock * k2
+    x = np.clip((t - T_SLIDE1) / (DUR - T_SLIDE1), 0, 1)
+    s = s * (1 + 0.08 * (x - 0.15 * (1 - np.exp(-x / 0.15))))
+    rot = np.radians(-6.0 * (1 - k1) ** 1.5 + 0.12 * np.sin(0.7 * t) * (1 - sstep(3.5, 5.2, t)))
+    return fx, fy, 2 * s, rot
 
 
 def burst(t, xx, yy, cx, cy):
