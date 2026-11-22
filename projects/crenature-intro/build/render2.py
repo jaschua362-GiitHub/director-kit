@@ -20,6 +20,7 @@ DUR = 6.2
 W2, H2, W, H = 3840, 2160, 1920, 1080
 FMT = os.environ.get('CRE_FMT', '16x9')          # CRE_FMT=9x16 -> vertical cut with the stacked lockup
 PORTRAIT = FMT == '9x16'
+DARK = os.environ.get('CRE_LOOK', 'light') == 'dark'   # CRE_LOOK=dark -> porcelain-white dragon, charcoal studio
 if PORTRAIT:
     W, H = 1080, 1920
 EYE = np.array([0xFF, 0x6A, 0x24]) / 255
@@ -27,6 +28,10 @@ EYE_HOT = np.array([0xFF, 0xBE, 0x77]) / 255
 INK = np.array([0x10, 0x10, 0x10]) / 255
 LETTER = np.array([0x12, 0x12, 0x12]) / 255
 SILVER = np.array([0.93, 0.91, 0.87])                  # warm-silver sheen on the type
+CREAM = np.array([0xFF, 0xFD, 0xF7]) / 255             # approved white-lockup colour (dark look)
+PORCELAIN = np.array([0.955, 0.94, 0.92])               # dark look: matte white dragon
+if DARK:
+    LETTER = CREAM
 WARM = np.array([1.0, 0.93, 0.84])                     # rim-light colour
 
 # ---------------------------------------------------------------- timeline
@@ -194,6 +199,16 @@ def shade(A, t):
     rimw = (1 - ndv) ** 2 * np.clip(-(n[..., 0] * 0.6 + n[..., 1] * 0.8) + 0.25, 0, 1) * 0.45
     sheen = A.rimsoft * (0.25 + 0.75 * A.left) * 0.42                 # warm-grey edge sheen
     studio = np.dstack([val + rimw + sheen, val * 0.985 + rimw * 0.86 + sheen * 0.95, val * 0.97 + rimw * 0.70 + sheen * 0.88])
+    if DARK:   # matte porcelain: wrapped soft key, gentle occlusion at the edges, a soft satin highlight
+        wrap = np.clip(0.5 + 0.5 * (n * key).sum(2), 0, 1)
+        dif = 0.66 + 0.34 * wrap ** 1.2
+        ao = 0.84 + 0.16 * ndv ** 0.6
+        spec = 0.10 * np.clip((n * hv).sum(2), 0, 1) ** 40
+        if 0 < sw < 1:
+            spec = spec + 0.28 * np.sin(np.pi * sw) * np.clip((r * k2).sum(2), 0, 1) ** 30
+        warm = (1 - ndv) ** 2.5 * np.clip(-(n[..., 0] * 0.6 + n[..., 1] * 0.8) + 0.3, 0, 1) * 0.22
+        studio = (PORCELAIN[None, None] * (dif * ao)[..., None] + spec[..., None]
+                  + warm[..., None] * np.array([1.0, 0.72, 0.45])[None, None])
     # --- dark look: a razor rim-light front runs along the body, leaving a faint lit edge behind
     f = front(t)
     ds = A.sig - f
@@ -289,15 +304,17 @@ def background(E, cxs=None, cys=None, env=None):
     hys, sp, fxs, fys = env                                    # horizon y, parallax scale, foot on screen
     col = lambda h: np.array([int(h[i:i + 2], 16) for i in (0, 2, 4)], np.float32) / 255
     # backdrop: darker at the top, brighter toward the horizon, a soft pool of light behind the logo
+    P = (dict(top='0C0E10', hor='14161A', pool='1C1E21', fnear='1E1E1F', ffront='0D0E0F', fpool='2B2A29') if DARK else
+         dict(top='C9C5C0', hor='E7E4E0', pool='F4F2EF', fnear='E9E6E2', ffront='BFBBB6', fpool='F1EFEC'))
     kw = sstep(-0.1 * H, hys, yy) ** 0.8
-    wall = col('C9C5C0')[None, None] * (1 - kw[..., None]) + col('E7E4E0')[None, None] * kw[..., None]
+    wall = col(P['top'])[None, None] * (1 - kw[..., None]) + col(P['hor'])[None, None] * kw[..., None]
     pool = np.exp(-(((xx - fxs) / (0.42 * W)) ** 2 + ((yy - (hys - 150 * sp)) / (0.38 * H)) ** 2))
-    wall = wall + (col('F4F2EF') - col('E7E4E0'))[None, None] * pool[..., None]
+    wall = wall + (col(P['pool']) - col(P['hor']))[None, None] * pool[..., None]
     # floor: bright where the key light lands under the dragon, falling off toward the front
     kf = sstep(hys, H * 1.08, yy)
-    floor = col('E9E6E2')[None, None] * (1 - kf[..., None]) + col('BFBBB6')[None, None] * kf[..., None]
+    floor = col(P['fnear'])[None, None] * (1 - kf[..., None]) + col(P['ffront'])[None, None] * kf[..., None]
     fpool = np.exp(-(((xx - fxs) / (700 * sp)) ** 2 + ((yy - fys) / (190 * sp)) ** 2))
-    floor = floor + (col('F1EFEC') - col('E9E6E2'))[None, None] * fpool[..., None]
+    floor = floor + (col(P['fpool']) - col(P['fnear']))[None, None] * fpool[..., None]
     # cove: a soft, curved wall-to-floor transition (no hard horizon line)
     wc = 230 * sp
     tf_ = sstep(hys - 0.5 * wc, hys + 0.5 * wc, yy)
@@ -306,8 +323,8 @@ def background(E, cxs=None, cys=None, env=None):
     light = light * (1 - crease[..., None])
     r = np.hypot((xx - 0.5 * W) / (0.7 * W), (yy - 0.45 * H) / (0.7 * H))
     light = light * (1 - 0.13 * np.clip(r, 0, 1.4) ** 2)[..., None]
-    dark = light * 0.055                                       # the same room, unlit
-    w = np.sin(np.pi * E) ** 2 * 0.22                          # warm, dawn-like tint mid-rise
+    dark = light * (0.3 if DARK else 0.055)                    # the same room, unlit
+    w = np.sin(np.pi * E) ** 2 * (0.08 if DARK else 0.22)      # warm, dawn-like tint mid-rise
     E = E[..., None]
     c = dark * (1 - E) + light * E
     return c * (1 - w[..., None] * (1 - np.array([1.0, 0.90, 0.78])))
@@ -332,7 +349,7 @@ def render(A, t):
         src = 2 * yf - rows
         ok = (src >= A.y0) & (src < A.y1)
         rows, src = rows[ok], src[ok]
-        fade = (np.exp(-(rows - yf) / 95.0) * 0.16 * E)[:, None]
+        fade = (np.exp(-(rows - yf) / 95.0) * (0.10 if DARK else 0.16) * E)[:, None]
         ra = ndimage.gaussian_filter(A.M[src - A.y0] * fade, (2.5, 1.0))
         rc = ndimage.gaussian_filter(c[src - A.y0], (2.5, 1.0, 0))
         xs_ = slice(A.x0, A.x1)
@@ -349,6 +366,7 @@ def render(A, t):
     rgb = rgb * (1 - e[..., None]) + ergb * e[..., None]
     a = a * (1 - e) + e
     # wordmark: each outline draws on, then the fill flows inward; a sheen glides along the edges
+    sheen_glow = []
     for i, L in enumerate(A.type):
         t0 = T_TYPE0 + i * T_TYPE_STEP
         if t < t0: continue
@@ -379,7 +397,10 @@ def render(A, t):
                     dh.line([tuple(p) for p in c[i0:i1 + 1]], fill=int(255 * ((j + 1) / 12) ** 1.6), width=24, joint='curve')
             hlf = ndimage.gaussian_filter(np.asarray(hl).astype(np.float32) / 255, 1.5)
             amt = (np.clip(hlf * 1.15, 0, 1) * L['m'] * env)[..., None]
-            col = col * (1 - amt) + SILVER * amt
+            if DARK:
+                sheen_glow.append(((y0, y1, x0, x1), ndimage.gaussian_filter(hlf * env, 6) * 0.55 + hlf * L['m'] * env * 0.4))
+            else:
+                col = col * (1 - amt) + SILVER * amt
         sl2 = (slice(y0, y1), slice(x0, x1))
         rgb[sl2] = rgb[sl2] * (1 - la[..., None]) + col * la[..., None]
         a[sl2] = a[sl2] * (1 - la) + la
@@ -392,6 +413,8 @@ def render(A, t):
         blo = ndimage.zoom(ndimage.gaussian_filter(src[::2, ::2], 9), 2, order=1)
         hh, ww = min(blo.shape[0], A.y1 - A.y0), min(blo.shape[1], A.x1 - A.x0)
         wl[A.y0:A.y0 + hh, A.x0:A.x0 + ww] += (blo[:hh, :ww] * 2.2 * (1 - light_level(t))).astype(np.float32)
+    for (y0_, y1_, x0_, x1_), gl in sheen_glow:
+        wl[y0_:y1_, x0_:x1_] += gl.astype(np.float32)
     gk = np.exp(-((t - T_GLINT - 0.12) / 0.06) ** 2)
     if gk > 0.02:
         ex, ey = A.eye_c
