@@ -95,5 +95,10 @@ sh = static(bp_sweep(pink(nh), 6200 - 1800 * np.minimum(1, th / 1.2), q=1.0), 'h
 m.add(norm(sh), t_sh, gain=.04, pan=np.clip(np.linspace(-.5, 1.2, nh), -.5, .5), rev=.65)
 
 out = os.path.join(HERE, 'crenature_v7_sfx.wav')
-m.render(out, rt_tau=.85, predelay=.03)
-print('wrote', out)
+mix = m.render(out, rt_tau=.85, predelay=.03)
+# master ease-out: everything (dry, reverb, air) glides to true silence before the last frame
+T_FADE0 = R.DUR - 1.3
+x = np.clip((t - T_FADE0) / (R.DUR - 0.06 - T_FADE0), 0, 1)
+mix = mix * (np.cos(np.pi / 2 * x) ** 2.2)[None, :]
+write_wav24(out, mix)
+print('wrote', out, '(eased out from', round(T_FADE0, 2), 's)')
