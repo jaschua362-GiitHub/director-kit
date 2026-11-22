@@ -128,11 +128,14 @@ class Assets:
             fb = self.bbox(full)
             lx0 = min(L['box'][0] for L in self.type); lx1 = max(L['box'][2] for L in self.type)
             ly0 = min(L['box'][1] for L in self.type); ly1 = max(L['box'][3] for L in self.type)
-            dx = int(round((fb[0] + fb[2]) / 2 - (lx0 + lx1) / 2))
+            yy_, xx_ = np.nonzero(full > 0.5)
+            wcx = float(xx_.mean())                                   # the dragon's visual mass (coil-heavy)
+            ocx = 0.5 * wcx + 0.5 * (fb[0] + fb[2]) / 2                # optical centre: between mass and box
+            dx = int(round(ocx - (lx0 + lx1) / 2))
             dy = int(round(self.foot_y + 150 - ly0))
             for L in self.type:
                 x0, y0, x1, y1 = L['box']; L['box'] = (x0 + dx, y0 + dy, x1 + dx, y1 + dy)
-            self.stack_cx = (fb[0] + fb[2]) / 2
+            self.stack_cx = ocx
             self.stack_cy = (fb[1] + ly1 + dy) / 2
             self.stack_w = max(lx1 - lx0, fb[2] - fb[0])
             self.drag_w = fb[2] - fb[0]
@@ -257,10 +260,10 @@ def camera_portrait(t, A):
     k2 = ease_io(T_SLIDE0, T_SLIDE1, t, 3)
     head = A.eye_c + np.array([-60, 40])
     drag = np.array([A.dcx, A.dcy])
-    s_lock = 0.72 * W / A.stack_w                                    # lockup ~72 % of the phone width
+    s_lock = 0.612 * W / A.stack_w                                   # lockup ~61 % of the phone width (15 % smaller)
     lock = np.array([A.stack_cx, A.stack_cy + 0.025 * H / s_lock])    # optical lift ~2.5 % of H
     fx, fy = (head * (1 - k1) + drag * k1) * (1 - k2) + lock * k2
-    s0 = 1.5 * (1 - k1) + (0.62 * W / A.drag_w) * k1                 # dragon ~62 % wide in the dark act
+    s0 = 1.5 * (1 - k1) + (0.53 * W / A.drag_w) * k1                 # dragon ~53 % wide in the dark act
     s = s0 * (1 - k2) + s_lock * k2
     x = np.clip((t - T_SLIDE1) / (DUR - T_SLIDE1), 0, 1)
     s = s * (1 + 0.08 * (x - 0.15 * (1 - np.exp(-x / 0.15))))
