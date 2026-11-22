@@ -10,31 +10,35 @@ Layout space = the final frame at 2x (3840x2160), from parts/*.png (approved SVG
 import argparse, json, os
 import numpy as np
 from multiprocessing import Pool
-from PIL import Image, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter
 from scipy import ndimage
 from scipy.spatial import cKDTree
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
-DUR = 5.6
+DUR = 6.2
 W2, H2, W, H = 3840, 2160, 1920, 1080
 EYE = np.array([0xFF, 0x6A, 0x24]) / 255
 EYE_HOT = np.array([0xFF, 0xBE, 0x77]) / 255
 INK = np.array([0x10, 0x10, 0x10]) / 255
 LETTER = np.array([0x12, 0x12, 0x12]) / 255
+SILVER = np.array([0.86, 0.84, 0.80])                  # warm-silver sheen on the type
 WARM = np.array([1.0, 0.93, 0.84])                     # rim-light colour
 
 # ---------------------------------------------------------------- timeline
 T_EYE0, T_EYE1 = 0.15, 0.50          # eye opens in the dark
 T_TRACE0, T_TRACE1 = 0.55, 2.25      # rim-light runs head -> tail
 T_PULL0, T_PULL1 = 0.05, 2.35        # camera pulls back from the eye to the whole dragon (centred)
-T_L1, T_L2, T_L3 = 2.42, 2.52, 2.61  # studio lights snap on: floor strip, backdrop, key
-T_LIGHT0, T_LIGHT1 = T_L1, T_L3 + 0.04
-T_LIGHT_HIT = T_L1
-T_SLIDE0, T_SLIDE1 = 2.65, 3.45      # camera slides from the dragon to the full lockup
-T_TYPE0, T_TYPE_STEP, T_TYPE_DUR = 2.85, 0.05, 0.07   # hard letter cuts (~4 frames each)
-T_BLINK = 3.35
-T_GLINT = 4.40                        # light sweep + eye glint in the hold
+T_RISE0, T_RISE1 = 2.15, 3.35      # sunrise: warm light rises behind the dragon, spreads to white
+T_GLOSS0, T_GLOSS1 = 2.30, 3.20      # gloss builds on the body
+T_SHADOW0, T_SHADOW1 = 2.85, 3.35    # floor shadow lands last
+T_LIGHT_HIT = 3.25                   # soft boom as the light settles
+T_SLIDE0, T_SLIDE1 = 3.00, 3.80      # camera slides from the dragon to the full lockup
+T_TYPE0, T_TYPE_STEP = 3.25, 0.065   # letter outlines draw on, staggered
+T_OUTLINE, T_FILL = 0.45, 0.35       # per letter: outline draw time, inward fill time
+T_BLINK = 4.65
+T_GLINT = 5.05                       # one light pass: dragon streak -> eye glint -> type sheen
+T_TSHEEN0, T_TSHEEN1 = 5.05, 5.85
 Z_CLOSE = 3.0
 
 
@@ -61,7 +65,20 @@ class Assets:
     def __init__(self):
         L = json.load(open('parts/layout.json'))
         self.letters = [load_mask(n) for n in L['parts'] if n.startswith('L')]
-        self.letter_boxes = [self.bbox(m) for m in self.letters]
+        self.letter_boxes = [self.bbox(m, pad=6) for m in self.letters]
+        from skimage.measure import find_contours
+        self.type = []
+        for Lm, (x0, y0, x1, y1) in zip(self.letters, self.letter_boxes):
+            m = Lm[y0:y1, x0:x1]
+            cons, clens = [], []
+            for c in find_contours(m, 0.5):
+                c = c[:, ::-1]                                        # (x, y)
+                c = np.roll(c, -int(np.argmin(c[:, 1] + 0.3 * c[:, 0])), axis=0)   # start top-left
+                c = np.vstack([c, c[:1]])
+                cl = np.r_[0, np.cumsum(np.hypot(*np.diff(c, axis=0).T))]
+                if cl[-1] > 20: cons.append(c); clens.append(cl)
+            din = ndimage.distance_transform_edt(m > 0.5).astype(np.float32)
+            self.type.append(dict(box=(x0, y0, x1, y1), m=m, contours=cons, clen=clens, din=din, dmax=float(din.max()) + 2))
         body, horns, self.eye = load_mask('body'), load_mask('horns'), load_mask('eye')
         full = np.clip(body + horns, 0, 1)
         self.x0, self.y0, self.x1, self.y1 = self.bbox(full, pad=160)
@@ -120,21 +137,16 @@ def st(t, t0, d=0.035):
 
 
 def light_level(t):
-    """how much studio light is on the dragon: light 3 (key) lands the highlights."""
-    return 0.18 * st(t, T_L1) + 0.17 * st(t, T_L2) + 0.65 * st(t, T_L3)
+    """how much studio light is on the dragon (gradual)."""
+    return float(ease_io(T_GLOSS0, T_GLOSS1, t, 2))
 
 
 def bg_level(t):
-    """backdrop brightness, a monotonic three-step rise (~70 / 150 / 235 of 255)."""
-    return 0.27 * st(t, T_L1) + 0.32 * st(t, T_L2) + 0.41 * st(t, T_L3)
+    return float(ease_io(T_RISE0, T_RISE1, t, 2))
 
 
 def shadow_level(t):
-    return st(t, T_L3, 0.06)
-
-
-def exposure_kick(t):
-    return sum(0.10 * np.exp(-((t - tk - 0.02) / 0.02) ** 2) for tk in (T_L1, T_L2, T_L3))
+    return float(sstep(T_SHADOW0, T_SHADOW1, t))
 
 
 def shade(A, t):
@@ -143,7 +155,7 @@ def shade(A, t):
     E = light_level(t)
     # --- studio look (as in the approved end frame), key light sweeps at the glint
     b2 = np.sin(np.pi * np.clip((t - (T_GLINT - 0.45)) / 1.1, 0, 1)) ** 2
-    az = np.radians(-150 + 10 * sstep(T_LIGHT0, DUR, t) + 32 * b2)
+    az = np.radians(-150 + 10 * sstep(T_GLOSS0, DUR, t) + 32 * b2)
     key = np.array([np.cos(az) * 0.75, np.sin(az) * 0.75 - 0.35, 0.55]); key /= np.linalg.norm(key)
     rk = np.clip((r * key).sum(2), 0, 1)
     env = (0.24 + 0.60 * np.clip(-r[..., 1], 0, 1) ** 1.2 + 0.35 * np.clip(r[..., 0], 0, 1) ** 2
@@ -222,23 +234,27 @@ def camera(t, A):
 
 def burst(t, xx, yy, cx, cy):
     """per-pixel light level: a radial wave from behind the dragon (accelerating), then full."""
-    x = np.clip((t - T_LIGHT0) / (T_LIGHT1 - T_LIGHT0), 0, 1)
+    x = np.clip((t - T_RISE0) / (T_RISE1 - T_RISE0), 0, 1)
     R = 2600 * x ** 1.6
     return np.clip((R - np.hypot(xx - cx, yy - cy)) / 420, 0, 1)
 
 
-def background(E, floor=0.0):
+def background(E, cxs=None, cys=None):
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
-    if floor > 0:
-        E = np.clip(E + floor * sstep(0.30 * H, 1.25 * H, yy), 0, 1)
+    if cxs is not None and 0 < E < 1:
+        rr = np.clip(np.hypot(xx - cxs, (yy - cys) * 1.2) / (0.95 * W), 0, 1)
+        E = np.clip(E * 1.4 - 0.4 * rr, 0, 1)                  # light rises behind the dragon first
+    E = np.full((H, W), E, np.float32) if np.ndim(E) == 0 else E
     r = np.hypot((xx - 0.5 * W) / (0.75 * W), (yy - 0.42 * H) / (0.75 * H))
     k = np.clip(r, 0, 1) ** 1.6
     hi, lo = np.array([0xFE, 0xFD, 0xFC]) / 255, np.array([0xF2, 0xF0, 0xED]) / 255
     light = hi * (1 - k[..., None]) + lo * k[..., None]
     dhi, dlo = np.array([0x0B, 0x0B, 0x0B]) / 255, np.array([0x04, 0x04, 0x05]) / 255
     dark = dhi * (1 - k[..., None]) + dlo * k[..., None]
-    E = E[..., None] if np.ndim(E) == 2 else E
-    return dark * (1 - E) + light * E
+    w = np.sin(np.pi * E) ** 2 * 0.22                          # warm, dawn-like tint mid-rise
+    E = E[..., None]
+    c = dark * (1 - E) + light * E
+    return c * (1 - w[..., None] * (1 - np.array([1.0, 0.90, 0.78])))
 
 
 def render(A, t):
@@ -264,21 +280,38 @@ def render(A, t):
     e, ergb, glow = eye_rgba(A, t)
     rgb = rgb * (1 - e[..., None]) + ergb * e[..., None]
     a = a * (1 - e) + e
-    # wordmark: hard slices from the baseline up, letter by letter (no fades)
-    for i, (Lm, (x0, y0, x1, y1)) in enumerate(zip(A.letters, A.letter_boxes)):
-        k = float(np.clip((t - (T_TYPE0 + i * T_TYPE_STEP)) / T_TYPE_DUR, 0, 1))
-        if k <= 0: continue
-        cut = int(y1 - (y1 - y0) * (1 - (1 - k) ** 2))      # rows below `cut` are visible
-        dy = int(round((1 - k) * 10))
-        la = np.zeros((y1 - y0, x1 - x0), np.float32)
-        la[cut - y0:] = Lm[cut:y1, x0:x1]
-        ys = slice(y0 + dy, y1 + dy)
-        rgb[ys, x0:x1] = rgb[ys, x0:x1] * (1 - la[..., None]) + LETTER * la[..., None]
-        a[ys, x0:x1] = a[ys, x0:x1] * (1 - la) + la
+    # wordmark: each outline draws on, then the fill flows inward; a sheen glides along the edges
+    lx0, lx1 = A.letter_boxes[0][0] - 150, A.letter_boxes[-1][2] + 150
+    xs_sheen = lx0 + (lx1 - lx0) * float(ease_io(T_TSHEEN0, T_TSHEEN1, t, 2))
+    sheen_on = T_TSHEEN0 < t < T_TSHEEN1 + 0.05
+    for i, L in enumerate(A.type):
+        t0 = T_TYPE0 + i * T_TYPE_STEP
+        if t < t0: continue
+        x0, y0, x1, y1 = L['box']
+        po = float(ease_io(t0, t0 + T_OUTLINE, t, 2))
+        kf = float(ease_out(t0 + T_OUTLINE - 0.06, t0 + T_OUTLINE - 0.06 + T_FILL, t, 2))
+        ol = Image.new('L', (x1 - x0, y1 - y0), 0); dr = ImageDraw.Draw(ol)
+        for c, cl in zip(L['contours'], L['clen']):
+            k = int(np.searchsorted(cl, po * cl[-1]))
+            if k >= 2: dr.line([tuple(p) for p in c[:k + 1]], fill=255, width=5, joint='curve')
+        ol = np.asarray(ol).astype(np.float32) / 255
+        g = kf * L['dmax']
+        fill = np.clip((g - L['din']) / 2.5 + 1, 0, 1) * L['m'] * (kf > 0)
+        la = np.maximum(fill, ol * (1 - kf))
+        col = np.broadcast_to(LETTER, la.shape + (3,)).copy()
+        if sheen_on:
+            xx_ = np.arange(x0, x1)[None, :]
+            band = np.exp(-((xx_ - xs_sheen) / 190.0) ** 2)
+            ring = np.clip(1 - L['din'] / 11.0, 0, 1) ** 0.7 * L['m']
+            amt = np.clip(band * (1.0 * ring + 0.22), 0, 1)[..., None]
+            col = col * (1 - amt) + SILVER * amt
+        sl2 = (slice(y0, y1), slice(x0, x1))
+        rgb[sl2] = rgb[sl2] * (1 - la[..., None]) + col * la[..., None]
+        a[sl2] = a[sl2] * (1 - la) + la
     # white light: the carve's hot leading point, and a star glint on the eye in the hold
     wl = np.zeros((H2, W2), np.float32)
     f = front(t)
-    if -0.05 < f < 1.05 and t < T_L3:
+    if -0.05 < f < 1.05 and t < T_GLOSS1:
         ds = A.sig - f
         src = A.rimline * np.exp(-(ds / 0.03) ** 2) * (ds > -0.06)
         blo = ndimage.zoom(ndimage.gaussian_filter(src[::2, ::2], 9), 2, order=1)
@@ -308,16 +341,10 @@ def render(A, t):
     dcx, dcy = (A.x0 + A.x1) / 2, (A.y0 + A.y1) / 2
     sx = c_ * (dcx - fx) - s_ * (dcy - fy); sy = s_ * (dcx - fx) + c_ * (dcy - fy)
     cxs, cys = W / 2 + sx * 0.5 * z, H / 2 + sy * 0.5 * z
-    eb = bg_level(t)
-    img = background(np.full((H, W), eb, np.float32), 0.35 * st(t, T_L1) * (1 - eb)) * (1 - out[..., 3:4]) + out[..., :3]
+    img = background(bg_level(t), cxs, cys) * (1 - out[..., 3:4]) + out[..., :3]
     g = out[..., 4:5]
     img = img + EYE[None, None] * g * (1 - img) * 1.5
     img = img + out[..., 5:6] * (1 - img)                      # white light: carve front + glint
-    kick = exposure_kick(t)
-    if kick > 0.01:                                            # light snaps on: overexpose + bloom
-        img = 1 - (1 - img) / (1 + kick)
-        hb = np.clip(img - 0.8, 0, 1)
-        img = img + ndimage.gaussian_filter(hb, (18, 18, 0)) * kick * 3
     return np.clip(img, 0, 1)
 
 
