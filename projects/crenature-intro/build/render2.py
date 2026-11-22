@@ -275,18 +275,35 @@ def burst(t, xx, yy, cx, cy):
     return np.clip((R - np.hypot(xx - cx, yy - cy)) / 420, 0, 1)
 
 
-def background(E, cxs=None, cys=None):
+def background(E, cxs=None, cys=None, env=None):
+    """studio cyclorama: warm-grey backdrop curving into a floor, a light pool behind and under the
+    logo, darker edges; the horizon moves with a little parallax. Lit by the sunrise (E 0..1)."""
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     if cxs is not None and 0 < E < 1:
         rr = np.clip(np.hypot(xx - cxs, (yy - cys) * 1.2) / (0.95 * W), 0, 1)
         E = np.clip(E * 1.4 - 0.4 * rr, 0, 1)                  # light rises behind the dragon first
     E = np.full((H, W), E, np.float32) if np.ndim(E) == 0 else E
-    r = np.hypot((xx - 0.5 * W) / (0.75 * W), (yy - 0.42 * H) / (0.75 * H))
-    k = np.clip(r, 0, 1) ** 1.6
-    hi, lo = np.array([0xFE, 0xFD, 0xFC]) / 255, np.array([0xF2, 0xF0, 0xED]) / 255
-    light = hi * (1 - k[..., None]) + lo * k[..., None]
-    dhi, dlo = np.array([0x0B, 0x0B, 0x0B]) / 255, np.array([0x04, 0x04, 0x05]) / 255
-    dark = dhi * (1 - k[..., None]) + dlo * k[..., None]
+    hys, sp, fxs, fys = env                                    # horizon y, parallax scale, foot on screen
+    col = lambda h: np.array([int(h[i:i + 2], 16) for i in (0, 2, 4)], np.float32) / 255
+    # backdrop: darker at the top, brighter toward the horizon, a soft pool of light behind the logo
+    kw = sstep(-0.1 * H, hys, yy) ** 0.8
+    wall = col('C9C5C0')[None, None] * (1 - kw[..., None]) + col('E7E4E0')[None, None] * kw[..., None]
+    pool = np.exp(-(((xx - fxs) / (0.42 * W)) ** 2 + ((yy - (hys - 150 * sp)) / (0.38 * H)) ** 2))
+    wall = wall + (col('F4F2EF') - col('E7E4E0'))[None, None] * pool[..., None]
+    # floor: bright where the key light lands under the dragon, falling off toward the front
+    kf = sstep(hys, H * 1.08, yy)
+    floor = col('E9E6E2')[None, None] * (1 - kf[..., None]) + col('BFBBB6')[None, None] * kf[..., None]
+    fpool = np.exp(-(((xx - fxs) / (700 * sp)) ** 2 + ((yy - fys) / (190 * sp)) ** 2))
+    floor = floor + (col('F1EFEC') - col('E9E6E2'))[None, None] * fpool[..., None]
+    # cove: a soft, curved wall-to-floor transition (no hard horizon line)
+    wc = 230 * sp
+    tf_ = sstep(hys - 0.5 * wc, hys + 0.5 * wc, yy)
+    light = wall * (1 - tf_[..., None]) + floor * tf_[..., None]
+    crease = np.exp(-((yy - hys) / (0.35 * wc)) ** 2) * 0.035     # faint shade in the curve
+    light = light * (1 - crease[..., None])
+    r = np.hypot((xx - 0.5 * W) / (0.7 * W), (yy - 0.45 * H) / (0.7 * H))
+    light = light * (1 - 0.13 * np.clip(r, 0, 1.4) ** 2)[..., None]
+    dark = light * 0.055                                       # the same room, unlit
     w = np.sin(np.pi * E) ** 2 * 0.22                          # warm, dawn-like tint mid-rise
     E = E[..., None]
     c = dark * (1 - E) + light * E
@@ -306,6 +323,18 @@ def render(A, t):
         a = sh.astype(np.float32)
     # dragon
     c = shade(A, t)
+    if E > 0:
+        yf = int(A.foot_y); Rh = 300
+        rows = np.arange(yf, min(yf + Rh, H2))
+        src = 2 * yf - rows
+        ok = (src >= A.y0) & (src < A.y1)
+        rows, src = rows[ok], src[ok]
+        fade = (np.exp(-(rows - yf) / 95.0) * 0.16 * E)[:, None]
+        ra = ndimage.gaussian_filter(A.M[src - A.y0] * fade, (2.5, 1.0))
+        rc = ndimage.gaussian_filter(c[src - A.y0], (2.5, 1.0, 0))
+        xs_ = slice(A.x0, A.x1)
+        rgb[rows, xs_] = rgb[rows, xs_] * (1 - ra[..., None]) + rc * ra[..., None]
+        a[rows, xs_] = a[rows, xs_] * (1 - ra) + ra
     sl = (slice(A.y0, A.y1), slice(A.x0, A.x1))
     # in the dark the body only exists where the light has carved it
     vis = np.clip((A.sig - front(t) + 0.07) / 0.07, 0, 1)
@@ -385,7 +414,12 @@ def render(A, t):
     dcx, dcy = (A.x0 + A.x1) / 2, (A.y0 + A.y1) / 2
     sx = c_ * (dcx - fx) - s_ * (dcy - fy); sy = s_ * (dcx - fx) + c_ * (dcy - fy)
     cxs, cys = W / 2 + sx * 0.5 * z, H / 2 + sy * 0.5 * z
-    img = background(bg_level(t), cxs, cys) * (1 - out[..., 3:4]) + out[..., :3]
+    sp = 0.5 * z * 0.9                                           # backdrop/floor parallax (slower than the logo)
+    hy = A.foot_y - 230                                           # horizon sits behind the dragon
+    hys = H / 2 + (hy - fy) * sp
+    fsx = c_ * (A.foot_x - fx) - s_ * (A.foot_y - fy); fsy = s_ * (A.foot_x - fx) + c_ * (A.foot_y - fy)
+    fxs, fys = W / 2 + fsx * 0.5 * z, H / 2 + fsy * 0.5 * z
+    img = background(bg_level(t), cxs, cys, (hys, sp, fxs, fys)) * (1 - out[..., 3:4]) + out[..., :3]
     g = out[..., 4:5]
     img = img + EYE[None, None] * g * (1 - img) * 1.5
     img = img + out[..., 5:6] * (1 - img)                      # white light: carve front + glint
