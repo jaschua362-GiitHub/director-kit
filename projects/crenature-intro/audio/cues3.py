@@ -56,8 +56,11 @@ m.add(norm(low_air), 0, gain=.06, pan=pan_a * .5, rev=.3)
 # 4. sunrise: one slow open-voiced swell (D, A, E, A - neither major nor minor), filter opening
 t0, t1 = R.T_RISE0 - .5, R.DUR
 ns = secs(t1 - t0); ts = tax(ns) + t0
-cut = 180 + 1300 * np.interp(ts, tf, [R.bg_level(x) for x in tf]) ** 1.2
-env = seg(ts, t0, R.T_LIGHT_HIT) ** 1.8 * (1 - seg(ts, R.T_LIGHT_HIT + .4, R.DUR - .05)) ** 1.3
+after = np.maximum(ts - R.T_LIGHT_HIT, 0)
+decay = np.exp(-after / 0.95)                                    # natural ease-out after the peak
+cut = 180 + 1400 * np.interp(ts, tf, [R.bg_level(x) for x in tf]) ** 1.2 * np.exp(-after / 1.8)
+env = np.where(ts < R.T_LIGHT_HIT, seg(ts, t0, R.T_LIGHT_HIT) ** 2.2, decay)
+env *= 1 - seg(ts, R.DUR - .35, R.DUR) ** 2                      # nothing left at the end
 pad = sum(g * saw_voice(F[k], ns, cut, harmonics=14, detune_cents=(-7, 0, 6))
           for k, g in (('D2', 1.0), ('A2', .8), ('E3', .55), ('A3', .4)))
 m.add(norm(pad) * env, t0, gain=.20, pan=0, rev=.55)
@@ -67,23 +70,29 @@ press = static(bp_sweep(pink(nr), np.linspace(300, 2400, nr), q=.6), 'lp', 3500)
 m.add(norm(press), R.T_LIGHT_HIT - 1.3, gain=.10, pan=0, rev=.6)
 
 # 5. the light settles: a deep, soft sub boom with a low body - no click
-m.add(sub_thump(62, 34, 2.2), R.T_LIGHT_HIT, gain=.34, pan=0, rev=.15)
+m.add(sub_thump(62, 32, 2.6), R.T_LIGHT_HIT, gain=.32, pan=0, rev=.18)
 nt = secs(1.6); thud = static(brown(nt), 'lp', 160) * np.exp(-tax(nt) / .35)
 m.add(norm(thud), R.T_LIGHT_HIT, gain=.12, pan=0, rev=.4)
 
 # 6. type: near-silent pen strokes while each outline draws (soft filtered noise, no ticks)
+act = np.zeros(n); fc = np.zeros(n)
 for i in range(9):
     ts0 = R.T_TYPE0 + i * R.T_TYPE_STEP
-    nn = secs(R.T_OUTLINE); tt = tax(nn)
-    pen = static(bp_sweep(pink(nn), 3000 + 1500 * np.sin(np.pi * tt / tt[-1]), q=.9), 'hp', 1800)
-    pen *= np.sin(np.pi * tt / tt[-1]) ** 2
-    m.add(norm(pen), ts0, gain=.018, pan=-.25 + .06 * i, rev=.3)
+    x = np.clip((t - ts0) / R.T_OUTLINE, 0, 1)
+    w = np.sin(np.pi * x) ** 2 * (1 - .085 * i)
+    act += w; fc += w * (3600 - 120 * i)
+fc = np.where(act > 1e-4, fc / np.maximum(act, 1e-4), 3000)
+act = ndimage_smooth = np.convolve(act, np.ones(secs(.05)) / secs(.05), 'same')
+act *= np.exp(-np.maximum(t - (R.T_TYPE0 + .35), 0) / .55)      # the gesture eases out as the word completes
+pen = static(bp_sweep(pink(n), fc, q=.8), 'hp', 1600) * act
+m.add(norm(pen), 0, gain=.028, pan=np.clip(np.interp(t, [R.T_TYPE0, R.T_TYPE0 + .9], [-.3, .3]), -.3, .3), rev=.35)
 
 # 7. the closing light pass: a soft high air shimmer travelling left -> right
-nh = secs(R.T_TSHEEN1 - R.T_GLINT + .5); th = tax(nh)
-sh = static(bp_sweep(pink(nh), 5200 + 2500 * np.sin(np.pi * th / th[-1]), q=1.1), 'hp', 3000)
-sh *= np.sin(np.pi * th / th[-1]) ** 2
-m.add(norm(sh), R.T_GLINT - .2, gain=.035, pan=np.linspace(-.5, .5, nh), rev=.6)
+t_sh = R.T_GLINT - .15
+nh = secs(R.DUR - t_sh); th = tax(nh)
+shenv = np.minimum(1, th / .18) ** 2 * np.exp(-np.maximum(th - .18, 0) / .5)
+sh = static(bp_sweep(pink(nh), 6200 - 1800 * np.minimum(1, th / 1.2), q=1.0), 'hp', 2800) * shenv
+m.add(norm(sh), t_sh, gain=.04, pan=np.clip(np.linspace(-.5, 1.2, nh), -.5, .5), rev=.65)
 
 out = os.path.join(HERE, 'crenature_v7_sfx.wav')
 m.render(out, rt_tau=.85, predelay=.03)

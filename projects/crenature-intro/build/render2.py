@@ -22,7 +22,7 @@ EYE = np.array([0xFF, 0x6A, 0x24]) / 255
 EYE_HOT = np.array([0xFF, 0xBE, 0x77]) / 255
 INK = np.array([0x10, 0x10, 0x10]) / 255
 LETTER = np.array([0x12, 0x12, 0x12]) / 255
-SILVER = np.array([0.86, 0.84, 0.80])                  # warm-silver sheen on the type
+SILVER = np.array([0.93, 0.91, 0.87])                  # warm-silver sheen on the type
 WARM = np.array([1.0, 0.93, 0.84])                     # rim-light colour
 
 # ---------------------------------------------------------------- timeline
@@ -38,7 +38,7 @@ T_TYPE0, T_TYPE_STEP = 3.25, 0.065   # letter outlines draw on, staggered
 T_OUTLINE, T_FILL = 0.45, 0.35       # per letter: outline draw time, inward fill time
 T_BLINK = 4.65
 T_GLINT = 5.05                       # one light pass: dragon streak -> eye glint -> type sheen
-T_TSHEEN0, T_TSHEEN1 = 5.05, 5.85
+T_TSHEEN0, T_TSHEEN_STEP, T_TSHEEN_DUR = 4.95, 0.05, 0.62   # a fine light runs each letter's contour
 Z_CLOSE = 3.0
 
 
@@ -224,8 +224,8 @@ def camera(t, A):
     drag = np.array([A.dcx, A.dcy])
     lock = np.array([W2 / 2 - 30, H2 / 2])
     fx, fy = (head * (1 - k1) + drag * k1) * (1 - k2) + lock * k2
-    z0 = Z_CLOSE * (1 - k1) + 1.32 * k1
-    z = z0 * (1 - k2) + 0.95 * k2
+    z0 = Z_CLOSE * (1 - k1) + 1.0 * k1
+    z = z0 * (1 - k2) + 0.665 * k2                                 # final lockup ~48 % of frame width
     x = np.clip((t - T_SLIDE1) / (DUR - T_SLIDE1), 0, 1)
     z = z * (1 + 0.095 * (x - 0.15 * (1 - np.exp(-x / 0.15))))       # ~4 %/s push through the hold
     rot = np.radians(-7.0 * (1 - k1) ** 1.5 + 0.15 * np.sin(0.7 * t) * (1 - sstep(3.5, 5.2, t)))
@@ -281,9 +281,6 @@ def render(A, t):
     rgb = rgb * (1 - e[..., None]) + ergb * e[..., None]
     a = a * (1 - e) + e
     # wordmark: each outline draws on, then the fill flows inward; a sheen glides along the edges
-    lx0, lx1 = A.letter_boxes[0][0] - 150, A.letter_boxes[-1][2] + 150
-    xs_sheen = lx0 + (lx1 - lx0) * float(ease_io(T_TSHEEN0, T_TSHEEN1, t, 2))
-    sheen_on = T_TSHEEN0 < t < T_TSHEEN1 + 0.05
     for i, L in enumerate(A.type):
         t0 = T_TYPE0 + i * T_TYPE_STEP
         if t < t0: continue
@@ -293,17 +290,27 @@ def render(A, t):
         ol = Image.new('L', (x1 - x0, y1 - y0), 0); dr = ImageDraw.Draw(ol)
         for c, cl in zip(L['contours'], L['clen']):
             k = int(np.searchsorted(cl, po * cl[-1]))
-            if k >= 2: dr.line([tuple(p) for p in c[:k + 1]], fill=255, width=5, joint='curve')
+            if k >= 2: dr.line([tuple(p) for p in c[:k + 1]], fill=255, width=6, joint='curve')
         ol = np.asarray(ol).astype(np.float32) / 255
         g = kf * L['dmax']
         fill = np.clip((g - L['din']) / 2.5 + 1, 0, 1) * L['m'] * (kf > 0)
         la = np.maximum(fill, ol * (1 - kf))
         col = np.broadcast_to(LETTER, la.shape + (3,)).copy()
-        if sheen_on:
-            xx_ = np.arange(x0, x1)[None, :]
-            band = np.exp(-((xx_ - xs_sheen) / 190.0) ** 2)
-            ring = np.clip(1 - L['din'] / 11.0, 0, 1) ** 0.7 * L['m']
-            amt = np.clip(band * (1.0 * ring + 0.22), 0, 1)[..., None]
+        ts = T_TSHEEN0 + i * T_TSHEEN_STEP
+        if ts < t < ts + T_TSHEEN_DUR:
+            x = (t - ts) / T_TSHEEN_DUR
+            head = float(ease_io(0, 1, x, 2)) * 1.15               # fraction of the contour travelled
+            env = np.sin(np.pi * x) ** 0.7
+            hl = Image.new('L', (x1 - x0, y1 - y0), 0); dh = ImageDraw.Draw(hl)
+            for c, cl in zip(L['contours'], L['clen']):
+                P_ = cl[-1]
+                for j in range(12):                                # tail fades toward the head
+                    a0, a1 = head - 0.24 * (1 - j / 12), head - 0.24 * (1 - (j + 1) / 12)
+                    i0, i1 = [int(np.searchsorted(cl, (v % 1.0) * P_)) for v in (a0, a1)]
+                    if i1 <= i0 + 1: continue
+                    dh.line([tuple(p) for p in c[i0:i1 + 1]], fill=int(255 * ((j + 1) / 12) ** 1.6), width=24, joint='curve')
+            hlf = ndimage.gaussian_filter(np.asarray(hl).astype(np.float32) / 255, 1.5)
+            amt = (np.clip(hlf * 1.15, 0, 1) * L['m'] * env)[..., None]
             col = col * (1 - amt) + SILVER * amt
         sl2 = (slice(y0, y1), slice(x0, x1))
         rgb[sl2] = rgb[sl2] * (1 - la[..., None]) + col * la[..., None]
@@ -328,8 +335,9 @@ def render(A, t):
     # camera: sample the 2x layout directly
     fx, fy, z, rot = camera(t, A)
     layer = np.dstack([rgb, a, glow, wl])
-    if z < 1.1:                                   # pre-filter when minifying
-        layer = ndimage.gaussian_filter(layer, (0.6, 0.6, 0))
+    if z < 1.1:                                   # pre-filter when minifying (scaled to the zoom)
+        sg = max(0.6, 0.45 * (2 / z) - 0.3)
+        layer = ndimage.gaussian_filter(layer, (sg, sg, 0))
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     px, py = (xx - W / 2) / (0.5 * z), (yy - H / 2) / (0.5 * z)
     c_, s_ = np.cos(rot), np.sin(rot)
