@@ -304,7 +304,7 @@ def background(E, cxs=None, cys=None, env=None):
     hys, sp, fxs, fys = env                                    # horizon y, parallax scale, foot on screen
     col = lambda h: np.array([int(h[i:i + 2], 16) for i in (0, 2, 4)], np.float32) / 255
     # backdrop: darker at the top, brighter toward the horizon, a soft pool of light behind the logo
-    P = (dict(top='0C0E10', hor='14161A', pool='1C1E21', fnear='1E1E1F', ffront='0D0E0F', fpool='2B2A29') if DARK else
+    P = (dict(top='101214', hor='111315', pool='121416', fnear='111214', ffront='0E0F11', fpool='272625') if DARK else
          dict(top='C9C5C0', hor='E7E4E0', pool='F4F2EF', fnear='E9E6E2', ffront='BFBBB6', fpool='F1EFEC'))
     kw = sstep(-0.1 * H, hys, yy) ** 0.8
     wall = col(P['top'])[None, None] * (1 - kw[..., None]) + col(P['hor'])[None, None] * kw[..., None]
@@ -313,16 +313,16 @@ def background(E, cxs=None, cys=None, env=None):
     # floor: bright where the key light lands under the dragon, falling off toward the front
     kf = sstep(hys, H * 1.08, yy)
     floor = col(P['fnear'])[None, None] * (1 - kf[..., None]) + col(P['ffront'])[None, None] * kf[..., None]
-    fpool = np.exp(-(((xx - fxs) / (700 * sp)) ** 2 + ((yy - fys) / (190 * sp)) ** 2))
+    fpool = np.exp(-(((xx - fxs) / ((480 if DARK else 700) * sp)) ** 2 + ((yy - fys) / ((150 if DARK else 190) * sp)) ** 2))
     floor = floor + (col(P['fpool']) - col(P['fnear']))[None, None] * fpool[..., None]
     # cove: a soft, curved wall-to-floor transition (no hard horizon line)
     wc = 230 * sp
     tf_ = sstep(hys - 0.5 * wc, hys + 0.5 * wc, yy)
     light = wall * (1 - tf_[..., None]) + floor * tf_[..., None]
-    crease = np.exp(-((yy - hys) / (0.35 * wc)) ** 2) * 0.035     # faint shade in the curve
+    crease = np.exp(-((yy - hys) / (0.35 * wc)) ** 2) * (0.0 if DARK else 0.035)   # faint shade in the curve
     light = light * (1 - crease[..., None])
     r = np.hypot((xx - 0.5 * W) / (0.7 * W), (yy - 0.45 * H) / (0.7 * H))
-    light = light * (1 - 0.13 * np.clip(r, 0, 1.4) ** 2)[..., None]
+    light = light * (1 - (0.06 if DARK else 0.13) * np.clip(r, 0, 1.4) ** 2)[..., None]
     dark = light * (0.3 if DARK else 0.055)                    # the same room, unlit
     w = np.sin(np.pi * E) ** 2 * (0.08 if DARK else 0.22)      # warm, dawn-like tint mid-rise
     E = E[..., None]
@@ -349,7 +349,7 @@ def render(A, t):
         src = 2 * yf - rows
         ok = (src >= A.y0) & (src < A.y1)
         rows, src = rows[ok], src[ok]
-        fade = (np.exp(-(rows - yf) / 95.0) * (0.10 if DARK else 0.16) * E)[:, None]
+        fade = (np.exp(-(rows - yf) / (120.0 if DARK else 95.0)) * (0.20 if DARK else 0.16) * E)[:, None]
         ra = ndimage.gaussian_filter(A.M[src - A.y0] * fade, (2.5, 1.0))
         rc = ndimage.gaussian_filter(c[src - A.y0], (2.5, 1.0, 0))
         xs_ = slice(A.x0, A.x1)
