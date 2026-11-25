@@ -19,7 +19,7 @@ Seven more films and spots since the last update (Small Cargo, House of Courtesy
 4. **One director, few hands; hand off by about 250 K context** on the one-page [HANDOFF_FORM.md](craft/HANDOFF_FORM.md), which names the next stage's card by path.
 5. **A cap is a cap.** One quote per gate, a typed yes that names the amount, drafts before HD. The money card now carries a standing per-film budget and the cost per finished second of recent films.
 6. **A toolbox by need.** [craft/TOOLBOX.md](craft/TOOLBOX.md) lists the proven routes (board and start frames, one-prompt takes, the new [graphic-spot-method](skills/graphic-spot-method/SKILL.md) skill for 15 s motion-graphics spots, environment continuity, vertical reframe, colour grade, art review). The handoff says which were taken and why.
-7. **Let the script check.** [tools/craft_check.py](tools/craft_check.py) runs the mechanical checks each card lists (spend against cap, HD against its draft, motion, sound transients, frame anchors, edges, context size), so a director does not have to remember them.
+7. **Let the script check.** [tools/craft_check.py](tools/craft_check.py) is the lab's own gate-check script for the checks the cards list (spend against cap, HD against its draft, motion, sound transients, frame anchors, edges, context size), so a director does not have to remember them. Run `python tools/craft_check.py --help`; adapt its file layout and thresholds to your project.
 
 New in `guides/`: the [Small Cargo retrospective](guides/RETROSPECTIVE_2026-11-09_TEST022.md) and the [Forsaken opener retrospective](guides/RETROSPECTIVE_2026-11-12_TEST024_FORSAKEN_OPENER.md). The older guides now open with an archive banner.
 

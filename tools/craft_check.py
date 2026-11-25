@@ -668,7 +668,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(
         prog="craft_check.py",
         description="The Lab's gate checks: each prints PASS/FAIL with the measured number; exit 1 on any fail. "
-                    "Details, thresholds and the films that taught them: tools/CRAFT_CHECK.md. "
+                    "Details, thresholds and the films that taught them are in the Lab's CRAFT_CHECK.md (not in the kit). "
                     "The proposed spend ledger format for future films: craft_check.py spend --help.",
         formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="check", metavar="CHECK")

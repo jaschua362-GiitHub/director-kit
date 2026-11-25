@@ -21,7 +21,7 @@ He owns the vision and the money; you own the eye. He judges look, motion and so
 7. A note: find which property he dislikes and keep the rest (Tide; Neo Siam's full retake lost a duel he liked); his reference beats your reading.
 
 ## Let the script check
-- Public and professional documents say "Jason Chua", then "Jason", never his location; internal records keep the handle `Jason` that `publish_final_render.py` checks: `not built: do it by hand`.
+- Public and professional documents say "Jason Chua", then "Jason", never his location: `not built: do it by hand`.
 
 ## How this stage runs
 - Each gate gets its own Artifact link (Remote Control cannot open local HTML). One page for the whole film was "way too long. Sometimes I lost track of where the real approval is."
