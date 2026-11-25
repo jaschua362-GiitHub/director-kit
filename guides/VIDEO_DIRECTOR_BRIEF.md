@@ -1,4 +1,11 @@
+> **Archive since 12 Nov 2026.** The current required reading is `craft/DIRECTOR_CRAFT.md` and its cards in `craft/cards/`; start at `START_HERE.md`.
+> This file is kept unchanged below as the record. Nothing in it overrides the craft page or cards.
+
 # Video agent — direct the best film
+
+**2026-11-09 — Jason's mandate after Small Cargo, which every phase handoff must carry verbatim at its top:** "I wish to see our video director is interactive. He is the video director, the film director, who has the eye or the cinematography, able to provide better angles than me, and produce a good film together. That's why I come to Claude Code, because of that intuition. It's like a partner. I am not the video director expertise; that's why I require the video director expertise to produce a good frame. And that experience kind of diluted in this process." On Small Cargo the phase handoffs were execution lists (22 must-not lines, no grant of judgement) and the directors obeyed step by step; the board followed the synopsis one to one and he found the camera dull. So: the director proposes the better angle before being asked, brings one improvement to every gate, delivers a bold reproposal beside the faithful board, and treats the lock as the limits of money and frozen files, not of taste. Details: [RETROSPECTIVE_2026-11-09_TEST022.md](RETROSPECTIVE_2026-11-09_TEST022.md) §13.
+
+**Jason's benchmark films (9 Nov 2026):** the two films that gave him "the best achievement so far" are **The Unstitched** (film 3, 14 Oct: "although we were still very inexperienced, the cinematography, the framing angle, and how it brought a very boring, very plain script into a nicely narrated emotional piece ... one of my best experiences and wow factor for the video title ... the one that made me decide to use Claude Code as a film director") and **Hold the Note** (7 Nov: "very well executed, but we went through a lot of mistakes; well done, intuition not bad"). Neither is the best-viewed spot; both are the standard for the eye he wants. Before planning a film, watch both finals in `FINAL_RENDERED/DCL-20261014-WEFT/` and `FINAL_RENDERED/DCL-20261102-NOTE/` and read what he said about them. Small Cargo (9 Nov) is the counter-example: finished, under cap, and dull.
 
 **2026-10-22 clarification:** numerical timing/coverage/camera recipes and mandatory map/animatic wording retained in historical retrospectives describe those films. They are learning evidence, not compulsory storyboard or execution constraints for a new director. Use the current user mandate and autonomous cinematic judgment.
 
@@ -158,7 +165,7 @@ Jason adopted six rules from the local director review of workflow v1.2 (lab fil
 
 **Seedance 2.5 Draft Mode — pending Jason's test.** Jason is subscribing to a provider with true promotable drafts (480p draft → 1080p promotion by draft task ID, 7-day expiry) and will test it himself. Before choosing a route for a new film, check this brief, AGENTS.md and the review file for his result, or ask him. If draft mode is confirmed available and worthwhile, it may replace exploratory 720p takes. Faces still finish at native resolution, the ledger records the draft ID and expiry, and promotion follows rule 5. Until then, ChatCut 480p is an independent low-res take, not a draft. ChatCut has no promotion field. When a real film needs a face shot anyway, render that shot at 480p, 720p and 1080p within the film's budget, and log the comparison in the review.
 
-**Local tooling note (2026-10-27):** Windows Application Control currently blocks the PATH `ffmpeg`/`ffprobe` on the desktop. The project-bundled build `experiments/TEST-001/tools/python-media/imageio_ffmpeg/binaries/ffmpeg-win-x86_64-v7.1.exe` runs, and `upres_shot.py` uses it automatically (override with `DCL_FFMPEG`). Older scripts that call bare `ffmpeg` (e.g. `assemble_v2.py`) need that path until the block is resolved. Real-ESRGAN and OpenCV are unaffected.
+**Local tooling note (2026-10-27):** Windows Application Control currently blocks the PATH `ffmpeg`/`ffprobe` on the desktop. The project-bundled build `lab file, not in kit: ffmpeg-win-x86_64-v7.1.exe` runs, and `upres_shot.py` uses it automatically (override with `DCL_FFMPEG`). Older scripts that call bare `ffmpeg` (e.g. `assemble_v2.py`) need that path until the block is resolved. Real-ESRGAN and OpenCV are unaffected.
 
 ## 2026-10-27 — Approved art is a style guide; review a visual board before video (Jason)
 
@@ -188,7 +195,7 @@ Jason requires the full perceived render finish of supplied artwork in video, ci
 
 Jason: "Director need to make sure music, SFx endtitle any additional requirements be fore starting, this will safe the repeating work."
 
-Hold the Note used **502 M processed tokens against an 80 M target**, and phase 5C alone used 192 M. The causes were requirements that arrived after the finish had started, one-at-a-time notes, a retake loop run inside the finish session, and status relays. Evidence: `experiments/TEST-020-hold-the-note/closeout/TOKEN_REPORT.md` and `RETROSPECTIVE_2026-11-06_TEST020.md`.
+Hold the Note used **502 M processed tokens against an 80 M target**, and phase 5C alone used 192 M. The causes were requirements that arrived after the finish had started, one-at-a-time notes, a retake loop run inside the finish session, and status relays. Evidence: `lab file, not in kit: TOKEN_REPORT.md` and `RETROSPECTIVE_2026-11-06_TEST020.md`.
 
 1. **Requirements lock at the board gate.** Fill in [REQUIREMENTS_LOCK_TEMPLATE.md](REQUIREMENTS_LOCK_TEMPLATE.md), covering formats, runtime, language, music, instrument performance, SFX, end title and its motion, epigraph or quote, typography, effects, finish routes, the ending, every item the source handoff deferred, social extras, and spend.
    - Get Jason's answer on every row. **No paid generation before that.**

@@ -1,16 +1,16 @@
 {
- "built": "2026-11-07",
+ "built": "2026-11-25",
  "note": "source_sha256 is the Lab source at copy time. Files are scrubbed on copy by tools/refresh_director_kit.py in the Lab (names, location, lab-only links, machine paths); a few kit files were then adapted by hand.",
  "files": [
   {
    "kit_path": "guides/PRODUCTION_PLAYBOOK.md",
    "source": "<LAB>\\PRODUCTION_PLAYBOOK.md",
-   "source_sha256": "f79c157cbaca1aebb15ed2b6092e97a25ab9b679eb873f2d9fc3b72756073894"
+   "source_sha256": "613221c4618ff8f4f15b86238a92b5700dce11c7af767653d7e22dc5f1475fc9"
   },
   {
    "kit_path": "guides/VIDEO_DIRECTOR_BRIEF.md",
    "source": "<LAB>\\VIDEO_DIRECTOR_BRIEF.md",
-   "source_sha256": "781c8b93e5388b155ad1adba57b1f185a84dc78843d1de3373c0d851089f5443"
+   "source_sha256": "cf0f7dc7b741038a004c2beace4dc98d7aaa496f53863aef0379d1104c380dbb"
   },
   {
    "kit_path": "guides/CONCEPT_TO_MOTION.md",
@@ -25,7 +25,7 @@
   {
    "kit_path": "guides/STORY_FOUNDATION.md",
    "source": "<LAB>\\STORY_FOUNDATION.md",
-   "source_sha256": "096fc469faf5ee9fbdb926e0e94ea051d5d01e0a43ef3fee20a7dc047a925af9"
+   "source_sha256": "24614a2aaa41523216115318548f4ea3866b5ccbe93de291d8aae0ccf54d802a"
   },
   {
    "kit_path": "guides/FINAL_DELIVERY_STANDARD.md",
@@ -35,12 +35,12 @@
   {
    "kit_path": "guides/LESSONS.md",
    "source": "<LAB>\\LESSONS.md",
-   "source_sha256": "3d012d4c9771f38ccbcc6df1375aff86db352db4ecec76235f8ac00832a8d082"
+   "source_sha256": "e1d61785b478fc601c55c968ae8d762bd87878f64de4bb40ad3621dc738f18dc"
   },
   {
    "kit_path": "guides/IMAGE_RENDERING_PIPELINE.md",
    "source": "<LAB>\\IMAGE_RENDERING_PIPELINE.md",
-   "source_sha256": "fbb3b44d4485ed2aacde9345f5b0c460ede92b19f575c45b99e44c5c0c07e4f4"
+   "source_sha256": "46633a4fb84f71947de4ce53a7f5e4b92622f74ac9090c467ba09103f890b9a6"
   },
   {
    "kit_path": "guides/REQUIREMENTS_LOCK_TEMPLATE.md",
@@ -60,42 +60,137 @@
   {
    "kit_path": "guides/RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md",
    "source": "<LAB>\\RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md",
-   "source_sha256": "e891dfa82f604496a84b96d78352d51c7aa8032676d19e4b479cedd01868998e"
+   "source_sha256": "295e9260087f70b767a173cce59d3dda74564a42a5ae8c2199a3a22c6f662808"
   },
   {
    "kit_path": "guides/RETROSPECTIVE_2026-10-20_FILM5_DIRECTING.md",
    "source": "<LAB>\\RETROSPECTIVE_2026-10-20_FILM5_DIRECTING.md",
-   "source_sha256": "742831968f5158d27285ac59bddb17432090716e535842bac45fe5aa46c49e14"
+   "source_sha256": "5a5a491d89d0ed8322368f86c2b022e4431020329ec18208acef3b820da7b90a"
   },
   {
    "kit_path": "guides/RETROSPECTIVE_2026-10-27_FILM6_DIRECTING.md",
    "source": "<LAB>\\RETROSPECTIVE_2026-10-27_FILM6_DIRECTING.md",
-   "source_sha256": "97948d42d6557be5a6cc18ff5f4f76506f16cc00ce11d8cdcf0dd001d1517de1"
+   "source_sha256": "12c7ac96fd6df0f673dde8c3b0097a678ff85d11528644d2d63425924fbefd35"
   },
   {
    "kit_path": "guides/RETROSPECTIVE_2026-10-29_FILM7_DIRECTING.md",
    "source": "<LAB>\\RETROSPECTIVE_2026-10-29_FILM7_DIRECTING.md",
-   "source_sha256": "9b766dddb40c1c66deeb51cf0d2bfd1bf8512543a697f649780889c82cca8bba"
+   "source_sha256": "2f6d05bf21432a4f7941b5e6f57de5b745d65d88abcf51e87048beedda168907"
   },
   {
    "kit_path": "guides/RETROSPECTIVE_2026-11-03_TEST018_DIRECTING.md",
    "source": "<LAB>\\RETROSPECTIVE_2026-11-03_TEST018_DIRECTING.md",
-   "source_sha256": "9a663bdfab4931cfd1181ac15752c7c69fca3d5666be574d0a28a8139d1c92d9"
+   "source_sha256": "851cc35628ea0091a1878545a8e27781611e613589eb8ccdf848637dcac93f3c"
   },
   {
    "kit_path": "guides/RETROSPECTIVE_2026-11-03_TEST019_PILOT.md",
    "source": "<LAB>\\RETROSPECTIVE_2026-11-03_TEST019_PILOT.md",
-   "source_sha256": "510e1dc165056b0513f2401131f0d8650e94155cb117d3b7cf75f30d6257e590"
+   "source_sha256": "50bd43d845a6f1cf1ca5500616ebe1d7c4d20cdd23706aed3c6d5f9630fd1d8a"
   },
   {
    "kit_path": "guides/RETROSPECTIVE_2026-11-05_TEST019_PHASE3.md",
    "source": "<LAB>\\RETROSPECTIVE_2026-11-05_TEST019_PHASE3.md",
-   "source_sha256": "ebd70400c0d05c946c00e432d2354d8ae8de8aebdc8d94fd9a39959d2d7b3dc0"
+   "source_sha256": "7612dfa6e8fae41ed614f550981d5ba4de319569b4261c558d1c2fab0faa7923"
   },
   {
    "kit_path": "guides/RETROSPECTIVE_2026-11-06_TEST020.md",
    "source": "<LAB>\\RETROSPECTIVE_2026-11-06_TEST020.md",
-   "source_sha256": "349509c99c7e2bbe568ed067cfe1ad882a061789df932dee864edf285effb40c"
+   "source_sha256": "9b23e84392ae7bb24284278db37642c3b9cf56b63dbb9431e0d4c6c25ee7cae3"
+  },
+  {
+   "kit_path": "guides/RETROSPECTIVE_2026-11-09_TEST022.md",
+   "source": "<LAB>\\RETROSPECTIVE_2026-11-09_TEST022.md",
+   "source_sha256": "6b341ed8bb875b1f73e5309bf4590e1c297a54ce35c2c8c25a28ff6c85400da2"
+  },
+  {
+   "kit_path": "guides/RETROSPECTIVE_2026-11-12_TEST024_FORSAKEN_OPENER.md",
+   "source": "<LAB>\\RETROSPECTIVE_2026-11-12_TEST024_FORSAKEN_OPENER.md",
+   "source_sha256": "1c14822240d7cf3bb54a9369f6ab447773a23031980bd9e781f13c841c4ba34b"
+  },
+  {
+   "kit_path": "craft/DIRECTOR_CRAFT.md",
+   "source": "<LAB>\\craft\\DIRECTOR_CRAFT.md",
+   "source_sha256": "4b456e7094bae5c168cf6a4ee0063f4af60f877a636a5fe66354470670618a20"
+  },
+  {
+   "kit_path": "craft/HANDOFF_FORM.md",
+   "source": "<LAB>\\craft\\HANDOFF_FORM.md",
+   "source_sha256": "41ef19364bf80929fd1701586cd0795bbe5fb875b885248a81fb8a902d9d43cc"
+  },
+  {
+   "kit_path": "craft/TOOLBOX.md",
+   "source": "<LAB>\\craft\\TOOLBOX.md",
+   "source_sha256": "49dbb8526dc1233b29c11d02facbf77b86e41a0f7501d54e440dd3e6f65df4cc"
+  },
+  {
+   "kit_path": "craft/cards/board.md",
+   "source": "<LAB>\\craft\\cards\\board.md",
+   "source_sha256": "53dc51f329d2ced4336e95def524fe44c034ff3e3367c4464364772bd3ff8f95"
+  },
+  {
+   "kit_path": "craft/cards/closeout-and-social.md",
+   "source": "<LAB>\\craft\\cards\\closeout-and-social.md",
+   "source_sha256": "577dff5db55a95b56085bf276f5c124d478dbcdf71a9aa1238b63280fc64e495"
+  },
+  {
+   "kit_path": "craft/cards/cut.md",
+   "source": "<LAB>\\craft\\cards\\cut.md",
+   "source_sha256": "12d7ec7d7249d64c881ffb79e747ccd51dd4c88ae6b73c4ac1fc33cadcaef778"
+  },
+  {
+   "kit_path": "craft/cards/fight-sequence.md",
+   "source": "<LAB>\\craft\\cards\\fight-sequence.md",
+   "source_sha256": "d70edfa339fe8d8c5ed5a97a382b9b2e56346b85b9a48ca5c4c75b35afa56439"
+  },
+  {
+   "kit_path": "craft/cards/handoff-and-sessions.md",
+   "source": "<LAB>\\craft\\cards\\handoff-and-sessions.md",
+   "source_sha256": "4392e7d4eaa85484ef4915126ae5bc27828e2d4da36958f1dc4275b45dc6a6c5"
+  },
+  {
+   "kit_path": "craft/cards/money-and-approvals.md",
+   "source": "<LAB>\\craft\\cards\\money-and-approvals.md",
+   "source_sha256": "2e964d6b37033c075fcae54472619327a93e78e686cf274d3d1a8d1b8c20a18a"
+  },
+  {
+   "kit_path": "craft/cards/pilot.md",
+   "source": "<LAB>\\craft\\cards\\pilot.md",
+   "source_sha256": "67c1abeb257826c91b3c66641dcd467c337572caff93bdeeb51dd48d5d6b05ac"
+  },
+  {
+   "kit_path": "craft/cards/plates.md",
+   "source": "<LAB>\\craft\\cards\\plates.md",
+   "source_sha256": "ffb337ddfafb2f05d5f854b5e675aad30ddd5e476c3ee996802d12b0201cf061"
+  },
+  {
+   "kit_path": "craft/cards/production.md",
+   "source": "<LAB>\\craft\\cards\\production.md",
+   "source_sha256": "6a29eb930d0fb2fb21883d7a63c5ef8e439318a7d4024db71496c2d09671d9bb"
+  },
+  {
+   "kit_path": "craft/cards/sound.md",
+   "source": "<LAB>\\craft\\cards\\sound.md",
+   "source_sha256": "873d225b402c216e8ce02861cd76f18f318b1127904debd5c0d50ff82d34fea8"
+  },
+  {
+   "kit_path": "craft/cards/story-and-prep.md",
+   "source": "<LAB>\\craft\\cards\\story-and-prep.md",
+   "source_sha256": "c2c3bd8473ed2e60e14df3b7a96c6956d79f31d58e998fc490c87f07f38912db"
+  },
+  {
+   "kit_path": "craft/cards/title-and-poster.md",
+   "source": "<LAB>\\craft\\cards\\title-and-poster.md",
+   "source_sha256": "01e20bdb177190358315e8993bd8a40e1350db810cf92cf6e26c75ca5e0c459c"
+  },
+  {
+   "kit_path": "craft/cards/vertical.md",
+   "source": "<LAB>\\craft\\cards\\vertical.md",
+   "source_sha256": "aecb5eb92cfebe6a8a803a1bf4d740e4b92b8d7542572d228f221e4f7847a189"
+  },
+  {
+   "kit_path": "craft/cards/working-with-jason.md",
+   "source": "<LAB>\\craft\\cards\\ (lab working-with card, renamed in the kit)",
+   "source_sha256": "e697a2a7c258cf84b269bd15a2b513a80f588bade2444c50073405db63eeb452"
   },
   {
    "kit_path": "guides/SKIN_REALISM.md",
@@ -141,6 +236,16 @@
    "kit_path": "skills/vertical-reframe/SKILL.md",
    "source": "<LAB>\\skills\\vertical-reframe\\SKILL.md",
    "source_sha256": "849de12dfbfeab2f37fba2a8cecca7276f1c96b0710764de7f3481341873dddc"
+  },
+  {
+   "kit_path": "skills/graphic-spot-method/SKILL.md",
+   "source": "<LAB>\\skills\\graphic-spot-method\\SKILL.md",
+   "source_sha256": "adc543ee120fff3ea79b75bb58d0b0b675b621eb93e727244568f5a2cbd906ee"
+  },
+  {
+   "kit_path": "tools/craft_check.py",
+   "source": "<LAB>\\tools\\craft_check.py",
+   "source_sha256": "e3d1222a1be2efc5a2d219749dcb6e6594be551a6bfbd9147c150ba3567e907c"
   },
   {
    "kit_path": "tools/upres_shot.py",
@@ -420,7 +525,7 @@
   {
    "kit_path": "guides/RETROSPECTIVE_2026-11-05_TEST021_ONE_PROMPT.md",
    "source": "<LAB>\\RETROSPECTIVE_2026-11-05_TEST021_ONE_PROMPT.md",
-   "source_sha256": "9cd04c42c1ad17cce54150d9de04b585503917de70bcb181f591d7fddd76e526"
+   "source_sha256": "b2eba24f33207e4fd3733b969d8fa81820e1915f2bd943cd72026f1659bfb856"
   },
   {
    "kit_path": "skills/one-prompt-takes/SKILL.md",
@@ -440,12 +545,12 @@
   {
    "kit_path": "tools/token_count.py",
    "source": "<LAB>\\tools\\token_count.py",
-   "source_sha256": "06bb88d8dfa044c7eaf51639517fc3606901904a999ba1867e3726257730353c"
+   "source_sha256": "6c8523557269ac844b2d12b9a8a8fd585d1d6621ac6dac434b3d3482a055352b"
   },
   {
    "kit_path": "tools/seedvr2.ps1",
    "source": "<LAB>\\tools\\seedvr2.ps1",
-   "source_sha256": "1a01b3731f23253f50c1f4d117c79a187a7ee84f69550d94d11e57bc267a90cd"
+   "source_sha256": "0e330b8f871cd30d5a8b76326c9d4e5cfbffcf9f77441fa9e67318e268a0f3e2"
   },
   {
    "kit_path": "skills/business-motion-film/SKILL.md",
@@ -555,7 +660,7 @@
   {
    "kit_path": "skills/motion-design-advisor/SKILL.md",
    "source": "<USER_SKILLS>\\motion-design-advisor\\SKILL.md",
-   "source_sha256": "07a1ec9a5a502898fd51381c34446c4f21ae2311b8156995143d2ee3b7b822a7"
+   "source_sha256": "1dca5f9b89052a9c9ce82f2bd005d2af892cad8046e99a1ac4c7c0a5937d751b"
   },
   {
    "kit_path": "skills/motion-design-advisor/references/style-library.md",

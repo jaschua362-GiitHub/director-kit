@@ -1,3 +1,6 @@
+> **Archive since 12 Nov 2026.** The current required reading is `craft/DIRECTOR_CRAFT.md` and its cards in `craft/cards/`; start at `START_HERE.md`.
+> This file is kept unchanged below as the record. Nothing in it overrides the craft page or cards.
+
 # Retrospective: One Beat Late (TEST-019), phase 3 through final delivery, 3–5 November 2026
 
 **Status:** Jason approved the final on 4 Nov 2026 ("final"). It is delivered to FINAL_RENDERED/DCL-20261030-BEAT (lab file, not in kit: `FINAL_RENDERED/DCL-20261030-BEAT/README.md`). The finish, closeout, spend and token totals are covered [at the end](#finish-and-closeout).

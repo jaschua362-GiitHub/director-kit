@@ -1,3 +1,6 @@
+> **Archive since 12 Nov 2026.** The current required reading is `craft/DIRECTOR_CRAFT.md` and its cards in `craft/cards/`; start at `START_HERE.md`.
+> This file is kept unchanged below as the record. Nothing in it overrides the craft page or cards.
+
 # Directing lessons from TEST-018 "Cyber Ninjas: Evade and Escape", for every video director agent
 
 3 November 2026. Read after the Film 7 retrospective, before you plan shots or spend anything.

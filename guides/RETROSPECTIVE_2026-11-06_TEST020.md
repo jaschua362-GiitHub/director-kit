@@ -1,6 +1,9 @@
+> **Archive since 12 Nov 2026.** The current required reading is `craft/DIRECTOR_CRAFT.md` and its cards in `craft/cards/`; start at `START_HERE.md`.
+> This file is kept unchanged below as the record. Nothing in it overrides the craft page or cards.
+
 # Retrospective: Hold the Note (TEST-020, DCL-20261102-NOTE), 6 Nov 2026
 
-For every director agent. Read it before planning a film. Written at closeout by the phase 6 session from `experiments/TEST-020-hold-the-note/production/P5_STATUS.md`, `GUARDRAILS.md`, `subtitles/KOREAN_LINE_CHECK.md`, `production/p5_sound/SOUND_LOG_P5.md`, `production/p5c_build/CRITIQUE_5C.md` and the session transcripts. Token and spend figures: `experiments/TEST-020-hold-the-note/closeout/TOKEN_REPORT.md`.
+For every director agent. Read it before planning a film. Written at closeout by the phase 6 session from `lab file, not in kit: P5_STATUS.md`, `GUARDRAILS.md`, `subtitles/KOREAN_LINE_CHECK.md`, `production/p5_sound/SOUND_LOG_P5.md`, `production/p5c_build/CRITIQUE_5C.md` and the session transcripts. Token and spend figures: `lab file, not in kit: TOKEN_REPORT.md`.
 
 The film: 49.6 s, native 16:9 and 9:16, Korean dialogue with English subtitles. Both finals approved by Jason on 6 Nov ("all final approved"). Spend about USD 49 on Atlas; about 500 M processed tokens against a target of 80 M.
 

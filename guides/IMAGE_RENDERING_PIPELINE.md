@@ -4,7 +4,7 @@ Target: photoreal cinematography for every film from Small Cargo onward. Evidenc
 
 ## Principle
 
-**7 November 2026, Jason's clarification.** For every newly selected creative, Codex makes the first base images here in native ImageGen. This includes the first character, environment and look anchors. Establish the film’s look from the brief and any explicit style direction before making the base. A later model-specific casting study is an optional, separately authorised experiment.
+**7 November 2026, Jason's clarification.** Once Jason gives the developed story a go-ahead for visuals, Codex makes the first base images in native ImageGen. This includes the first character, environment and look anchors. Establish the film’s look from the brief and any explicit style direction before making the base. A later model-specific casting study is an optional, separately authorised experiment.
 
 Use the approved Small Cargo v10 plates as a reference for how light and materials behave. For a new film, establish original characters and world design. When a benchmark has a person or a distinctive object in it, transfer its lighting and material behaviour in words. For a comparable still, describe the motivated key, shadow separation, neutral whites where appropriate, quiet local practicals and fine dust visible in the light. Use the film’s own palette and atmosphere. See the approved photo plates (lab file, not in kit: `approved/DCL-20261104-CARGO/photo-plates-v10/START_HERE.md`) and Codex wrap note (lab file, not in kit: `reviews/IMAGE_REALISM_ADVISOR_2026-11-07/NOTE_TO_CODEX.md`).
 
@@ -12,7 +12,7 @@ Use the approved Small Cargo v10 plates as a reference for how light and materia
 
 | Stage | Tool | Output | Notes |
 |---|---|---|---|
-| 0 Look and first base images | Native ChatGPT/Codex ImageGen after creative selection | First character, environment and look anchors | Use the selected brief and any explicit style direction. Record the intended look for REQUIREMENTS_LOCK. Inspect identity, composition and motivated lighting before expanding. |
+| 0 Look and first base images | Native ChatGPT/Codex ImageGen after story go-ahead | First character, environment and look anchors | Use the selected brief and any explicit style direction. Record the intended look for REQUIREMENTS_LOCK. Inspect identity, composition and motivated lighting before expanding. |
 | 1 Design and layout | Native ChatGPT/Codex ImageGen | Character sheets, 9-view environment coverage, props, blocking, lighting direction and design lock | Use the film’s own identity anchors. Describe what is in frame, the material behaviour and where the light comes from. Judge the image as a design plate. |
 | 2 Rendering pass | Seedream 5.5 Edit (USD 0.02 per frame) on every approved frame; MAI-Image 2.6 Edit (USD 0.09) first on clean-product scenes | photo plates | one pass per model, fixed order: MAI (materials, only when needed) -> Seedream (rendering, colour, air) -> Nano Banana 2.1 masked fix (only when needed) |
 | 3 Measure | local crops and patches | approval evidence | 2x face and material crops; white-patch means on the same patches each time; drift checklist |

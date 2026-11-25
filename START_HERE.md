@@ -1,13 +1,29 @@
 # Director Kit — start here
 
-A starter package for new film and motion directors. It collects what we learned making eleven AI-assisted short films and spots and a set of brand motion pieces (October to November 2026): the guides, the agent skills, the tools that worked, and real scripts from finished films. Start from this instead of from zero.
+A starter package for new film and motion directors. It collects what we learned making AI-assisted short films, spots and brand motion pieces from October to November 2026: the director's craft set, the guides, the agent skills, the tools that worked, and real scripts from finished films. Start from this instead of from zero.
+
+**Read first:** [craft/DIRECTOR_CRAFT.md](craft/DIRECTOR_CRAFT.md), then the card for the stage you are in ([craft/](craft/README.md) explains which). That is the required reading; everything in `guides/` is the archive behind it.
 
 **Local setup only:** run the kit on your own Windows desktop, not in a cloud or web agent session. [SETUP.md](SETUP.md) explains why.
 
 **Setup:** [SETUP.md](SETUP.md) (software) and [PLUGINS.md](PLUGINS.md) (agent plugins and services).
 **Using an AI agent?** Point it at [AGENTS.md](AGENTS.md).
 
-## What changed in this update (7 November 2026)
+## What changed in this update (25 November 2026)
+
+Seven more films and spots since the last update (Small Cargo, House of Courtesy, the Forsaken opener, The Last Fritter, the FAI reveal, the Neo Siam film, The Last Ferry). The lessons had grown to about 95,000 words across retrospectives, and directors stopped absorbing them: one film repeated 18 faults that a written rule already covered. So the experience was rewritten by **when a director needs it**, not by the date it was learned.
+
+1. **The craft set replaces the reading list.** [craft/DIRECTOR_CRAFT.md](craft/DIRECTOR_CRAFT.md) (about 900 words: who the director is, what a good film is, the six costliest lessons) plus fourteen 500-word cards in [craft/cards/](craft/cards/): three for every session (handoff and sessions, money and approvals, working with the creative lead) and one per stage (story and prep, board, plates, pilot, production, fight sequence, cut, sound, vertical, title and poster, closeout and social). A new lesson replaces or merges a card line; no dated blocks.
+2. **Look before the creative lead does.** Watch every shot at normal speed, then step every frame on faces, hands and joins, and write a verdict per shot. Never send a shot you would not approve; a weak measurement is a stop, not a footnote.
+3. **Compare with the design feature by feature,** at the still, where a fix costs cents rather than dollars.
+4. **One director, few hands; hand off by about 250 K context** on the one-page [HANDOFF_FORM.md](craft/HANDOFF_FORM.md), which names the next stage's card by path.
+5. **A cap is a cap.** One quote per gate, a typed yes that names the amount, drafts before HD. The money card now carries a standing per-film budget and the cost per finished second of recent films.
+6. **A toolbox by need.** [craft/TOOLBOX.md](craft/TOOLBOX.md) lists the proven routes (board and start frames, one-prompt takes, the new [graphic-spot-method](skills/graphic-spot-method/SKILL.md) skill for 15 s motion-graphics spots, environment continuity, vertical reframe, colour grade, art review). The handoff says which were taken and why.
+7. **Let the script check.** [tools/craft_check.py](tools/craft_check.py) runs the mechanical checks each card lists (spend against cap, HD against its draft, motion, sound transients, frame anchors, edges, context size), so a director does not have to remember them.
+
+New in `guides/`: the [Small Cargo retrospective](guides/RETROSPECTIVE_2026-11-09_TEST022.md) and the [Forsaken opener retrospective](guides/RETROSPECTIVE_2026-11-12_TEST024_FORSAKEN_OPENER.md). The older guides now open with an archive banner.
+
+## Earlier update (7 November 2026)
 
 Four more films were finished since the first release, and they changed the workflow more than the first six did. The short version:
 
@@ -26,8 +42,9 @@ Four more films were finished since the first release, and they changed the work
 
 | Folder | What it holds | How to treat it |
 |---|---|---|
-| [guides/](guides/) | Playbooks, director brief, retrospectives film by film, the requirements lock, guardrails, the rendering pipeline, lessons | Read. Dated entries; the newest entry wins |
-| [skills/](skills/) | Eight agent skills (Claude Code / Codex) | Install, then the agent uses them |
+| [craft/](craft/README.md) | The craft page, fourteen cards, the handoff form and the toolbox | Required reading. Current rules, one line per lesson |
+| [guides/](guides/) | Playbooks, director brief, retrospectives film by film, the requirements lock, guardrails, the rendering pipeline, lessons | Archive: open for the full story behind a card line |
+| [skills/](skills/) | Nine agent skills (Claude Code / Codex) | Install, then the agent uses them |
 | [tools/](tools/) | Ready-to-use scripts: image jobs, frame-pair check, per-shot upscale (Real-ESRGAN, SeedVR2), token counter | Copy into your project's `tools\` folder |
 | [examples/](examples/) | Real scripts from six films | Study and adapt. Paths inside are project-specific |
 | [MANIFEST.json](MANIFEST.json) | Source path and hash of every copied file | For refreshing the kit later |
@@ -38,7 +55,7 @@ The guides are working records from the lab. Project IDs such as `DCL-20261021-S
 
 Work through it in order. Each step names what to read and what to practise.
 
-1. **How we direct.** [VIDEO_DIRECTOR_BRIEF.md](guides/VIDEO_DIRECTOR_BRIEF.md), then the retrospectives in order: [films 1–3](guides/RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md), [Film 5](guides/RETROSPECTIVE_2026-10-20_FILM5_DIRECTING.md), [Film 6](guides/RETROSPECTIVE_2026-10-27_FILM6_DIRECTING.md), [Film 7](guides/RETROSPECTIVE_2026-10-29_FILM7_DIRECTING.md), [Evade and Escape](guides/RETROSPECTIVE_2026-11-03_TEST018_DIRECTING.md), [One Beat Late pilot](guides/RETROSPECTIVE_2026-11-03_TEST019_PILOT.md) and [phase 3](guides/RETROSPECTIVE_2026-11-05_TEST019_PHASE3.md), [one-prompt takes](guides/RETROSPECTIVE_2026-11-05_TEST021_ONE_PROMPT.md), [Hold the Note](guides/RETROSPECTIVE_2026-11-06_TEST020.md). Hold the Note and its [simulation](guides/PIPELINE_SIMULATION_2026-11-07_TEST020.md) hold the current workflow; Film 6 still has the best board-and-start-frame walkthrough.
+1. **How we direct.** Start with [DIRECTOR_CRAFT.md](craft/DIRECTOR_CRAFT.md) and the three every-session cards. For the history behind them: [VIDEO_DIRECTOR_BRIEF.md](guides/VIDEO_DIRECTOR_BRIEF.md), then the retrospectives in order: [films 1–3](guides/RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md), [Film 5](guides/RETROSPECTIVE_2026-10-20_FILM5_DIRECTING.md), [Film 6](guides/RETROSPECTIVE_2026-10-27_FILM6_DIRECTING.md), [Film 7](guides/RETROSPECTIVE_2026-10-29_FILM7_DIRECTING.md), [Evade and Escape](guides/RETROSPECTIVE_2026-11-03_TEST018_DIRECTING.md), [One Beat Late pilot](guides/RETROSPECTIVE_2026-11-03_TEST019_PILOT.md) and [phase 3](guides/RETROSPECTIVE_2026-11-05_TEST019_PHASE3.md), [one-prompt takes](guides/RETROSPECTIVE_2026-11-05_TEST021_ONE_PROMPT.md), [Hold the Note](guides/RETROSPECTIVE_2026-11-06_TEST020.md). Hold the Note and its [simulation](guides/PIPELINE_SIMULATION_2026-11-07_TEST020.md) hold the current workflow; Film 6 still has the best board-and-start-frame walkthrough.
 2. **Story.** [STORY_FOUNDATION.md](guides/STORY_FOUNDATION.md): a synopsis plus concept art is the foundation; the director develops the storyboard and pacing. Price the hard beats first with the story risk list (crossing paths, small hand-held objects, on-screen text, mirrors, a light change inside one shot, three actions in a row). [OPTIONAL_CRAFT_TOOLS.md](guides/OPTIONAL_CRAFT_TOOLS.md) has scene and take diagnostics to use when a scene feels flat.
 3. **Concept art that can move.** [CONCEPT_TO_MOTION.md](guides/CONCEPT_TO_MOTION.md), the [cinematic-art-review](skills/cinematic-art-review/SKILL.md) skill, and [environment-continuity](skills/environment-continuity/SKILL.md) (nine consistent views of each location). Then the [rendering pipeline](guides/IMAGE_RENDERING_PIPELINE.md): design plates, a rendering pass to photo plates, measured crops. Prepare image prompts as jobs that can run by hand or by agent: [IMAGE_JOBS_FORMAT.md](tools/IMAGE_JOBS_FORMAT.md).
 4. **Board, requirements lock and rough preview.** Draw the board and get it locked before you spend credits on photoreal frames or video. Fill in the [requirements lock](guides/REQUIREMENTS_LOCK_TEMPLATE.md) and send it with the board and a rough local preview (board frames timed as the cut, with the planned sound, subtitles and title). Read the [guardrails](guides/GUARDRAILS_HOLD_THE_NOTE.md). Examples: [build_drawn_board.py](examples/film6-shadow/build_drawn_board.py), [build_storyboard.py](examples/film6-shadow/build_storyboard.py), [make_locked_jobs.py](examples/film6-shadow/startframes/make_locked_jobs.py), [build_visual_board.py](examples/one-beat-late/production/stills/build_visual_board.py).

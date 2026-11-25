@@ -1,3 +1,6 @@
+> **Archive since 12 Nov 2026.** The current required reading is `craft/DIRECTOR_CRAFT.md` and its cards in `craft/cards/`; start at `START_HERE.md`.
+> This file is kept unchanged below as the record. Nothing in it overrides the craft page or cards.
+
 # Video production playbook
 
 2026-10-12 — Rules learned from The Tide Remembers. Read after verifying the approved foundation and before the first paid video call. Keep provider/model choice open; one successful session is not a universal ranking.
@@ -74,7 +77,7 @@ Jason's bar: "we shouldn't deliver unpolished work." Polish means correct motion
 
 ## 9. Director-mode rules (2026-10-14, film 3, The Unstitched)
 
-Details: [RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md](RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md). Film 5 additions (2026-10-20): [RETROSPECTIVE_2026-10-20_FILM5_DIRECTING.md](RETROSPECTIVE_2026-10-20_FILM5_DIRECTING.md) — blocking map and timed animatic before paid motion, and the director-owned pre-review checklist.
+Details: [RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md](RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md). Film 5 additions (2026-10-20): [RETROSPECTIVE_2026-10-20_FILM5_DIRECTING.md](RETROSPECTIVE_2026-10-20_FILM5_DIRECTING.md) — blocking map and timed animatic before paid motion, and the director-owned pre-review checklist. Small Cargo additions (2026-11-09): [RETROSPECTIVE_2026-11-09_TEST022.md](RETROSPECTIVE_2026-11-09_TEST022.md) — a gate is a session boundary, take geometry scanned at both ends, drafts shown before HD, music A/B with three options at the rough cut, cheap native models for calm wides, 9:16 extension as tracked stills.
 
 1. **No locked-camera films.** Frames mode with same-camera endpoints gives zero ghosting and zero cinema. Default to first-frame-only shots, each with one named, eased camera move.
 2. **Build coverage.** Generate per-shot start frames. Derive neighbouring shots from one hero frame so the world matches. Prefer an edit model (gpt-image-2.5-sunburst) for changes to a good frame. Check every nano-banana output for identity or style drift and mirrored makeup.

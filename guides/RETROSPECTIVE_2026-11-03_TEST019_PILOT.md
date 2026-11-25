@@ -1,3 +1,6 @@
+> **Archive since 12 Nov 2026.** The current required reading is `craft/DIRECTOR_CRAFT.md` and its cards in `craft/cards/`; start at `START_HERE.md`.
+> This file is kept unchanged below as the record. Nothing in it overrides the craft page or cards.
+
 # Retrospective: One Beat Late panel 11 pilot (TEST-019), 3 November 2026
 
 Read after the TEST-018 retrospective, before planning a moving shot. Film: DCL-20261030-BEAT. Pilot shot: board panel 11, "His answer lands". It was approved by Jason on 3 Nov 2026 (approval (lab file, not in kit: `experiments/TEST-019-one-beat-late/pilot/PILOT_APPROVAL.json`), record (lab file, not in kit: `experiments/TEST-019-one-beat-late/pilot/README.md`)). It was directed by Claude Opus 5.5 on Atlas Seedance 2.5 and cost USD4.33: two 480p drafts plus one native 1080p `draft-complete`. All stills were free (Route B).
@@ -16,6 +19,6 @@ Read after the TEST-018 retrospective, before planning a moving shot. Film: DCL-
 - Atlas Seedance 2.5 image-to-video accepts `last_image` with `image`. `draft-complete` takes only `draft_id`; it returns 1920x1080 HEVC Main10, close to the draft but not pixel-identical. It cost USD2.98 for 5 s. Drafts were USD0.67 each.
 - The ChatCut 100-credit pack is USD30 (USD0.30/credit). That's dearer per second than Atlas, so don't buy packs for video.
 - Reusable local tools:
-  - `experiments/TEST-019-one-beat-late/pilot/composite/insert.py` animates a still: accelerating push, grain vortex under glass with reflections protected, footprint relief, per-frame film grain.
+  - `lab file, not in kit: insert.py` animates a still: accelerating push, grain vortex under glass with reflections protected, footprint relief, per-frame film grain.
   - `composite/glass_beat.py` is the in-place repair. Only use it when the camera barely moves.
 - Panel 3.4 s vs Seedance minimum 4 s: generate 5 s and fix the trim window **before** timing any composite.

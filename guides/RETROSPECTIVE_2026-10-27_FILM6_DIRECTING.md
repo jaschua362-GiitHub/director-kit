@@ -1,3 +1,6 @@
+> **Archive since 12 Nov 2026.** The current required reading is `craft/DIRECTOR_CRAFT.md` and its cards in `craft/cards/`; start at `START_HERE.md`.
+> This file is kept unchanged below as the record. Nothing in it overrides the craft page or cards.
+
 # Directing lessons from Film 6 "The Shadow Apprentice": for every video director agent
 
 27 October 2026. Read this after the [films 1–3 retrospective](RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md) and the [Film 5 retrospective](RETROSPECTIVE_2026-10-20_FILM5_DIRECTING.md), before planning shots.
@@ -53,14 +56,14 @@ The climax landed at 55% of the 58.9 s runtime including the title, and 64% of t
 
 ## Technical lessons: these cost time, so don't rediscover them
 
-- **Frame-exact assembly** (`experiments/TEST-013/assemble_final.py`):
+- **Frame-exact assembly** (`lab file, not in kit: assemble_final.py`):
   - Snap in and out points to the 24 fps grid, force an exact frame count per segment, and restamp each frame by index (`setpts=N/(24*TB)`).
   - Use MKV intermediates (MP4 edit lists drop a first frame on decode).
   - Join picture and sound separately; AAC padding makes an a/v concat hold a frame at every cut.
   - Verify with packet counts and a frame-difference scan.
 - **Real-ESRGAN GPU fault:** once, the AI frames came back black mid-batch, and the 30% Lanczos blend hid it as a dark shot. `tools/upres_shot.py` now stops on a dark AI frame. **Still compare every upscaled shot's luma with its source.**
 - **ChatCut Desktop:**
-  - After an app update, an agent session's tools go stale. `chatcut doctor` plus the local launcher (`experiments/TEST-013/finish/chatcut_call.py`) works.
+  - After an app update, an agent session's tools go stale. `chatcut doctor` plus the local launcher (`lab file, not in kit: chatcut_call.py`) works.
   - Lip-sync needs the project **open in the app**.
   - A source video needs its own audio track.
   - A job that failed for lack of credits needs a new `requestId` once credits are topped up.
@@ -68,7 +71,7 @@ The climax landed at 55% of the 58.9 s runtime including the title, and 64% of t
   - 2K, 4–15 s, 2 cr/s.
   - An `end_image` needs a `start_image`.
   - Land on the approved poster as the end frame, then crossfade the exact PNG over the last second; H3 garbles type mid-motion.
-- **PATH ffmpeg/ffprobe are blocked by Application Control.** Use the bundled ffmpeg. `experiments/TEST-013/finish/publish_with_bundled_ffmpeg.py` runs the delivery helper unchanged.
+- **PATH ffmpeg/ffprobe are blocked by Application Control.** Use the bundled ffmpeg. `lab file, not in kit: publish_with_bundled_ffmpeg.py` runs the delivery helper unchanged.
 - **Grade:** E1N (E1 plus a night lift) put faces at 42–44% and highlights at about 95%. Plain E1 measured too dark for a phone.
 
 ## Token budget for the next film

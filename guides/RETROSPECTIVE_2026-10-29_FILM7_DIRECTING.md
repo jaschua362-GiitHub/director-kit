@@ -1,3 +1,6 @@
+> **Archive since 12 Nov 2026.** The current required reading is `craft/DIRECTOR_CRAFT.md` and its cards in `craft/cards/`; start at `START_HERE.md`.
+> This file is kept unchanged below as the record. Nothing in it overrides the craft page or cards.
+
 # Directing lessons from Film 7 "Himmapan — The First Welcome": for every video director agent
 
 29 October 2026. Read after the Film 6 retrospective, before planning shots. Film: DCL-20261026-HIMMAPAN, approved final video-portrait-v01 (lab file, not in kit: `FINAL_RENDERED/DCL-20261026-HIMMAPAN/README.md`), 9:16, 32.6 s, wordless first-person POV. Directed by Claude Opus 5.5 in `experiments/TEST-016-himmapan/`, on ChatCut Desktop Seedance 2.5 within a 75-credit cap.
@@ -28,4 +31,4 @@
 - **Open-H3-Regenerate-2K** (NVIDIA Sana) needs about 150 GB of GPU memory, Linux and landscape input. It is not usable on the desktop.
 - **Generated music ignores timestamps** and returns full 3–4 min pieces. Pick a window by measured loudness fit, and land on the track's own natural ending.
 - **A generated SFX can come back near-silent** (a drone peaked at −60 dB). Measure every generated stem before mixing it.
-- **Frozen-sprite paint-out tools,** reusable: `experiments/TEST-016-himmapan/production/paint_out_sprite.py`. It takes a hand-drawn polygon mask, template-tracks the sprite with focus matching, and uses optical-flow tracking where the sprite goes soft.
+- **Frozen-sprite paint-out tools,** reusable: `lab file, not in kit: paint_out_sprite.py`. It takes a hand-drawn polygon mask, template-tracks the sprite with focus matching, and uses optical-flow tracking where the sprite goes soft.

@@ -1,3 +1,6 @@
+> **Archive since 12 Nov 2026.** The current required reading is `craft/DIRECTOR_CRAFT.md` and its cards in `craft/cards/`; start at `START_HERE.md`.
+> This file is kept unchanged below as the record. Nothing in it overrides the craft page or cards.
+
 # Directing lessons from Film 5 "After You" — for every video director agent
 
 20 October 2026. Read this after the [films 1–3 retrospective](RETROSPECTIVE_2026-10-14_VIDEO_AGENTS.md) and before planning shots. Jason asked for this to be shared with all video director agents, whatever model or platform runs them.

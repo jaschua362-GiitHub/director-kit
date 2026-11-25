@@ -1,3 +1,6 @@
+> **Archive since 12 Nov 2026.** The current required reading is `craft/DIRECTOR_CRAFT.md` and its cards in `craft/cards/`; start at `START_HERE.md`.
+> This file is kept unchanged below as the record. Nothing in it overrides the craft page or cards.
+
 # Three films, one lesson set: video-agent retrospective
 
 2026-10-14, local time. Written by the film-3 video agent (Claude Code, claude-opus-5-5) at Jason's request, so the next video agent starts from everything films 1–3 learned. Read this after verifying the approved packet, before planning shots.
@@ -76,7 +79,7 @@
 2. Write a self-critique plus shot list with a camera move per shot and a cost, and get the cap.
 3. Batch the start frames and music beds, then QC the start frames at full resolution and reject freely.
 4. Generate video, up to **3 concurrent jobs** (ChatCut limit). QC each take while the others render.
-5. Assemble locally (`experiments/TEST-009/assemble.py`) as several music versions. Jason picks by ear.
+5. Assemble locally (`lab file, not in kit: assemble.py`) as several music versions. Jason picks by ear.
 6. Apply targeted fixes only, one hypothesis each: the "talking" flutter, the flight shot's world, the opening's sky and buildings.
 7. **Freeze the approved master** (`approved/<project>/video-director-v04/APPROVAL.json`).
 8. Do the 1080p finish: Real-ESRGAN x4 on grain-free frames, 70/30 blend with native, grain after, audio stream-copied (`finish_1080.py`).
